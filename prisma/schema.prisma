@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model criterios {
+  id_criterio          Int                    @id @default(autoincrement())
+  nombre               String                 @db.VarChar
+  descripcion          String
+  fecha_creacion       DateTime               @db.Date
+  fecha_actualizacion  DateTime?              @db.Date
+  estado               Boolean
+  criterios_evaluacion criterios_evaluacion[]
+}
+
+model criterios_evaluacion {
+  id_criterio         Int
+  id_evaluacion       Int
+  valoracion          String     @db.VarChar
+  fecha_creacion      DateTime   @db.Date
+  fecha_actualizacion DateTime?  @db.Date
+  estado              Boolean
+  criterios           criterios  @relation(fields: [id_criterio], references: [id_criterio], onDelete: NoAction, onUpdate: NoAction)
+  evaluacion          evaluacion @relation(fields: [id_evaluacion], references: [id_evaluacion], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_criterio, id_evaluacion])
+}
+
+model equipo {
+  id_equipo           Int          @id @default(autoincrement())
+  nombre              String       @db.VarChar
+  token_captcha       String       @db.VarChar
+  estado_incripcion   Boolean
+  fecha_creacion      DateTime     @db.Date
+  fecha_actualizacion DateTime?    @db.Date
+  estado              Boolean
+  integrante          integrante[]
+  videojuego          videojuego[]
+}
+
+model evaluacion {
+  id_evaluacion        Int                    @id @default(autoincrement())
+  id_usuario           Int
+  id_videojuegos       Int
+  comentario           String?
+  fecha_creacion       DateTime               @db.Date
+  fecha_actualizacion  DateTime?              @db.Date
+  estado               Boolean
+  criterios_evaluacion criterios_evaluacion[]
+  usuario              usuario                @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  videojuego           videojuego             @relation(fields: [id_videojuegos], references: [id_videojuego], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model integrante {
+  id_integrante       Int              @id @default(autoincrement())
+  id_equipo           Int
+  primer_nombre       String           @db.VarChar
+  correo              String           @db.VarChar
+  usuario_github      String           @db.VarChar
+  fecha_creacion      DateTime         @db.Date
+  fecha_actualizacion DateTime?        @db.Date
+  estado              Boolean
+  equipo              equipo           @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
+  integrante_nrc      integrante_nrc[]
+}
+
+model integrante_nrc {
+  id_integrante       Int
+  id_nrc              Int
+  fecha_creacion      DateTime   @db.Date
+  fecha_actualizacion DateTime?  @db.Date
+  estado              Boolean
+  integrante          integrante @relation(fields: [id_integrante], references: [id_integrante], onDelete: NoAction, onUpdate: NoAction)
+  nrc                 nrc        @relation(fields: [id_nrc], references: [id_nrc], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_integrante, id_nrc])
+}
+
+model materia {
+  id_materia          Int       @id @default(autoincrement())
+  nombre              String    @db.VarChar
+  codigo              String    @db.VarChar
+  fecha_creacion      DateTime  @db.Date
+  fecha_actualizacion DateTime? @db.Date
+  estado              Boolean
+  nrc                 nrc[]
+}
+
+model nrc {
+  id_nrc              Int              @id @default(autoincrement())
+  id_materia          Int
+  codigo              String           @db.VarChar
+  activo              Boolean
+  id_usuario          Int
+  fecha_creacion      DateTime         @db.Date
+  fecha_actualizacion DateTime?        @db.Date
+  estado              Boolean
+  integrante_nrc      integrante_nrc[]
+  materia             materia          @relation(fields: [id_materia], references: [id_materia], onDelete: NoAction, onUpdate: NoAction)
+  usuario             usuario          @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model roles {
+  id_rol              Int             @id @default(autoincrement())
+  rol                 String          @db.VarChar
+  fecha_creacion      DateTime        @db.Date
+  fecha_actualizacion DateTime?       @db.Date
+  estado              Boolean
+  usuario_roles       usuario_roles[]
+}
+
+model usuario {
+  id_usuario          Int             @id @default(autoincrement())
+  primer_nombre       String          @db.VarChar
+  segundo_nombre      String?         @db.VarChar
+  primer_apellido     String          @db.VarChar
+  segundo_apellido    String          @db.VarChar
+  correo              String          @db.VarChar
+  confirmado          Boolean
+  token_cofirmacion   String          @db.VarChar
+  ultima_conexion     DateTime        @db.Date
+  password            String?         @db.VarChar
+  fecha_actualizacion DateTime        @db.Date
+  fecha_creacion      DateTime?       @db.Date
+  estado              Boolean
+  evaluacion          evaluacion[]
+  nrc                 nrc[]
+  usuario_roles       usuario_roles[]
+}
+
+model usuario_roles {
+  id_usuario          Int
+  id_rol              Int
+  fecha_creacion      DateTime  @db.Date
+  fecha_actualizacion DateTime? @db.Date
+  estado              Boolean
+  roles               roles     @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction)
+  usuario             usuario   @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_usuario, id_rol])
+}
+
+model videojuego {
+  id_videojuego       Int          @id @default(autoincrement())
+  id_equipo           Int
+  nombre              String       @db.Char(1)
+  descripcion         String?
+  fecha_creacion      DateTime     @db.Date
+  fecha_actualizacion DateTime?    @db.Date
+  estado              Boolean
+  evaluacion          evaluacion[]
+  equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
+}
