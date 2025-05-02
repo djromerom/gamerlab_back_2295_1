@@ -1,41 +1,31 @@
-// src/estudiantes/estudiantes.service.ts
 import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { integrante } from '@prisma/client'; // Importa el tipo generado por Prisma
-import { CreateIntegranteDto } from './dto/create-integrante.dto'; // Crearemos este DTO a continuación
+import { integrante } from '@prisma/client'; 
+import { CreateIntegranteDto } from './dto/create-integrante.dto';
 
 @Injectable()
 export class EstudiantesService {
-  // Inyecta PrismaService para poder usarlo
   constructor(private prisma: PrismaService) {}
 
   async create(createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
     try {
-      console.log("Intentando crear integrante en DB con datos:", createIntegranteDto); // Opcional: log
-
-      // Usa el cliente Prisma para crear un nuevo integrante en la tabla 'integrante'
+      // validacion de usuario git y correo uninorte ----
       const nuevoIntegrante = await this.prisma.integrante.create({
-        data: createIntegranteDto, // Prisma toma los datos del DTO y los mapea a las columnas de la tabla
+        data: createIntegranteDto, 
       });
 
-      console.log("Integrante creado exitosamente:", nuevoIntegrante); // Opcional: log
-      return nuevoIntegrante; // Devuelve el objeto integrante creado (con su ID asignado)
+      return nuevoIntegrante; 
 
     } catch (error) {
-      console.error("Error al crear integrante en el servicio:", error);
-      // Aquí podrías añadir lógica más sofisticada para manejar errores específicos de Prisma (ej: P2002 para duplicados)
-      // Por ahora, lanza una excepción genérica de servidor interno
       throw new InternalServerErrorException('No se pudo crear el integrante.', error.message);
     }
   }
 
   async findAll(): Promise<integrante[]> {
     try {
-      // Usa el cliente Prisma para obtener todos los integrantes
       const integrantes = await this.prisma.integrante.findMany();
       return integrantes;
     } catch (error) {
-       console.error("Error al buscar integrantes:", error);
        throw new InternalServerErrorException('No se pudieron obtener los integrantes.', error);
     }
   }
@@ -49,6 +39,4 @@ export class EstudiantesService {
     }
     return integrante;
   }
-
-  // Puedes añadir métodos para actualizar (update) y eliminar (remove) aquí
 }

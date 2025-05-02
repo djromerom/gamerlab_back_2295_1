@@ -1,10 +1,9 @@
-// src/estudiantes/dto/create-integrante.dto.ts
-import { IsString, IsEmail, IsInt, IsBoolean, IsNotEmpty } from 'class-validator'; // Necesitarás instalar class-validator y class-transformer
+import { IsString, IsEmail, IsInt, IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CreateIntegranteDto {
   @IsInt()
   @IsNotEmpty()
-  id_equipo: number; // Necesitas el ID del equipo al que pertenece
+  id_equipo: number;
 
   @IsString()
   @IsNotEmpty()
@@ -19,7 +18,7 @@ export class CreateIntegranteDto {
   usuario_github: string;
 
   @IsBoolean()
-  estado: boolean; // El estado al crear
+  estado: boolean; 
 
-  // id_integrante, fecha_creacion, fecha_actualizacion son gestionados por la BD/Prisma
+  // id_integrante, fecha_creacion, fecha_actualizacion son gestionados por la BD
 }
