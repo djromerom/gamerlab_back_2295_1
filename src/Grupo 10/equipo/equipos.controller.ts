@@ -8,7 +8,7 @@ import { equipo } from '@prisma/client';
 export class EquiposController {
   constructor(private readonly equiposService: EquiposService) {}
 
-  @Post()
+  @Post('addnew')
   async create(@Body() createEquipoDto: CreateEquipoDto): Promise<equipo> {
     //validar no crear dos equipos con el mismo nombre
     return this.equiposService.create(createEquipoDto);

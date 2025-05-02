@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { integrante } from '@prisma/client'; 
 import { CreateIntegranteDto } from './dto/create-integrante.dto';
 
