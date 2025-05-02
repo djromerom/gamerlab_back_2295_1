@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -215,6 +214,9 @@ model videojuego {
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
+  id_materia          Int
+  id_nrc              Int
   evaluacion          evaluacion[]
   equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
 }
+
