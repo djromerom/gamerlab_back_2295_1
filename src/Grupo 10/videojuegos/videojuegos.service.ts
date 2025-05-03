@@ -1,26 +1,80 @@
-import { Injectable } from '@nestjs/common';
-import { CreateVideojuegoDto } from './dto/create-videojuego.dto';
-import { UpdateVideojuegoDto } from './dto/update-videojuego.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
+import { CreateVideojuegoDto } from './dto/create-videojuegos.dto';
+import { UpdateVideojuegoDto } from './dto/update-videojuegos.dto';
 
 @Injectable()
 export class VideojuegosService {
-  create(createVideojuegoDto: CreateVideojuegoDto) {
-    return 'This action adds a new videojuego';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createVideojuegoDto: CreateVideojuegoDto) {
+    const equipo = await this.prisma.equipo.findUnique({
+      where: { id_equipo: createVideojuegoDto.id_equipo },
+    });
+    if (!equipo) {
+      throw new NotFoundException(`Equipo con ID ${createVideojuegoDto.id_equipo} no encontrado`);
+    }
+    return this.prisma.videojuego.create({
+      data: {
+        ...createVideojuegoDto,
+        fecha_creacion: new Date(),
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all videojuegos`;
+  async findAll() {
+    return this.prisma.videojuego.findMany({
+      include: {
+        equipo: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} videojuego`;
+  async findOne(id: number) {
+    const videojuego = await this.prisma.videojuego.findUnique({
+      where: { id_videojuego: id },
+      include: {
+        equipo: true,
+      },
+    });
+
+    if (!videojuego) {
+      throw new NotFoundException(`Videojuego con ID ${id} no encontrado`);
+    }
+
+    return videojuego;
   }
 
-  update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
-    return `This action updates a #${id} videojuego`;
+  async update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
+    // Verificar si existe el videojuego
+    await this.findOne(id);
+
+    // Si se actualiza el id_equipo, verificar que existe
+    if (updateVideojuegoDto.id_equipo) {
+      const equipo = await this.prisma.equipo.findUnique({
+        where: { id_equipo: updateVideojuegoDto.id_equipo },
+      });
+
+      if (!equipo) {
+        throw new NotFoundException(`Equipo con ID ${updateVideojuegoDto.id_equipo} no encontrado`);
+      }
+    }
+
+    return this.prisma.videojuego.update({
+      where: { id_videojuego: id },
+      data: {
+        ...updateVideojuegoDto,
+        fecha_actualizacion: new Date(),
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} videojuego`;
+  async remove(id: number) {
+    // Verificar si existe el videojuego
+    await this.findOne(id);
+
+    return this.prisma.videojuego.delete({
+      where: { id_videojuego: id },
+    });
   }
 }

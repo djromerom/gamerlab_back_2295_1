@@ -7,7 +7,7 @@ import { integrante } from '@prisma/client'
 export class EstudiantesController {
   constructor(private readonly estudiantesService: EstudiantesService) {}
 
-  @Post('addnew') // crear estudiantes
+  @Post() // crear estudiantes
   async create(@Body() createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
     return this.estudiantesService.create(createIntegranteDto);
   }
