@@ -14,14 +14,6 @@ export class UpdateVideojuegoDto {
   id_equipo?: number;
 
   @IsOptional()
-  @IsInt()
-  id_materia?: number;
-
-  @IsOptional()
-  @IsInt()
-  id_nrc?: number;
-
-  @IsOptional()
   @IsBoolean()
   estado?: boolean;
 }

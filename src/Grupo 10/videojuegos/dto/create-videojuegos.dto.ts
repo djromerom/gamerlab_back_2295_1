@@ -11,12 +11,6 @@ export class CreateVideojuegoDto {
   @IsInt()
   id_equipo: number;
 
-  @IsInt()
-  id_materia: number;
-
-  @IsInt()
-  id_nrc: number;
-
   @IsBoolean()
   estado: boolean;
 }
