@@ -1,9 +1,12 @@
-import { estado } from "@prisma/client";
+import { IsString, IsInt, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateEquipoDto {
-    // El id_equipo, fecha_creacion y fecha_actualizacion son generados por la DB/Prisma
-    nombre: string;
-    estado: boolean;
-    id_estado: number; // Relación con el modelo estado
-    
+  @IsString()
+  nombre: string;
+
+  @IsInt()
+  id_estado: number;
+
+  @IsBoolean()
+  estado: boolean;
   }

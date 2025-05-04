@@ -2,7 +2,6 @@ import { Injectable, NotFoundException, InternalServerErrorException, Logger } f
 import { CreateVideojuegoDto } from './dto/create-videojuegos.dto';
 import { UpdateVideojuegoDto } from './dto/update-videojuegos.dto';
 import { CreateEquipoDto } from '../equipo/dto/create-equipo.dto';
-
 import axios from 'axios';
 
 
