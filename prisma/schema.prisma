@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,6 +15,7 @@ model criterio {
   fecha_creacion      DateTime              @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?             @updatedAt @db.Timestamp(6)
   estado              Boolean
+  porcentaje          Int
   criterio_evaluacion criterio_evaluacion[]
 }
 
@@ -33,20 +35,20 @@ model criterio_evaluacion {
 model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
-  token_captcha       String       @db.VarChar
+  id_estado           Int
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
   integrante          integrante[]
   videojuego          videojuego[]
-  id_estado           Int          @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)       
+  estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model estado {
-  id_estado    Int       @id @default(autoincrement())
-  estado       String    @db.VarChar
-  created_at   DateTime  @default(now()) @db.Timestamp(6)
-  equipos      equipo[] 
+  id_estado  Int      @id @default(autoincrement())
+  estado     String   @db.VarChar
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  equipos    equipo[]
 }
 
 model evaluacion {
@@ -90,7 +92,7 @@ model integrante_nrc {
 model materia {
   id_materia          Int       @id @default(autoincrement())
   nombre              String    @db.VarChar
-  codigo              String    @db.VarChar
+  codigo              String    @unique @db.VarChar
   fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -100,7 +102,7 @@ model materia {
 model nrc {
   id_nrc              Int              @id @default(autoincrement())
   id_materia          Int
-  codigo              String           @db.VarChar
+  codigo              String           @unique @db.VarChar
   activo              Boolean
   id_usuario          Int
   fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
@@ -187,7 +189,7 @@ model usuario {
   segundo_nombre      String?           @db.VarChar
   primer_apellido     String            @db.VarChar
   segundo_apellido    String            @db.VarChar
-  correo              String            @db.VarChar
+  correo              String            @unique @db.VarChar
   confirmado          Boolean
   token_confirmacion  String            @db.VarChar
   ultima_conexion     DateTime          @db.Date
@@ -216,6 +218,7 @@ model usuario_rol {
 model videojuego {
   id_videojuego       Int          @id @default(autoincrement())
   id_equipo           Int
+  token_captcha       String       @db.VarChar
   nombre              String       @db.VarChar
   descripcion         String?
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
@@ -224,4 +227,3 @@ model videojuego {
   evaluacion          evaluacion[]
   equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
 }
-
