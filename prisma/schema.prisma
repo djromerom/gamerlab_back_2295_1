@@ -47,7 +47,7 @@ model estado {
   id_estado    Int       @id @default(autoincrement())
   estado       String    @db.VarChar
   created_at   DateTime  @default(now()) @db.Timestamp(6)
-  equipos      equipo[] 
+  equipos      equipo[] 
 }
 
 model evaluacion {

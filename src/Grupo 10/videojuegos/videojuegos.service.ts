@@ -14,6 +14,9 @@ export class VideojuegosService {
     if (!equipo) {
       throw new NotFoundException(`Equipo con ID ${createVideojuegoDto.id_equipo} no encontrado`);
     }
+    if (createVideojuegoDto.descripcion && createVideojuegoDto.descripcion.length > 300) {
+      throw new NotFoundException('La descripción no puede exceder los 300 caracteres.');
+    }
     return this.prisma.videojuego.create({
       data: {
         ...createVideojuegoDto,
@@ -46,7 +49,6 @@ export class VideojuegosService {
   }
 
   async update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
-    // Verificar si existe el videojuego
     await this.findOne(id);
 
     // Si se actualiza el id_equipo, verificar que existe
@@ -58,6 +60,9 @@ export class VideojuegosService {
       if (!equipo) {
         throw new NotFoundException(`Equipo con ID ${updateVideojuegoDto.id_equipo} no encontrado`);
       }
+    }
+    if (updateVideojuegoDto.descripcion && updateVideojuegoDto.descripcion.length > 300) {
+      throw new NotFoundException('La descripción no puede exceder los 300 caracteres.');
     }
 
     return this.prisma.videojuego.update({
