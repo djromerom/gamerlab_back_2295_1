@@ -35,12 +35,20 @@ model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
   token_captcha       String       @db.VarChar
-  estado_incripcion   Boolean
+  id_estado           Int          
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
   integrante          integrante[]
   videojuego          videojuego[]
+  estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model estado {
+  id_estado    Int       @id @default(autoincrement())
+  estado       String    @db.VarChar
+  created_at   DateTime  @default(now()) @db.Timestamp(6)
+  equipos      equipo[] 
 }
 
 model evaluacion {
