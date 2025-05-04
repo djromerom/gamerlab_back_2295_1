@@ -218,6 +218,7 @@ model videojuego {
   id_videojuego       Int          @id @default(autoincrement())
   id_equipo           Int
   nombre              String       @db.VarChar
+  token_captcha       String       @db.VarChar
   descripcion         String?
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
