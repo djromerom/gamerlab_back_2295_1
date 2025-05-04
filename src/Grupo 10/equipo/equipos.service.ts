@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { equipo } from '@prisma/client'; 
 import { CreateEquipoDto } from './dto/create-equipo.dto';
@@ -6,6 +6,8 @@ import { UpdateEquipoDto } from './dto/update-equipo.dto';
 
 @Injectable()
 export class EquiposService {
+  private readonly logger = new Logger(EquiposService.name);
+
   constructor(private prisma: PrismaService) {}
 
   async create(createEquipoDto: CreateEquipoDto): Promise<equipo> {
@@ -22,9 +24,15 @@ export class EquiposService {
   async findAll(): Promise<equipo[]> {
     try {
       const equipos = await this.prisma.equipo.findMany();
+      if (!equipos || equipos.length === 0) {
+        // Si no hay equipos, lanzar NotFoundException y no capturarlo en el catch
+        throw new NotFoundException(`No hay equipos registrados.`);
+      }
       return equipos;
     } catch (error) {
-      throw new InternalServerErrorException('No se pudieron obtener los equipos.');
+      // Log de error para diagnóstico, no afecta error de no encontrar equipos
+      this.logger.error('Error al obtener equipos:', error.stack);
+      throw new InternalServerErrorException('No se pudieron obtener los eqipos.');
     }
   }
 

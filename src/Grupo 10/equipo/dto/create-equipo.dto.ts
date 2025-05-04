@@ -5,9 +5,6 @@ export class CreateEquipoDto {
     nombre: string;
     token_captcha: string; 
     estado: boolean;
-    estado_equipo: {
-      connect: {
-        id_estado: number;
-      };
+    id_estado: number; // Relación con el modelo estado
     
-  }}
+  }
