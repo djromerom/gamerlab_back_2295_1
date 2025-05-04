@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, ParseIntPipe } from '@nestjs/common'; // Importa los decoradores necesarios
+import { Controller, Get, Post, Patch, Delete, Body, Param, ParseIntPipe,HttpException, HttpStatus } from '@nestjs/common'; // Importa los decoradores necesarios
 import { EquiposService } from './equipos.service'; 
 import { CreateEquipoDto } from './dto/create-equipo.dto'; 
 import { UpdateEquipoDto } from './dto/update-equipo.dto'; 
@@ -7,13 +7,21 @@ import { equipo } from '@prisma/client';
 @Controller('equipos')
 export class EquiposController {
   constructor(private readonly equiposService: EquiposService) {}
-
-  @Post()
-  async create(@Body() createEquipoDto: CreateEquipoDto): Promise<equipo> {
-    //validar no crear dos equipos con el mismo nombre
-    return this.equiposService.create(createEquipoDto);
-  }
-
+  
+    @Post()
+    async create(@Body() createEquipoDto: CreateEquipoDto): Promise<equipo> {
+      // Validar si ya existe un equipo con el mismo nombre
+      const existingTeam = await this.equiposService.findByName(createEquipoDto.nombre);
+      if (existingTeam) {
+        throw new HttpException('Team with this name already exists', HttpStatus.CONFLICT);
+      }
+  
+  
+  
+      // Crear el equipo después de todas las validaciones
+      return this.equiposService.create(createEquipoDto);
+    }
+  
   @Get()
   async findAll(): Promise<equipo[]> {
     return this.equiposService.findAll();

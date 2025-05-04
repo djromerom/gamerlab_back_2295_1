@@ -226,4 +226,3 @@ model videojuego {
   evaluacion          evaluacion[]
   equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
 }
-

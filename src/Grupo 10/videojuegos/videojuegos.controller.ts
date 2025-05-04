@@ -10,7 +10,13 @@ export class VideojuegosController {
   @Post()
   async create(@Body() createVideojuegoDto: CreateVideojuegoDto) {
     try {
+      // Validar reCAPTCHA antes de proceder a crear el equipo
+      const isHuman = await this.videojuegosService.verifyRecaptchaToken(createVideojuegoDto.token_captcha);
+      if (!isHuman) {
+        throw new HttpException('Failed reCAPTCHA verification', HttpStatus.FORBIDDEN);
+      }
       return await this.videojuegosService.create(createVideojuegoDto);
+
     } catch (error) {
       throw new HttpException(
         error.message || 'Error al crear el videojuego',

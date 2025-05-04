@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { equipo } from '@prisma/client'; 
+import { equipo } from '@prisma/client';
 import { CreateEquipoDto } from './dto/create-equipo.dto';
 import { UpdateEquipoDto } from './dto/update-equipo.dto';
 
 @Injectable()
 export class EquiposService {
+  private readonly logger = new Logger(EquiposService.name);
+
   constructor(private prisma: PrismaService) {}
 
   async create(createEquipoDto: CreateEquipoDto): Promise<equipo> {
@@ -15,6 +17,7 @@ export class EquiposService {
       });
       return nuevoEquipo;
     } catch (error) {
+      this.logger.error('Error creating equipo:', error.stack);
       throw new InternalServerErrorException('No se pudo crear el equipo.');
     }
   }
@@ -22,23 +25,40 @@ export class EquiposService {
   async findAll(): Promise<equipo[]> {
     try {
       const equipos = await this.prisma.equipo.findMany();
+      if (!equipos || equipos.length === 0) {
+        throw new NotFoundException('No hay equipos registrados.');
+      }
       return equipos;
     } catch (error) {
+      this.logger.error('Error al obtener equipos:', error.stack);
       throw new InternalServerErrorException('No se pudieron obtener los equipos.');
     }
   }
 
   async findOne(id: number): Promise<equipo | null> {
-    const equipoEncontrado = await this.prisma.equipo.findUnique({
-      where: { id_equipo: id },
-    });
-    if (!equipoEncontrado) {
-      throw new NotFoundException(`Equipo con ID ${id} no encontrado.`);
+    try {
+      const equipoEncontrado = await this.prisma.equipo.findUnique({
+        where: { id_equipo: id },
+      });
+      if (!equipoEncontrado) {
+        throw new NotFoundException(`Equipo con ID ${id} no encontrado.`);
+      }
+      return equipoEncontrado;
+    } catch (error) {
+      this.logger.error(`Error finding equipo with ID ${id}:`, error.stack);
+      throw new InternalServerErrorException('Error al buscar el equipo.');
     }
-    return equipoEncontrado;
   }
 
-
+  async findByName(name: string): Promise<equipo | null> {
+    
+      const equipoEncontrado = await this.prisma.equipo.findFirst({
+        where: { nombre: name }, // Asegúrate de que 'nombre' sea el campo correcto en tu modelo de Prisma
+      });
+      
+      return equipoEncontrado;
+    
+  }
   async update(id: number, updateEquipoDto: UpdateEquipoDto): Promise<equipo> {
     try {
       const equipoActualizado = await this.prisma.equipo.update({
@@ -47,10 +67,10 @@ export class EquiposService {
       });
       return equipoActualizado;
     } catch (error) {
-       // Prisma lanza P2025 si el registro a actualizar no existe (Not Found)
-       if (error.code === 'P2025') {
-           throw new NotFoundException(`Equipo con ID ${id} no encontrado para actualizar.`);
-       }
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`Equipo con ID ${id} no encontrado para actualizar.`);
+      }
+      this.logger.error(`Error updating equipo with ID ${id}:`, error.stack);
       throw new InternalServerErrorException('No se pudo actualizar el equipo.');
     }
   }
@@ -62,10 +82,13 @@ export class EquiposService {
       });
       return equipoEliminado;
     } catch (error) {
-       if (error.code === 'P2025') {
-           throw new NotFoundException(`Equipo con ID ${id} no encontrado para eliminar.`);
-       }
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`Equipo con ID ${id} no encontrado para eliminar.`);
+      }
+      this.logger.error(`Error deleting equipo with ID ${id}:`, error.stack);
       throw new InternalServerErrorException('No se pudo eliminar el equipo.');
     }
   }
+
+   
 }
