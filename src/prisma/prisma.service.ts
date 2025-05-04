@@ -1,9 +1,13 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from '../../generated/prisma';
+import { PrismaClient } from '../../prisma/generated/client';
 
 //conexión con prisma
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor() {
+    super();
+  }
+
   async onModuleInit() {
     try {
       await this.$connect();
@@ -13,4 +17,4 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
         console.error('Error al conectar a la base de datos:', error.message);
     }
   }
-}
+} 

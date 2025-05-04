@@ -1,9 +1,25 @@
 import { Module } from '@nestjs/common';
-import { EvaluacionModule } from './evaluacion/evaluacion.module';
+import { ConfigModule } from '@nestjs/config';
+import { JuradosModule } from './modules/jurados/jurados.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { JuradosModule } from './jurados/jurados.module';
+import { EvaluacionModule } from './evaluacion/evaluacion.module';
+import { MailModule } from './shared/mail/mail.module';
+
 @Module({
-  imports: [EvaluacionModule, PrismaModule, JuradosModule],
+  imports: [
+    // Configuración global
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    
+    // Módulos de infraestructura
+    PrismaModule,
+    MailModule,
+    
+    // Módulos de funcionalidad
+    JuradosModule,
+    EvaluacionModule,
+  ],
   controllers: [],
   providers: [],
 })
