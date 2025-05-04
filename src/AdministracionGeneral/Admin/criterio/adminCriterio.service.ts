@@ -34,7 +34,7 @@ export class AdminCriterioService {
     });
 
     if (!rol) {
-      throw new NotFoundException(`rol con id ${id_criterio} no encontrado o inactivo`);
+      throw new NotFoundException(`Criterio con id ${id_criterio} no encontrado o inactivo`);
     }
 
     return rol;
@@ -62,7 +62,7 @@ export class AdminCriterioService {
     const criterio = await this.PrismaService.criterio.findUnique({ where: { id_criterio } });
   
     if (!criterio || !criterio.estado) {
-      throw new NotFoundException(`rol con id ${id_criterio} no encontradp o inactivo`);
+      throw new NotFoundException(`Criterio con id ${id_criterio} no encontradp o inactivo`);
     }
   
     return criterio;

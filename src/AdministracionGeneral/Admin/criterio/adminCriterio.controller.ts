@@ -19,23 +19,23 @@ export class AdminCriterioController {
     }
 
     @Get("getCriterios")
-    getCriterio() {
+    getCriterios() {
         return this.adminService.getCriterios();
     }
 
     @Get("getCriterioById/:id")
-    getMateriaById(@Param('id') id: string) {
+    getCriterioById(@Param('id') id: string) {
         return this.adminService.getCriterioById(Number(id));
     }
 
     @Put("updateCriterio/:id")
-    pdateMateria(@Param('id') id: string, @Body() data: CriterioDTO) {
+    updateCriterio(@Param('id') id: string, @Body() data: CriterioDTO) {
         return this.adminService.updateCriterio(Number(id), data);
     }
 
 
     @Delete("deleteCriterio/:id")
-    deleteMateria(@Param('id') id: string) {
+    deleteCriterio(@Param('id') id: string) {
         return this.adminService.deleteCriterio(Number(id));
     }
 }

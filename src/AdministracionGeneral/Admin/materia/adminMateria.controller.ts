@@ -27,7 +27,7 @@ export class AdminMateriaController {
     }
 
     @Put("updateMateria/:id")
-    pdateMateria(@Param('id') id: string, @Body() data: MateriaDTO) {
+    updateMateria(@Param('id') id: string, @Body() data: MateriaDTO) {
         return this.adminService.updateMateria(Number(id), data);
     }
 
