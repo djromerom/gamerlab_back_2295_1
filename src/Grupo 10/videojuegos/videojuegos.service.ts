@@ -1,4 +1,7 @@
 import { Injectable, NotFoundException, InternalServerErrorException, Logger } from '@nestjs/common';import { PrismaService } from '../../prisma/prisma.service';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { CreateVideojuegoDto } from './dto/create-videojuegos.dto';
 import { UpdateVideojuegoDto } from './dto/update-videojuegos.dto';
 import { CreateEquipoDto } from '../equipo/dto/create-equipo.dto';
@@ -8,7 +11,10 @@ import axios from 'axios';
 @Injectable()
 export class VideojuegosService {
   private readonly logger = new Logger(VideojuegosService.name);
-  constructor(private prisma: PrismaService) {}
+   constructor(
+    private prisma: PrismaService,
+    private mailService: MailService,    
+  ) {}
 
   async create(createVideojuegoDto: CreateVideojuegoDto) {
     const { id_equipo } = createVideojuegoDto;  // Extraemos el id_equipo del DTO
@@ -37,11 +43,50 @@ export class VideojuegosService {
   private async verifyEquipoExists(id_equipo: number) {
     const equipo = await this.prisma.equipo.findFirst({
       where: { id_equipo }, // Utilizamos findFirst en lugar de findUnique
+
+
+  async create(createDto: CreateVideojuegoDto) {
+    const equipo = await this.prisma.equipo.findUnique({
+      where: { id_equipo: createDto.id_equipo },
+      include: { integrante: true },      // ← traemos integrantes y sus correos
     });
 
     if (!equipo) {
-      throw new NotFoundException(`Equipo con ID ${id_equipo} no encontrado`);
+      throw new NotFoundException(`Equipo con ID ${createDto.id_equipo} no encontrado`);
     }
+
+    const nuevo = await this.prisma.videojuego.create({
+      data: {
+        ...createDto,
+        fecha_creacion: new Date(),
+      },
+    });
+
+    // Preparar y enviar correos a cada integrante
+    const enlaces = equipo.integrante.map(int => {
+      // ejemplo de enlace de confirmación (puedes adaptarlo)
+      const url = `${process.env.FRONTEND_URL}/confirmar/${int.id_integrante}`;
+      return `<p><a href="${url}">Confirmar inscripción</a></p>`;
+    }).join('\n');
+
+    const html = `
+      <h2>¡Nuevo videojuego registrado!</h2>
+      <p>Equipo: <strong>${equipo.nombre}</strong></p>
+      <p>Juego: <strong>${nuevo.nombre}</strong></p>
+      <p>${nuevo.descripcion || ''}</p>
+      <hr/>
+      <p>Para confirmar, pulsa en tu enlace:</p>
+      ${enlaces}
+    `;
+
+    // Enviamos un solo mail con todos los destinatarios en copia oculta (BCC)
+    await this.mailService.sendMail(
+      equipo.integrante.map(i => i.correo),
+      'Confirmación de inscripción al videojuego',
+      html,
+    );
+
+    return nuevo;
   }
 
 
@@ -69,7 +114,6 @@ export class VideojuegosService {
   }
 
   async update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
-    // Verificar si existe el videojuego
     await this.findOne(id);
 
     // Si se actualiza el id_equipo, verificar que existe
@@ -81,6 +125,9 @@ export class VideojuegosService {
       if (!equipo) {
         throw new NotFoundException(`Equipo con ID ${updateVideojuegoDto.id_equipo} no encontrado`);
       }
+    }
+    if (updateVideojuegoDto.descripcion && updateVideojuegoDto.descripcion.length > 300) {
+      throw new NotFoundException('La descripción no puede exceder los 300 caracteres.');
     }
 
     return this.prisma.videojuego.update({

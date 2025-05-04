@@ -16,4 +16,7 @@ export class CreateVideojuegoDto {
 
   @IsBoolean()
   estado: boolean;
+
+  @IsString()
+  token_captcha: string;
 }
