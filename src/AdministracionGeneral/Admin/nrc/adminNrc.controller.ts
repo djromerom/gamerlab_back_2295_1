@@ -1,0 +1,41 @@
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { AdminNrcService } from "./adminNrc.service";
+
+
+//esquema del rol
+interface NrcDTO {
+    id_materia: number,
+    codigo: string,
+    id_usuario: number,
+}
+
+@Controller('admin')
+export class AdminNrcController {
+    constructor(private adminService: AdminNrcService) { }
+    //CRUD de materias
+    @Post('createNrc')
+    createNrc(@Body() data: NrcDTO) {
+        return this.adminService.createNrc(data);
+    }
+
+    @Get("getNrcs")
+    getNrcs() {
+        return this.adminService.getNrcs();
+    }
+
+    @Get("getNrcById/:id")
+    getNrcById(@Param('id') id: string) {
+        return this.adminService.getNrcById(Number(id));
+    }
+
+    @Put("updateNrc/:id")
+    updateNrc(@Param('id') id: string, @Body() data: NrcDTO) {
+        return this.adminService.updateNrc(Number(id), data);
+    }
+
+
+    @Delete("deleteNrc/:id")
+    deleteMateria(@Param('id') id: string) {
+        return this.adminService.deleteNrc(Number(id));
+    }
+}
