@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException, HttpCode, NotFoundException  } from '@nestjs/common';
 import { VideojuegosService } from './videojuegos.service';
 import { CreateVideojuegoDto } from './dto/create-videojuegos.dto';
 import { UpdateVideojuegoDto } from './dto/update-videojuegos.dto';
@@ -52,6 +52,17 @@ export class VideojuegosController {
       );
     }
   }
+
+  @Get('confirmar/:id')
+  @HttpCode(200)
+  async confirmVideojuego(@Param('id') id: string) {
+    const updated = await this.videojuegosService.confirmar(+id);
+    if (!updated) {
+      throw new NotFoundException('Videojuego no encontrado o ya confirmado');
+    }
+    return { message: 'Confirmación exitosa', videojuego: updated };
+  }
+  
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateVideojuegoDto: UpdateVideojuegoDto) {

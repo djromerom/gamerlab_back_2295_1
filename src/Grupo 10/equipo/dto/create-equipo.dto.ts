@@ -9,4 +9,5 @@ export class CreateEquipoDto {
 
   @IsBoolean()
   estado: boolean;
-  }
+
+}
