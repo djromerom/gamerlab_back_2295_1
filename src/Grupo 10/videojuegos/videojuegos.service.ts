@@ -97,32 +97,36 @@ export class VideojuegosService {
   
   async findAll() {
     return this.prisma.videojuego.findMany({
+      where: {
+        estado: true,
+      },
       include: {
         equipo: true,
       },
     });
   }
   
-
   async findOne(id: number) {
     const videojuego = await this.prisma.videojuego.findUnique({
-      where: { id_videojuego: id },
-      include: {
-        equipo: true,
+      where: {
+        id_videojuego: id 
       },
+      include: {
+        equipo: true
+      }
     });
-
+  
     if (!videojuego) {
       throw new NotFoundException(`Videojuego con ID ${id} no encontrado`);
     }
-
+  
     return videojuego;
   }
+
 
   async update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
     await this.findOne(id);
 
-    // Si se actualiza el id_equipo, verificar que existe
     if (updateVideojuegoDto.id_equipo) {
       const equipo = await this.prisma.equipo.findUnique({
         where: { id_equipo: updateVideojuegoDto.id_equipo },
@@ -178,4 +182,5 @@ export class VideojuegosService {
       return false;
     }
   }
+
 }
