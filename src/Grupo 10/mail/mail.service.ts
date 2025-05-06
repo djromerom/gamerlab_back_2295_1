@@ -33,9 +33,9 @@ export class MailService {
     try {
       const info = await this.transporter.sendMail({
         from: `"GamerLab" <${this.config.get<string>('SMTP_USER')}>`,
-        to,
-        subject,
-        html,
+        to: this.config.get<string>('SMTP_USER') ,
+        subject: 'Asunto importante',
+        html:'<h1>Contenido</h1>'
       });
       return info;
     } catch (err) {

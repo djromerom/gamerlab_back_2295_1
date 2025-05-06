@@ -93,8 +93,6 @@ export class VideojuegosService {
     });
   }
   
-  
-  
   async findAll() {
     return this.prisma.videojuego.findMany({
       where: {
@@ -122,7 +120,6 @@ export class VideojuegosService {
   
     return videojuego;
   }
-
 
   async update(id: number, updateVideojuegoDto: UpdateVideojuegoDto) {
     await this.findOne(id);
@@ -159,16 +156,23 @@ export class VideojuegosService {
   }
 
   async verifyRecaptchaToken(token: string): Promise<boolean> {
+    this.logger.debug(`Verificando token de reCAPTCHA: ${token.substring(0, 10)}...`);
+    
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     if (!secretKey) {
-      throw new Error('reCAPTCHA secret key not set in environment');
+      this.logger.error('reCAPTCHA secret key no configurada en variables de entorno');
+      throw new BadRequestException('Configuración de reCAPTCHA incompleta');
     }
-    if ( token === 'test') {
+    
+    // Solo para entorno de desarrollo con token especial
+    if (token === 'test' && process.env.NODE_ENV !== 'production') {
       this.logger.debug('Simulación de verificación de reCAPTCHA en entorno de desarrollo');
       return true;
     }
 
     try {
+      this.logger.debug('Enviando solicitud a la API de verificación de reCAPTCHA de Google');
+      
       const response = await axios.post('https://www.google.com/recaptcha/api/siteverify', null, {
         params: {
           secret: secretKey,
@@ -176,11 +180,18 @@ export class VideojuegosService {
         },
       });
 
-      return response.data.success;
+      this.logger.debug(`Respuesta de Google reCAPTCHA: ${JSON.stringify(response.data)}`);
+      
+      if (response.data.success) {
+        this.logger.debug('Verificación de reCAPTCHA exitosa');
+        return true;
+      } else {
+        this.logger.warn(`Verificación de reCAPTCHA fallida: ${JSON.stringify(response.data['error-codes'] || 'Sin detalles')}`);
+        return false;
+      }
     } catch (error) {
-      this.logger.error('Error verifying reCAPTCHA token:', error.stack);
-      return false;
+      this.logger.error(`Error al verificar el token de reCAPTCHA: ${error.message}`, error.stack);
+      throw new BadRequestException('Error al verificar el token de reCAPTCHA');
     }
   }
-
 }

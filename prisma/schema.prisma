@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -34,7 +35,7 @@ model criterio_evaluacion {
 model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
-  id_estado           Int          
+  id_estado           Int
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -44,10 +45,10 @@ model equipo {
 }
 
 model estado {
-  id_estado    Int       @id @default(autoincrement())
-  estado       String    @db.VarChar
-  created_at   DateTime  @default(now()) @db.Timestamp(6)
-  equipos      equipo[] 
+  id_estado  Int      @id @default(autoincrement())
+  estado     String   @db.VarChar
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  equipos    equipo[]
 }
 
 model evaluacion {
@@ -91,7 +92,7 @@ model integrante_nrc {
 model materia {
   id_materia          Int       @id @default(autoincrement())
   nombre              String    @db.VarChar
-  codigo              String    @db.VarChar
+  codigo              String    @unique @db.VarChar
   fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -101,7 +102,7 @@ model materia {
 model nrc {
   id_nrc              Int              @id @default(autoincrement())
   id_materia          Int
-  codigo              String           @db.VarChar
+  codigo              String           @unique @db.VarChar
   activo              Boolean
   id_usuario          Int
   fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
@@ -191,7 +192,7 @@ model usuario {
   correo              String            @unique @db.VarChar
   confirmado          Boolean
   token_confirmacion  String            @db.VarChar
-  ultima_conexion     DateTime          @db.Date
+  ultima_conexion     DateTime?         @db.Timestamp(6)
   password            String?           @db.VarChar
   fecha_actualizacion DateTime          @updatedAt @db.Timestamp(6)
   fecha_creacion      DateTime?         @default(now()) @db.Timestamp(6)
@@ -217,8 +218,8 @@ model usuario_rol {
 model videojuego {
   id_videojuego       Int          @id @default(autoincrement())
   id_equipo           Int
-  nombre              String       @db.VarChar
   token_captcha       String       @db.VarChar
+  nombre              String       @db.VarChar
   descripcion         String?
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
