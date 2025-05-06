@@ -2,6 +2,7 @@ import { Injectable, ConflictException, NotFoundException, BadRequestException }
 import { PrismaService } from '../../../prisma/prisma.service';
 import { MailService } from '../../../shared/mail/mail.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class JuradosService {
@@ -157,4 +158,22 @@ export class JuradosService {
       throw error;
     }
   }
-} 
+
+  async setPassword(token: string, password: string) {
+    const user = await this.prisma.usuario.findFirst({
+      where: { token_confirmacion: token },
+    });
+    if (!user) throw new NotFoundException('Token inválido');
+
+    const hashed = await bcrypt.hash(password, 10);
+    await this.prisma.usuario.update({
+      where: { id_usuario: user.id_usuario },
+      data: {
+        password: hashed,
+        token_confirmacion: '', // Limpia el token
+        confirmado: true,
+      },
+    });
+    return { message: 'Contraseña creada exitosamente' };
+  }
+}
