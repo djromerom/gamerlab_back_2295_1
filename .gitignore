@@ -138,3 +138,7 @@ dist
 #prisma client y temps
 generated/prisma/
 .prisma/
+
+# config files
+.vscode
+.zed
