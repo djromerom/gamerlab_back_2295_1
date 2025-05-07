@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class AdminNrcService {
   constructor(private PrismaService: PrismaService) {}
-// CRUD de Materias
-  async createNrc(data: { id_materia: number, codigo: string, id_usuario: number }) {
+  // CRUD de Nrcs
+  async createNrc(data: {
+    id_materia: number;
+    codigo: string;
+    id_usuario: number;
+  }) {
     console.log('DATA RECIBIDA:', data);
     return this.PrismaService.nrc.create({
       data: {
@@ -24,31 +28,37 @@ export class AdminNrcService {
         estado: true,
       },
     });
-    const nrcsConDetalles = await Promise.all(nrcs.map(async (nrc) => {
-      const materia = await this.PrismaService.materia.findFirst({
-        where: {
-          id_materia: nrc.id_materia,
-          estado: true,
-        }
-      });
+    const nrcsConDetalles = await Promise.all(
+      nrcs.map(async (nrc) => {
+        const materia = await this.PrismaService.materia.findFirst({
+          where: {
+            id_materia: nrc.id_materia,
+            estado: true,
+          },
+        });
         if (!materia) {
-            throw new NotFoundException(`la materia correspondieente al nrc no existe o está inactiva`);
+          throw new NotFoundException(
+            `la materia correspondiente al nrc no existe o está inactiva`,
+          );
         }
-      const profesor = await this.PrismaService.usuario.findFirst({
-        where: {
-          id_usuario: nrc.id_usuario,
-          estado: true,
-        }
-      });
+        const profesor = await this.PrismaService.usuario.findFirst({
+          where: {
+            id_usuario: nrc.id_usuario,
+            estado: true,
+          },
+        });
         if (!profesor) {
-            throw new NotFoundException(`el profesor correspondieente al nrc no existe o está inactivo`);
+          throw new NotFoundException(
+            `el profesor correspondiente al nrc no existe o está inactivo`,
+          );
         }
-      return {
-        ...nrc,
-        materia: materia.nombre,
-        profesor: `${profesor.primer_nombre} ${profesor.primer_apellido}`,
-      };
-    }));
+        return {
+          ...nrc,
+          materia: materia.nombre,
+          profesor: `${profesor.primer_nombre} ${profesor.primer_apellido}`,
+        };
+      }),
+    );
     return nrcsConDetalles;
   }
 
@@ -61,48 +71,68 @@ export class AdminNrcService {
     });
 
     if (!nrc) {
-      throw new NotFoundException(`nrc con id ${id_nrc} no encontrado o inactivo`);
+      throw new NotFoundException(
+        `nrc con id ${id_nrc} no encontrado o inactivo`,
+      );
     }
 
     const materia = await this.PrismaService.materia.findFirst({
-        where: {
-            id_materia: nrc.id_materia,
-            estado: true,
-        }
+      where: {
+        id_materia: nrc.id_materia,
+        estado: true,
+      },
     });
-    if(!materia) {
-        throw new NotFoundException(`la materia correspondieente al nrc no existe o está inactiva`);
+    if (!materia) {
+      throw new NotFoundException(
+        `la materia correspondiente al nrc no existe o está inactiva`,
+      );
     }
 
     const profesor = await this.PrismaService.usuario.findFirst({
-        where: {
-            id_usuario: nrc.id_usuario,
-            estado: true,
-        }
+      where: {
+        id_usuario: nrc.id_usuario,
+        estado: true,
+      },
     });
-    if(!profesor) {
-        throw new NotFoundException(`el profesor correspondieente al nrc no existe o está inactivo`);
+    if (!profesor) {
+      throw new NotFoundException(
+        `el profesor correspondiente al nrc no existe o está inactivo`,
+      );
     }
 
     return {
-        ...nrc,
-        materia: materia.nombre,
-        profesor: `${profesor.primer_nombre} ${profesor.primer_apellido}`,
-    }
+      ...nrc,
+      materia: materia.nombre,
+      profesor: `${profesor.primer_nombre} ${profesor.primer_apellido}`,
+    };
   }
 
-  async updateNrc(id_nrc: number, data: { id_materia?: number, codigo?: string, id_usuario?: number }) {
+  async getNrcByMateria(id_materia: number) {
+    const nrc = await this.PrismaService.nrc.findMany({
+      where: {
+        id_materia: id_materia,
+        estado: true,
+      },
+    });
+
+    return nrc;
+  }
+
+  async updateNrc(
+    id_nrc: number,
+    data: { id_materia?: number; codigo?: string; id_usuario?: number },
+  ) {
     await this.validarNrcActivo(id_nrc);
-  
+
     return this.PrismaService.nrc.update({
-      where: { id_nrc},
+      where: { id_nrc },
       data,
     });
   }
-  
+
   async deleteNrc(id_nrc: number) {
     await this.validarNrcActivo(id_nrc);
-  
+
     return this.PrismaService.nrc.update({
       where: { id_nrc },
       data: { estado: false },
@@ -110,12 +140,16 @@ export class AdminNrcService {
   }
 
   private async validarNrcActivo(id_nrc: number) {
-    const criterio = await this.PrismaService.nrc.findUnique({ where: { id_nrc } });
-  
+    const criterio = await this.PrismaService.nrc.findUnique({
+      where: { id_nrc },
+    });
+
     if (!criterio || !criterio.estado) {
-      throw new NotFoundException(`rol con id ${id_nrc} no encontradp o inactivo`);
+      throw new NotFoundException(
+        `rol con id ${id_nrc} no encontrado o inactivo`,
+      );
     }
-  
+
     return criterio;
   }
 }

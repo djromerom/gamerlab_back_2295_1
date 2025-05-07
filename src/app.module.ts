@@ -4,7 +4,7 @@ import { AdminModule } from './AdministracionGeneral/Admin/admin.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule,AuthModule, AdminModule],
+  imports: [PrismaModule, AuthModule, AdminModule],
   controllers: [],
   providers: [],
 })
