@@ -35,11 +35,7 @@ model criterio_evaluacion {
 model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
-<<<<<<< HEAD
   id_estado           Int
-=======
-  id_estado           Int          
->>>>>>> 31b13ecc0df69f98fdcd0bd45da37b8bd89cd7c3
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -118,23 +114,23 @@ model nrc {
 }
 
 model rol {
-  id_rol              Int              @id(map: "roles_pkey") @default(autoincrement())
-  rol                 String           @db.VarChar
-  fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?        @updatedAt @db.Timestamp(6)
+  id_rol              Int            @id(map: "roles_pkey") @default(autoincrement())
+  rol                 String         @db.VarChar
+  fecha_creacion      DateTime       @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?      @updatedAt @db.Timestamp(6)
   estado              Boolean
   usuario_rol         usuario_rol[]
   rol_servicio        rol_servicio[]
 }
 
 model servicio {
-  id_servicio         Int             @id @default(autoincrement())
-  nombre              String          @db.VarChar
-  descripcion         String          @db.VarChar
-  url                 String          @db.VarChar
-  metodo              String          @db.VarChar
-  fecha_creacion      DateTime?       @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?       @updatedAt @db.Timestamp(6)
+  id_servicio         Int            @id @default(autoincrement())
+  nombre              String         @db.VarChar
+  descripcion         String         @db.VarChar
+  url                 String         @db.VarChar
+  metodo              String         @db.VarChar
+  fecha_creacion      DateTime?      @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?      @updatedAt @db.Timestamp(6)
   estado              Boolean
   rol_servicio        rol_servicio[]
 }
@@ -146,25 +142,25 @@ model rol_servicio {
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
 
-  rol                 rol       @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction)
-  servicio            servicio  @relation(fields: [id_servicio], references: [id_servicio], onDelete: NoAction, onUpdate: NoAction)
+  rol      rol      @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction)
+  servicio servicio @relation(fields: [id_servicio], references: [id_servicio], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([id_rol, id_servicio])
 }
 
 model usuario {
-  id_usuario          Int               @id @default(autoincrement())
-  primer_nombre       String            @db.VarChar
-  segundo_nombre      String?           @db.VarChar
-  primer_apellido     String            @db.VarChar
-  segundo_apellido    String            @db.VarChar
-  correo              String            @unique @db.VarChar
+  id_usuario          Int           @id @default(autoincrement())
+  primer_nombre       String        @db.VarChar
+  segundo_nombre      String?       @db.VarChar
+  primer_apellido     String        @db.VarChar
+  segundo_apellido    String        @db.VarChar
+  correo              String        @unique @db.VarChar
   confirmado          Boolean
-  token_confirmacion  String            @db.VarChar
-  ultima_conexion     DateTime?         @db.Timestamp(6)
-  password            String?           @db.VarChar
-  fecha_actualizacion DateTime          @updatedAt @db.Timestamp(6)
-  fecha_creacion      DateTime?         @default(now()) @db.Timestamp(6)
+  token_confirmacion  String        @db.VarChar
+  ultima_conexion     DateTime?     @db.Timestamp(6)
+  password            String?       @db.VarChar
+  fecha_actualizacion DateTime      @updatedAt @db.Timestamp(6)
+  fecha_creacion      DateTime?     @default(now()) @db.Timestamp(6)
   estado              Boolean
   evaluacion          evaluacion[]
   nrc                 nrc[]
