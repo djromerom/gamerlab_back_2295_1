@@ -15,6 +15,7 @@ model criterio {
   fecha_creacion      DateTime              @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?             @updatedAt @db.Timestamp(6)
   estado              Boolean
+  porcentaje          Int
   criterio_evaluacion criterio_evaluacion[]
 }
 
@@ -34,13 +35,20 @@ model criterio_evaluacion {
 model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
-  token_captcha       String       @db.VarChar
-  estado_incripcion   Boolean
+  id_estado           Int          
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
   integrante          integrante[]
   videojuego          videojuego[]
+  estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model estado {
+  id_estado    Int       @id @default(autoincrement())
+  estado       String    @db.VarChar
+  created_at   DateTime  @default(now()) @db.Timestamp(6)
+  equipos      equipo[] 
 }
 
 model evaluacion {
@@ -84,7 +92,7 @@ model integrante_nrc {
 model materia {
   id_materia          Int       @id @default(autoincrement())
   nombre              String    @db.VarChar
-  codigo              String    @db.VarChar
+  codigo              String    @unique @db.VarChar
   fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -94,7 +102,7 @@ model materia {
 model nrc {
   id_nrc              Int              @id @default(autoincrement())
   id_materia          Int
-  codigo              String           @db.VarChar
+  codigo              String           @unique @db.VarChar
   activo              Boolean
   id_usuario          Int
   fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
@@ -105,74 +113,39 @@ model nrc {
   usuario             usuario          @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model permiso {
-  id_permiso          Int                @id @default(autoincrement())
-  nombre              String             @db.VarChar
-  descripcion         String             @db.VarChar
-  fecha_creacion      DateTime?          @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?          @updatedAt @db.Timestamp(6)
-  estado              Boolean
-  permiso_rol         permiso_rol[]
-  permiso_servicio    permiso_servicio[]
-  permiso_usuario     permiso_usuario[]
-}
-
-model permiso_rol {
-  id_permiso          Int
-  id_rol              Int
-  fecha_creacion      DateTime? @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
-  estado              Boolean
-  permiso             permiso   @relation(fields: [id_permiso], references: [id_permiso], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_rol")
-  rol                 rol       @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction, map: "fk_rol")
-
-  @@id([id_permiso, id_rol])
-}
-
-model permiso_servicio {
-  id_permiso          Int
-  id_servicio         Int
-  fecha_creacion      DateTime? @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
-  estado              Boolean
-  permiso             permiso   @relation(fields: [id_permiso], references: [id_permiso], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso")
-  servicio            servicio  @relation(fields: [id_servicio], references: [id_servicio], onDelete: NoAction, onUpdate: NoAction, map: "fk_servicio")
-
-  @@id([id_permiso, id_servicio])
-}
-
-model permiso_usuario {
-  id_permiso          Int
-  id_usuario          Int
-  fecha_creacion      DateTime? @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
-  estado              Boolean
-  permiso             permiso   @relation(fields: [id_permiso], references: [id_permiso], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_usuario")
-  usuario             usuario   @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario")
-
-  @@id([id_permiso, id_usuario])
-}
-
 model rol {
-  id_rol              Int           @id(map: "roles_pkey") @default(autoincrement())
-  rol                 String        @db.VarChar
-  fecha_creacion      DateTime      @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?     @updatedAt @db.Timestamp(6)
+  id_rol              Int              @id(map: "roles_pkey") @default(autoincrement())
+  rol                 String           @db.VarChar
+  fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?        @updatedAt @db.Timestamp(6)
   estado              Boolean
-  permiso_rol         permiso_rol[]
   usuario_rol         usuario_rol[]
+  rol_servicio        rol_servicio[]
 }
 
 model servicio {
-  id_servicio         Int                @id @default(autoincrement())
-  nombre              String             @db.VarChar
-  descripcion         String             @db.VarChar
-  url                 String             @db.VarChar
-  metodo              String             @db.VarChar
-  fecha_creacion      DateTime?          @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?          @updatedAt @db.Timestamp(6)
+  id_servicio         Int             @id @default(autoincrement())
+  nombre              String          @db.VarChar
+  descripcion         String          @db.VarChar
+  url                 String          @db.VarChar
+  metodo              String          @db.VarChar
+  fecha_creacion      DateTime?       @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?       @updatedAt @db.Timestamp(6)
   estado              Boolean
-  permiso_servicio    permiso_servicio[]
+  rol_servicio        rol_servicio[]
+}
+
+model rol_servicio {
+  id_rol              Int
+  id_servicio         Int
+  fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
+  estado              Boolean
+
+  rol                 rol       @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction)
+  servicio            servicio  @relation(fields: [id_servicio], references: [id_servicio], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_rol, id_servicio])
 }
 
 model usuario {
@@ -181,17 +154,16 @@ model usuario {
   segundo_nombre      String?           @db.VarChar
   primer_apellido     String            @db.VarChar
   segundo_apellido    String            @db.VarChar
-  correo              String            @db.VarChar
+  correo              String            @unique @db.VarChar
   confirmado          Boolean
   token_confirmacion  String            @db.VarChar
-  ultima_conexion     DateTime          @db.Date
+  ultima_conexion     DateTime?         @db.Timestamp(6)
   password            String?           @db.VarChar
   fecha_actualizacion DateTime          @updatedAt @db.Timestamp(6)
   fecha_creacion      DateTime?         @default(now()) @db.Timestamp(6)
   estado              Boolean
   evaluacion          evaluacion[]
   nrc                 nrc[]
-  permiso_usuario     permiso_usuario[]
   usuario_rol         usuario_rol[]
 }
 
@@ -210,11 +182,12 @@ model usuario_rol {
 model videojuego {
   id_videojuego       Int          @id @default(autoincrement())
   id_equipo           Int
+  token_captcha       String       @db.VarChar
   nombre              String       @db.VarChar
   descripcion         String?
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
   evaluacion          evaluacion[]
-  equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
+  equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
 }
