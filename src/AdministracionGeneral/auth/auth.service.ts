@@ -26,9 +26,28 @@ export class AuthService {
                     throw new BadRequestException("email o contraseña invalidos");
                 }
             }
+            const rolesServices = await this.PrismaService.rol_servicio.findMany({
+                where: {
+                    rol: {
+                        usuario_rol: {
+                            some: {
+                                id_usuario: user.id_usuario,
+                                estado: true
+                            }
+                        }
+                    },
+                    estado: true
+                },
+                select: {
+                    id_servicio: true
+                }
+            });
+            
+            const servicios = rolesServices.map(service => service.id_servicio);
             const {password: _, ...userWithoutPassword} = user;
             const payload = {
                 ...userWithoutPassword,
+                servicios: servicios,
             };
             const accessToken = await this.jwtService.signAsync(payload);
             return {accessToken};
