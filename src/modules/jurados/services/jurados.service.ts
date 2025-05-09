@@ -1,4 +1,9 @@
-import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { MailService } from '../../../shared/mail/mail.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
@@ -69,7 +74,8 @@ export class JuradosService {
       await this.mailService.sendWelcomeEmail(user.correo, token);
 
       return {
-        message: 'Jurado creado exitosamente. Por favor, revisa tu correo para confirmar tu cuenta.',
+        message:
+          'Jurado creado exitosamente. Por favor, revisa tu correo para confirmar tu cuenta.',
         user: {
           id: user.id_usuario,
           nombre: `${user.primer_nombre} ${user.primer_apellido}`,
@@ -103,6 +109,47 @@ export class JuradosService {
     });
   }
 
+  async obtenerJurados() {
+    return this.prisma.usuario.findMany({
+      where: {
+        estado: true,
+        usuario_rol: {
+          some: {
+            id_rol: 2, // rol jurado
+            estado: true,
+          },
+        },
+      },
+      select: {
+        id_usuario: true,
+        primer_nombre: true,
+        correo: true,
+        confirmado: true,
+        ultima_conexion: true,
+        evaluacion: {
+          select: {
+            id_evaluacion: true,
+          },
+        },
+      },
+    });
+  }
+
+  async eliminarJurado(id: number) {
+    const jurado = await this.prisma.usuario.findUnique({
+      where: { id_usuario: id },
+    });
+
+    if (!jurado) {
+      throw new NotFoundException('Jurado no encontrado');
+    }
+
+    return this.prisma.usuario.update({
+      where: { id_usuario: id },
+      data: { estado: false }, // Desactivación lógica
+    });
+  }
+
   async findOne(id: number) {
     const user = await this.prisma.usuario.findUnique({
       where: { id_usuario: id },
@@ -133,7 +180,9 @@ export class JuradosService {
       }
 
       if (user.confirmado) {
-        throw new BadRequestException('El correo ya ha sido confirmado anteriormente');
+        throw new BadRequestException(
+          'El correo ya ha sido confirmado anteriormente',
+        );
       }
 
       const updatedUser = await this.prisma.usuario.update({
@@ -157,4 +206,4 @@ export class JuradosService {
       throw error;
     }
   }
-} 
+}

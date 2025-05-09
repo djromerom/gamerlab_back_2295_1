@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  Delete,
+} from '@nestjs/common';
 import { JuradosService } from '../services/jurados.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
 
@@ -25,4 +33,14 @@ export class JuradosController {
   confirmEmail(@Param('token') token: string) {
     return this.juradosService.confirmEmail(token);
   }
-} 
+
+  @Get()
+  getJurados() {
+    return this.juradosService.obtenerJurados();
+  }
+
+  @Delete(':id')
+  deleteJurado(@Param('id') id: string) {
+    return this.juradosService.eliminarJurado(Number(id));
+  }
+}
