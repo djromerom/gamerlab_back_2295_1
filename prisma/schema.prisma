@@ -15,7 +15,7 @@ model criterio {
   fecha_creacion      DateTime              @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?             @updatedAt @db.Timestamp(6)
   estado              Boolean
-  porcentaje          Int
+  porcentaje          Float                 @default(0.5)
   criterio_evaluacion criterio_evaluacion[]
 }
 
@@ -35,20 +35,20 @@ model criterio_evaluacion {
 model equipo {
   id_equipo           Int          @id @default(autoincrement())
   nombre              String       @db.VarChar
-  id_estado           Int          
+  id_estado           Int
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
+  estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
   integrante          integrante[]
   videojuego          videojuego[]
-  estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model estado {
-  id_estado    Int       @id @default(autoincrement())
-  estado       String    @db.VarChar
-  created_at   DateTime  @default(now()) @db.Timestamp(6)
-  equipos      equipo[] 
+  id_estado  Int   @id(map: "estados_pkey") @default(autoincrement())
+  estado     String   @db.VarChar
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  equipos    equipo[]
 }
 
 model evaluacion {
@@ -92,7 +92,7 @@ model integrante_nrc {
 model materia {
   id_materia          Int       @id @default(autoincrement())
   nombre              String    @db.VarChar
-  codigo              String    @unique @db.VarChar
+  codigo              String    @db.VarChar
   fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
@@ -102,7 +102,7 @@ model materia {
 model nrc {
   id_nrc              Int              @id @default(autoincrement())
   id_materia          Int
-  codigo              String           @unique @db.VarChar
+  codigo              String           @db.VarChar
   activo              Boolean
   id_usuario          Int
   fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
@@ -114,23 +114,23 @@ model nrc {
 }
 
 model rol {
-  id_rol              Int              @id(map: "roles_pkey") @default(autoincrement())
-  rol                 String           @db.VarChar
-  fecha_creacion      DateTime         @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?        @updatedAt @db.Timestamp(6)
+  id_rol              Int            @id(map: "roles_pkey") @default(autoincrement())
+  rol                 String         @db.VarChar
+  fecha_creacion      DateTime       @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?      @updatedAt @db.Timestamp(6)
   estado              Boolean
-  usuario_rol         usuario_rol[]
   rol_servicio        rol_servicio[]
+  usuario_rol         usuario_rol[]
 }
 
 model servicio {
-  id_servicio         Int             @id @default(autoincrement())
-  nombre              String          @db.VarChar
-  descripcion         String          @db.VarChar
-  url                 String          @db.VarChar
-  metodo              String          @db.VarChar
-  fecha_creacion      DateTime?       @default(now()) @db.Timestamp(6)
-  fecha_actualizacion DateTime?       @updatedAt @db.Timestamp(6)
+  id_servicio         Int            @id @default(autoincrement())
+  nombre              String         @db.VarChar
+  descripcion         String         @db.VarChar
+  url                 String         @db.VarChar
+  metodo              String         @db.VarChar
+  fecha_creacion      DateTime?      @default(now()) @db.Timestamp(6)
+  fecha_actualizacion DateTime?      @updatedAt @db.Timestamp(6)
   estado              Boolean
   rol_servicio        rol_servicio[]
 }
@@ -138,10 +138,9 @@ model servicio {
 model rol_servicio {
   id_rol              Int
   id_servicio         Int
-  fecha_creacion      DateTime  @default(now()) @db.Timestamp(6)
+  fecha_creacion      DateTime? @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime? @updatedAt @db.Timestamp(6)
   estado              Boolean
-
   rol                 rol       @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction)
   servicio            servicio  @relation(fields: [id_servicio], references: [id_servicio], onDelete: NoAction, onUpdate: NoAction)
 
@@ -149,18 +148,18 @@ model rol_servicio {
 }
 
 model usuario {
-  id_usuario          Int               @id @default(autoincrement())
-  primer_nombre       String            @db.VarChar
-  segundo_nombre      String?           @db.VarChar
-  primer_apellido     String            @db.VarChar
-  segundo_apellido    String            @db.VarChar
-  correo              String            @unique @db.VarChar
-  confirmado          Boolean
-  token_confirmacion  String            @db.VarChar
-  ultima_conexion     DateTime?         @db.Timestamp(6)
-  password            String?           @db.VarChar
-  fecha_actualizacion DateTime          @updatedAt @db.Timestamp(6)
-  fecha_creacion      DateTime?         @default(now()) @db.Timestamp(6)
+  id_usuario          Int           @id @default(autoincrement())
+  primer_nombre       String        @db.VarChar
+  segundo_nombre      String?       @db.VarChar
+  primer_apellido     String        @db.VarChar
+  segundo_apellido    String        @db.VarChar
+  correo              String        @db.VarChar
+  confirmado          Boolean       @default(false)
+  token_confirmacion  String        @db.VarChar
+  ultima_conexion     DateTime?     @db.Timestamp(6)
+  password            String?       @db.VarChar
+  fecha_actualizacion DateTime      @updatedAt @db.Timestamp(6)
+  fecha_creacion      DateTime?     @default(now()) @db.Timestamp(6)
   estado              Boolean
   evaluacion          evaluacion[]
   nrc                 nrc[]
@@ -182,12 +181,12 @@ model usuario_rol {
 model videojuego {
   id_videojuego       Int          @id @default(autoincrement())
   id_equipo           Int
-  token_captcha       String       @db.VarChar
   nombre              String       @db.VarChar
   descripcion         String?
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
+  token_captcha       String?
   evaluacion          evaluacion[]
-  equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
+  equipo              equipo       @relation(fields: [id_equipo], references: [id_equipo], onDelete: NoAction, onUpdate: NoAction)
 }

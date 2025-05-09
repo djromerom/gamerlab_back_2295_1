@@ -59,26 +59,6 @@ export type materia = $Result.DefaultSelection<Prisma.$materiaPayload>
  */
 export type nrc = $Result.DefaultSelection<Prisma.$nrcPayload>
 /**
- * Model permiso
- * 
- */
-export type permiso = $Result.DefaultSelection<Prisma.$permisoPayload>
-/**
- * Model permiso_rol
- * 
- */
-export type permiso_rol = $Result.DefaultSelection<Prisma.$permiso_rolPayload>
-/**
- * Model permiso_servicio
- * 
- */
-export type permiso_servicio = $Result.DefaultSelection<Prisma.$permiso_servicioPayload>
-/**
- * Model permiso_usuario
- * 
- */
-export type permiso_usuario = $Result.DefaultSelection<Prisma.$permiso_usuarioPayload>
-/**
  * Model rol
  * 
  */
@@ -88,6 +68,11 @@ export type rol = $Result.DefaultSelection<Prisma.$rolPayload>
  * 
  */
 export type servicio = $Result.DefaultSelection<Prisma.$servicioPayload>
+/**
+ * Model rol_servicio
+ * 
+ */
+export type rol_servicio = $Result.DefaultSelection<Prisma.$rol_servicioPayload>
 /**
  * Model usuario
  * 
@@ -320,46 +305,6 @@ export class PrismaClient<
   get nrc(): Prisma.nrcDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.permiso`: Exposes CRUD operations for the **permiso** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Permisos
-    * const permisos = await prisma.permiso.findMany()
-    * ```
-    */
-  get permiso(): Prisma.permisoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.permiso_rol`: Exposes CRUD operations for the **permiso_rol** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Permiso_rols
-    * const permiso_rols = await prisma.permiso_rol.findMany()
-    * ```
-    */
-  get permiso_rol(): Prisma.permiso_rolDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.permiso_servicio`: Exposes CRUD operations for the **permiso_servicio** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Permiso_servicios
-    * const permiso_servicios = await prisma.permiso_servicio.findMany()
-    * ```
-    */
-  get permiso_servicio(): Prisma.permiso_servicioDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.permiso_usuario`: Exposes CRUD operations for the **permiso_usuario** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Permiso_usuarios
-    * const permiso_usuarios = await prisma.permiso_usuario.findMany()
-    * ```
-    */
-  get permiso_usuario(): Prisma.permiso_usuarioDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.rol`: Exposes CRUD operations for the **rol** model.
     * Example usage:
     * ```ts
@@ -378,6 +323,16 @@ export class PrismaClient<
     * ```
     */
   get servicio(): Prisma.servicioDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rol_servicio`: Exposes CRUD operations for the **rol_servicio** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rol_servicios
+    * const rol_servicios = await prisma.rol_servicio.findMany()
+    * ```
+    */
+  get rol_servicio(): Prisma.rol_servicioDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.usuario`: Exposes CRUD operations for the **usuario** model.
@@ -857,12 +812,9 @@ export namespace Prisma {
     integrante_nrc: 'integrante_nrc',
     materia: 'materia',
     nrc: 'nrc',
-    permiso: 'permiso',
-    permiso_rol: 'permiso_rol',
-    permiso_servicio: 'permiso_servicio',
-    permiso_usuario: 'permiso_usuario',
     rol: 'rol',
     servicio: 'servicio',
+    rol_servicio: 'rol_servicio',
     usuario: 'usuario',
     usuario_rol: 'usuario_rol',
     videojuego: 'videojuego'
@@ -884,7 +836,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "criterio" | "criterio_evaluacion" | "equipo" | "estado" | "evaluacion" | "integrante" | "integrante_nrc" | "materia" | "nrc" | "permiso" | "permiso_rol" | "permiso_servicio" | "permiso_usuario" | "rol" | "servicio" | "usuario" | "usuario_rol" | "videojuego"
+      modelProps: "criterio" | "criterio_evaluacion" | "equipo" | "estado" | "evaluacion" | "integrante" | "integrante_nrc" | "materia" | "nrc" | "rol" | "servicio" | "rol_servicio" | "usuario" | "usuario_rol" | "videojuego"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1554,302 +1506,6 @@ export namespace Prisma {
           }
         }
       }
-      permiso: {
-        payload: Prisma.$permisoPayload<ExtArgs>
-        fields: Prisma.permisoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.permisoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.permisoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          findFirst: {
-            args: Prisma.permisoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.permisoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          findMany: {
-            args: Prisma.permisoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>[]
-          }
-          create: {
-            args: Prisma.permisoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          createMany: {
-            args: Prisma.permisoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.permisoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>[]
-          }
-          delete: {
-            args: Prisma.permisoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          update: {
-            args: Prisma.permisoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          deleteMany: {
-            args: Prisma.permisoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.permisoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.permisoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>[]
-          }
-          upsert: {
-            args: Prisma.permisoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permisoPayload>
-          }
-          aggregate: {
-            args: Prisma.PermisoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePermiso>
-          }
-          groupBy: {
-            args: Prisma.permisoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PermisoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.permisoCountArgs<ExtArgs>
-            result: $Utils.Optional<PermisoCountAggregateOutputType> | number
-          }
-        }
-      }
-      permiso_rol: {
-        payload: Prisma.$permiso_rolPayload<ExtArgs>
-        fields: Prisma.permiso_rolFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.permiso_rolFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.permiso_rolFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          findFirst: {
-            args: Prisma.permiso_rolFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.permiso_rolFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          findMany: {
-            args: Prisma.permiso_rolFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>[]
-          }
-          create: {
-            args: Prisma.permiso_rolCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          createMany: {
-            args: Prisma.permiso_rolCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.permiso_rolCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>[]
-          }
-          delete: {
-            args: Prisma.permiso_rolDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          update: {
-            args: Prisma.permiso_rolUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          deleteMany: {
-            args: Prisma.permiso_rolDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.permiso_rolUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.permiso_rolUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>[]
-          }
-          upsert: {
-            args: Prisma.permiso_rolUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_rolPayload>
-          }
-          aggregate: {
-            args: Prisma.Permiso_rolAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePermiso_rol>
-          }
-          groupBy: {
-            args: Prisma.permiso_rolGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_rolGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.permiso_rolCountArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_rolCountAggregateOutputType> | number
-          }
-        }
-      }
-      permiso_servicio: {
-        payload: Prisma.$permiso_servicioPayload<ExtArgs>
-        fields: Prisma.permiso_servicioFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.permiso_servicioFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.permiso_servicioFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          findFirst: {
-            args: Prisma.permiso_servicioFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.permiso_servicioFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          findMany: {
-            args: Prisma.permiso_servicioFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>[]
-          }
-          create: {
-            args: Prisma.permiso_servicioCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          createMany: {
-            args: Prisma.permiso_servicioCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.permiso_servicioCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>[]
-          }
-          delete: {
-            args: Prisma.permiso_servicioDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          update: {
-            args: Prisma.permiso_servicioUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          deleteMany: {
-            args: Prisma.permiso_servicioDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.permiso_servicioUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.permiso_servicioUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>[]
-          }
-          upsert: {
-            args: Prisma.permiso_servicioUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_servicioPayload>
-          }
-          aggregate: {
-            args: Prisma.Permiso_servicioAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePermiso_servicio>
-          }
-          groupBy: {
-            args: Prisma.permiso_servicioGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_servicioGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.permiso_servicioCountArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_servicioCountAggregateOutputType> | number
-          }
-        }
-      }
-      permiso_usuario: {
-        payload: Prisma.$permiso_usuarioPayload<ExtArgs>
-        fields: Prisma.permiso_usuarioFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.permiso_usuarioFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.permiso_usuarioFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          findFirst: {
-            args: Prisma.permiso_usuarioFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.permiso_usuarioFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          findMany: {
-            args: Prisma.permiso_usuarioFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>[]
-          }
-          create: {
-            args: Prisma.permiso_usuarioCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          createMany: {
-            args: Prisma.permiso_usuarioCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.permiso_usuarioCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>[]
-          }
-          delete: {
-            args: Prisma.permiso_usuarioDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          update: {
-            args: Prisma.permiso_usuarioUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          deleteMany: {
-            args: Prisma.permiso_usuarioDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.permiso_usuarioUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.permiso_usuarioUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>[]
-          }
-          upsert: {
-            args: Prisma.permiso_usuarioUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$permiso_usuarioPayload>
-          }
-          aggregate: {
-            args: Prisma.Permiso_usuarioAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePermiso_usuario>
-          }
-          groupBy: {
-            args: Prisma.permiso_usuarioGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_usuarioGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.permiso_usuarioCountArgs<ExtArgs>
-            result: $Utils.Optional<Permiso_usuarioCountAggregateOutputType> | number
-          }
-        }
-      }
       rol: {
         payload: Prisma.$rolPayload<ExtArgs>
         fields: Prisma.rolFieldRefs
@@ -1995,6 +1651,80 @@ export namespace Prisma {
           count: {
             args: Prisma.servicioCountArgs<ExtArgs>
             result: $Utils.Optional<ServicioCountAggregateOutputType> | number
+          }
+        }
+      }
+      rol_servicio: {
+        payload: Prisma.$rol_servicioPayload<ExtArgs>
+        fields: Prisma.rol_servicioFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.rol_servicioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.rol_servicioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          findFirst: {
+            args: Prisma.rol_servicioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.rol_servicioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          findMany: {
+            args: Prisma.rol_servicioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>[]
+          }
+          create: {
+            args: Prisma.rol_servicioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          createMany: {
+            args: Prisma.rol_servicioCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.rol_servicioCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>[]
+          }
+          delete: {
+            args: Prisma.rol_servicioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          update: {
+            args: Prisma.rol_servicioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          deleteMany: {
+            args: Prisma.rol_servicioDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.rol_servicioUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.rol_servicioUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>[]
+          }
+          upsert: {
+            args: Prisma.rol_servicioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$rol_servicioPayload>
+          }
+          aggregate: {
+            args: Prisma.Rol_servicioAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRol_servicio>
+          }
+          groupBy: {
+            args: Prisma.rol_servicioGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Rol_servicioGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.rol_servicioCountArgs<ExtArgs>
+            result: $Utils.Optional<Rol_servicioCountAggregateOutputType> | number
           }
         }
       }
@@ -2313,12 +2043,9 @@ export namespace Prisma {
     integrante_nrc?: integrante_nrcOmit
     materia?: materiaOmit
     nrc?: nrcOmit
-    permiso?: permisoOmit
-    permiso_rol?: permiso_rolOmit
-    permiso_servicio?: permiso_servicioOmit
-    permiso_usuario?: permiso_usuarioOmit
     rol?: rolOmit
     servicio?: servicioOmit
+    rol_servicio?: rol_servicioOmit
     usuario?: usuarioOmit
     usuario_rol?: usuario_rolOmit
     videojuego?: videojuegoOmit
@@ -2638,65 +2365,16 @@ export namespace Prisma {
 
 
   /**
-   * Count Type PermisoCountOutputType
-   */
-
-  export type PermisoCountOutputType = {
-    permiso_rol: number
-    permiso_servicio: number
-    permiso_usuario: number
-  }
-
-  export type PermisoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_rol?: boolean | PermisoCountOutputTypeCountPermiso_rolArgs
-    permiso_servicio?: boolean | PermisoCountOutputTypeCountPermiso_servicioArgs
-    permiso_usuario?: boolean | PermisoCountOutputTypeCountPermiso_usuarioArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PermisoCountOutputType without action
-   */
-  export type PermisoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PermisoCountOutputType
-     */
-    select?: PermisoCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PermisoCountOutputType without action
-   */
-  export type PermisoCountOutputTypeCountPermiso_rolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_rolWhereInput
-  }
-
-  /**
-   * PermisoCountOutputType without action
-   */
-  export type PermisoCountOutputTypeCountPermiso_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_servicioWhereInput
-  }
-
-  /**
-   * PermisoCountOutputType without action
-   */
-  export type PermisoCountOutputTypeCountPermiso_usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_usuarioWhereInput
-  }
-
-
-  /**
    * Count Type RolCountOutputType
    */
 
   export type RolCountOutputType = {
-    permiso_rol: number
+    rol_servicio: number
     usuario_rol: number
   }
 
   export type RolCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_rol?: boolean | RolCountOutputTypeCountPermiso_rolArgs
+    rol_servicio?: boolean | RolCountOutputTypeCountRol_servicioArgs
     usuario_rol?: boolean | RolCountOutputTypeCountUsuario_rolArgs
   }
 
@@ -2714,8 +2392,8 @@ export namespace Prisma {
   /**
    * RolCountOutputType without action
    */
-  export type RolCountOutputTypeCountPermiso_rolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_rolWhereInput
+  export type RolCountOutputTypeCountRol_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: rol_servicioWhereInput
   }
 
   /**
@@ -2731,11 +2409,11 @@ export namespace Prisma {
    */
 
   export type ServicioCountOutputType = {
-    permiso_servicio: number
+    rol_servicio: number
   }
 
   export type ServicioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_servicio?: boolean | ServicioCountOutputTypeCountPermiso_servicioArgs
+    rol_servicio?: boolean | ServicioCountOutputTypeCountRol_servicioArgs
   }
 
   // Custom InputTypes
@@ -2752,8 +2430,8 @@ export namespace Prisma {
   /**
    * ServicioCountOutputType without action
    */
-  export type ServicioCountOutputTypeCountPermiso_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_servicioWhereInput
+  export type ServicioCountOutputTypeCountRol_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: rol_servicioWhereInput
   }
 
 
@@ -2764,14 +2442,12 @@ export namespace Prisma {
   export type UsuarioCountOutputType = {
     evaluacion: number
     nrc: number
-    permiso_usuario: number
     usuario_rol: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     evaluacion?: boolean | UsuarioCountOutputTypeCountEvaluacionArgs
     nrc?: boolean | UsuarioCountOutputTypeCountNrcArgs
-    permiso_usuario?: boolean | UsuarioCountOutputTypeCountPermiso_usuarioArgs
     usuario_rol?: boolean | UsuarioCountOutputTypeCountUsuario_rolArgs
   }
 
@@ -2798,13 +2474,6 @@ export namespace Prisma {
    */
   export type UsuarioCountOutputTypeCountNrcArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: nrcWhereInput
-  }
-
-  /**
-   * UsuarioCountOutputType without action
-   */
-  export type UsuarioCountOutputTypeCountPermiso_usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_usuarioWhereInput
   }
 
   /**
@@ -3553,7 +3222,7 @@ export namespace Prisma {
     readonly fecha_creacion: FieldRef<"criterio", 'DateTime'>
     readonly fecha_actualizacion: FieldRef<"criterio", 'DateTime'>
     readonly estado: FieldRef<"criterio", 'Boolean'>
-    readonly porcentaje: FieldRef<"criterio", 'Int'>
+    readonly porcentaje: FieldRef<"criterio", 'Float'>
   }
     
 
@@ -5311,9 +4980,9 @@ export namespace Prisma {
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
+    estado_equipo?: boolean | estadoDefaultArgs<ExtArgs>
     integrante?: boolean | equipo$integranteArgs<ExtArgs>
     videojuego?: boolean | equipo$videojuegoArgs<ExtArgs>
-    estado_equipo?: boolean | estadoDefaultArgs<ExtArgs>
     _count?: boolean | EquipoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["equipo"]>
 
@@ -5348,9 +5017,9 @@ export namespace Prisma {
 
   export type equipoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_equipo" | "nombre" | "id_estado" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["equipo"]>
   export type equipoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estado_equipo?: boolean | estadoDefaultArgs<ExtArgs>
     integrante?: boolean | equipo$integranteArgs<ExtArgs>
     videojuego?: boolean | equipo$videojuegoArgs<ExtArgs>
-    estado_equipo?: boolean | estadoDefaultArgs<ExtArgs>
     _count?: boolean | EquipoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type equipoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5363,9 +5032,9 @@ export namespace Prisma {
   export type $equipoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "equipo"
     objects: {
+      estado_equipo: Prisma.$estadoPayload<ExtArgs>
       integrante: Prisma.$integrantePayload<ExtArgs>[]
       videojuego: Prisma.$videojuegoPayload<ExtArgs>[]
-      estado_equipo: Prisma.$estadoPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id_equipo: number
@@ -5768,9 +5437,9 @@ export namespace Prisma {
    */
   export interface Prisma__equipoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    estado_equipo<T extends estadoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, estadoDefaultArgs<ExtArgs>>): Prisma__estadoClient<$Result.GetResult<Prisma.$estadoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     integrante<T extends equipo$integranteArgs<ExtArgs> = {}>(args?: Subset<T, equipo$integranteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$integrantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     videojuego<T extends equipo$videojuegoArgs<ExtArgs> = {}>(args?: Subset<T, equipo$videojuegoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videojuegoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    estado_equipo<T extends estadoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, estadoDefaultArgs<ExtArgs>>): Prisma__estadoClient<$Result.GetResult<Prisma.$estadoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13074,4491 +12743,6 @@ export namespace Prisma {
 
 
   /**
-   * Model permiso
-   */
-
-  export type AggregatePermiso = {
-    _count: PermisoCountAggregateOutputType | null
-    _avg: PermisoAvgAggregateOutputType | null
-    _sum: PermisoSumAggregateOutputType | null
-    _min: PermisoMinAggregateOutputType | null
-    _max: PermisoMaxAggregateOutputType | null
-  }
-
-  export type PermisoAvgAggregateOutputType = {
-    id_permiso: number | null
-  }
-
-  export type PermisoSumAggregateOutputType = {
-    id_permiso: number | null
-  }
-
-  export type PermisoMinAggregateOutputType = {
-    id_permiso: number | null
-    nombre: string | null
-    descripcion: string | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type PermisoMaxAggregateOutputType = {
-    id_permiso: number | null
-    nombre: string | null
-    descripcion: string | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type PermisoCountAggregateOutputType = {
-    id_permiso: number
-    nombre: number
-    descripcion: number
-    fecha_creacion: number
-    fecha_actualizacion: number
-    estado: number
-    _all: number
-  }
-
-
-  export type PermisoAvgAggregateInputType = {
-    id_permiso?: true
-  }
-
-  export type PermisoSumAggregateInputType = {
-    id_permiso?: true
-  }
-
-  export type PermisoMinAggregateInputType = {
-    id_permiso?: true
-    nombre?: true
-    descripcion?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type PermisoMaxAggregateInputType = {
-    id_permiso?: true
-    nombre?: true
-    descripcion?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type PermisoCountAggregateInputType = {
-    id_permiso?: true
-    nombre?: true
-    descripcion?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-    _all?: true
-  }
-
-  export type PermisoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso to aggregate.
-     */
-    where?: permisoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permisos to fetch.
-     */
-    orderBy?: permisoOrderByWithRelationInput | permisoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: permisoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permisos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permisos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned permisos
-    **/
-    _count?: true | PermisoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: PermisoAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PermisoSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PermisoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PermisoMaxAggregateInputType
-  }
-
-  export type GetPermisoAggregateType<T extends PermisoAggregateArgs> = {
-        [P in keyof T & keyof AggregatePermiso]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePermiso[P]>
-      : GetScalarType<T[P], AggregatePermiso[P]>
-  }
-
-
-
-
-  export type permisoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permisoWhereInput
-    orderBy?: permisoOrderByWithAggregationInput | permisoOrderByWithAggregationInput[]
-    by: PermisoScalarFieldEnum[] | PermisoScalarFieldEnum
-    having?: permisoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PermisoCountAggregateInputType | true
-    _avg?: PermisoAvgAggregateInputType
-    _sum?: PermisoSumAggregateInputType
-    _min?: PermisoMinAggregateInputType
-    _max?: PermisoMaxAggregateInputType
-  }
-
-  export type PermisoGroupByOutputType = {
-    id_permiso: number
-    nombre: string
-    descripcion: string
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean
-    _count: PermisoCountAggregateOutputType | null
-    _avg: PermisoAvgAggregateOutputType | null
-    _sum: PermisoSumAggregateOutputType | null
-    _min: PermisoMinAggregateOutputType | null
-    _max: PermisoMaxAggregateOutputType | null
-  }
-
-  type GetPermisoGroupByPayload<T extends permisoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PermisoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PermisoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PermisoGroupByOutputType[P]>
-            : GetScalarType<T[P], PermisoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type permisoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    nombre?: boolean
-    descripcion?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso_rol?: boolean | permiso$permiso_rolArgs<ExtArgs>
-    permiso_servicio?: boolean | permiso$permiso_servicioArgs<ExtArgs>
-    permiso_usuario?: boolean | permiso$permiso_usuarioArgs<ExtArgs>
-    _count?: boolean | PermisoCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso"]>
-
-  export type permisoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    nombre?: boolean
-    descripcion?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }, ExtArgs["result"]["permiso"]>
-
-  export type permisoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    nombre?: boolean
-    descripcion?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }, ExtArgs["result"]["permiso"]>
-
-  export type permisoSelectScalar = {
-    id_permiso?: boolean
-    nombre?: boolean
-    descripcion?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }
-
-  export type permisoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_permiso" | "nombre" | "descripcion" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["permiso"]>
-  export type permisoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_rol?: boolean | permiso$permiso_rolArgs<ExtArgs>
-    permiso_servicio?: boolean | permiso$permiso_servicioArgs<ExtArgs>
-    permiso_usuario?: boolean | permiso$permiso_usuarioArgs<ExtArgs>
-    _count?: boolean | PermisoCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type permisoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type permisoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $permisoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "permiso"
-    objects: {
-      permiso_rol: Prisma.$permiso_rolPayload<ExtArgs>[]
-      permiso_servicio: Prisma.$permiso_servicioPayload<ExtArgs>[]
-      permiso_usuario: Prisma.$permiso_usuarioPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id_permiso: number
-      nombre: string
-      descripcion: string
-      fecha_creacion: Date | null
-      fecha_actualizacion: Date | null
-      estado: boolean
-    }, ExtArgs["result"]["permiso"]>
-    composites: {}
-  }
-
-  type permisoGetPayload<S extends boolean | null | undefined | permisoDefaultArgs> = $Result.GetResult<Prisma.$permisoPayload, S>
-
-  type permisoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<permisoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PermisoCountAggregateInputType | true
-    }
-
-  export interface permisoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['permiso'], meta: { name: 'permiso' } }
-    /**
-     * Find zero or one Permiso that matches the filter.
-     * @param {permisoFindUniqueArgs} args - Arguments to find a Permiso
-     * @example
-     * // Get one Permiso
-     * const permiso = await prisma.permiso.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends permisoFindUniqueArgs>(args: SelectSubset<T, permisoFindUniqueArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Permiso that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {permisoFindUniqueOrThrowArgs} args - Arguments to find a Permiso
-     * @example
-     * // Get one Permiso
-     * const permiso = await prisma.permiso.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends permisoFindUniqueOrThrowArgs>(args: SelectSubset<T, permisoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoFindFirstArgs} args - Arguments to find a Permiso
-     * @example
-     * // Get one Permiso
-     * const permiso = await prisma.permiso.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends permisoFindFirstArgs>(args?: SelectSubset<T, permisoFindFirstArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoFindFirstOrThrowArgs} args - Arguments to find a Permiso
-     * @example
-     * // Get one Permiso
-     * const permiso = await prisma.permiso.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends permisoFindFirstOrThrowArgs>(args?: SelectSubset<T, permisoFindFirstOrThrowArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Permisos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Permisos
-     * const permisos = await prisma.permiso.findMany()
-     * 
-     * // Get first 10 Permisos
-     * const permisos = await prisma.permiso.findMany({ take: 10 })
-     * 
-     * // Only select the `id_permiso`
-     * const permisoWithId_permisoOnly = await prisma.permiso.findMany({ select: { id_permiso: true } })
-     * 
-     */
-    findMany<T extends permisoFindManyArgs>(args?: SelectSubset<T, permisoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Permiso.
-     * @param {permisoCreateArgs} args - Arguments to create a Permiso.
-     * @example
-     * // Create one Permiso
-     * const Permiso = await prisma.permiso.create({
-     *   data: {
-     *     // ... data to create a Permiso
-     *   }
-     * })
-     * 
-     */
-    create<T extends permisoCreateArgs>(args: SelectSubset<T, permisoCreateArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Permisos.
-     * @param {permisoCreateManyArgs} args - Arguments to create many Permisos.
-     * @example
-     * // Create many Permisos
-     * const permiso = await prisma.permiso.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends permisoCreateManyArgs>(args?: SelectSubset<T, permisoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Permisos and returns the data saved in the database.
-     * @param {permisoCreateManyAndReturnArgs} args - Arguments to create many Permisos.
-     * @example
-     * // Create many Permisos
-     * const permiso = await prisma.permiso.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Permisos and only return the `id_permiso`
-     * const permisoWithId_permisoOnly = await prisma.permiso.createManyAndReturn({
-     *   select: { id_permiso: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends permisoCreateManyAndReturnArgs>(args?: SelectSubset<T, permisoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Permiso.
-     * @param {permisoDeleteArgs} args - Arguments to delete one Permiso.
-     * @example
-     * // Delete one Permiso
-     * const Permiso = await prisma.permiso.delete({
-     *   where: {
-     *     // ... filter to delete one Permiso
-     *   }
-     * })
-     * 
-     */
-    delete<T extends permisoDeleteArgs>(args: SelectSubset<T, permisoDeleteArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Permiso.
-     * @param {permisoUpdateArgs} args - Arguments to update one Permiso.
-     * @example
-     * // Update one Permiso
-     * const permiso = await prisma.permiso.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends permisoUpdateArgs>(args: SelectSubset<T, permisoUpdateArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Permisos.
-     * @param {permisoDeleteManyArgs} args - Arguments to filter Permisos to delete.
-     * @example
-     * // Delete a few Permisos
-     * const { count } = await prisma.permiso.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends permisoDeleteManyArgs>(args?: SelectSubset<T, permisoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permisos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Permisos
-     * const permiso = await prisma.permiso.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends permisoUpdateManyArgs>(args: SelectSubset<T, permisoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permisos and returns the data updated in the database.
-     * @param {permisoUpdateManyAndReturnArgs} args - Arguments to update many Permisos.
-     * @example
-     * // Update many Permisos
-     * const permiso = await prisma.permiso.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Permisos and only return the `id_permiso`
-     * const permisoWithId_permisoOnly = await prisma.permiso.updateManyAndReturn({
-     *   select: { id_permiso: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends permisoUpdateManyAndReturnArgs>(args: SelectSubset<T, permisoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Permiso.
-     * @param {permisoUpsertArgs} args - Arguments to update or create a Permiso.
-     * @example
-     * // Update or create a Permiso
-     * const permiso = await prisma.permiso.upsert({
-     *   create: {
-     *     // ... data to create a Permiso
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Permiso we want to update
-     *   }
-     * })
-     */
-    upsert<T extends permisoUpsertArgs>(args: SelectSubset<T, permisoUpsertArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Permisos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoCountArgs} args - Arguments to filter Permisos to count.
-     * @example
-     * // Count the number of Permisos
-     * const count = await prisma.permiso.count({
-     *   where: {
-     *     // ... the filter for the Permisos we want to count
-     *   }
-     * })
-    **/
-    count<T extends permisoCountArgs>(
-      args?: Subset<T, permisoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PermisoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Permiso.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PermisoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PermisoAggregateArgs>(args: Subset<T, PermisoAggregateArgs>): Prisma.PrismaPromise<GetPermisoAggregateType<T>>
-
-    /**
-     * Group by Permiso.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permisoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends permisoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: permisoGroupByArgs['orderBy'] }
-        : { orderBy?: permisoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, permisoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermisoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the permiso model
-   */
-  readonly fields: permisoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for permiso.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__permisoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso_rol<T extends permiso$permiso_rolArgs<ExtArgs> = {}>(args?: Subset<T, permiso$permiso_rolArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    permiso_servicio<T extends permiso$permiso_servicioArgs<ExtArgs> = {}>(args?: Subset<T, permiso$permiso_servicioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    permiso_usuario<T extends permiso$permiso_usuarioArgs<ExtArgs> = {}>(args?: Subset<T, permiso$permiso_usuarioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the permiso model
-   */
-  interface permisoFieldRefs {
-    readonly id_permiso: FieldRef<"permiso", 'Int'>
-    readonly nombre: FieldRef<"permiso", 'String'>
-    readonly descripcion: FieldRef<"permiso", 'String'>
-    readonly fecha_creacion: FieldRef<"permiso", 'DateTime'>
-    readonly fecha_actualizacion: FieldRef<"permiso", 'DateTime'>
-    readonly estado: FieldRef<"permiso", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * permiso findUnique
-   */
-  export type permisoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso to fetch.
-     */
-    where: permisoWhereUniqueInput
-  }
-
-  /**
-   * permiso findUniqueOrThrow
-   */
-  export type permisoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso to fetch.
-     */
-    where: permisoWhereUniqueInput
-  }
-
-  /**
-   * permiso findFirst
-   */
-  export type permisoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso to fetch.
-     */
-    where?: permisoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permisos to fetch.
-     */
-    orderBy?: permisoOrderByWithRelationInput | permisoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permisos.
-     */
-    cursor?: permisoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permisos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permisos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permisos.
-     */
-    distinct?: PermisoScalarFieldEnum | PermisoScalarFieldEnum[]
-  }
-
-  /**
-   * permiso findFirstOrThrow
-   */
-  export type permisoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso to fetch.
-     */
-    where?: permisoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permisos to fetch.
-     */
-    orderBy?: permisoOrderByWithRelationInput | permisoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permisos.
-     */
-    cursor?: permisoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permisos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permisos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permisos.
-     */
-    distinct?: PermisoScalarFieldEnum | PermisoScalarFieldEnum[]
-  }
-
-  /**
-   * permiso findMany
-   */
-  export type permisoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter, which permisos to fetch.
-     */
-    where?: permisoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permisos to fetch.
-     */
-    orderBy?: permisoOrderByWithRelationInput | permisoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing permisos.
-     */
-    cursor?: permisoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permisos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permisos.
-     */
-    skip?: number
-    distinct?: PermisoScalarFieldEnum | PermisoScalarFieldEnum[]
-  }
-
-  /**
-   * permiso create
-   */
-  export type permisoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a permiso.
-     */
-    data: XOR<permisoCreateInput, permisoUncheckedCreateInput>
-  }
-
-  /**
-   * permiso createMany
-   */
-  export type permisoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many permisos.
-     */
-    data: permisoCreateManyInput | permisoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * permiso createManyAndReturn
-   */
-  export type permisoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * The data used to create many permisos.
-     */
-    data: permisoCreateManyInput | permisoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * permiso update
-   */
-  export type permisoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a permiso.
-     */
-    data: XOR<permisoUpdateInput, permisoUncheckedUpdateInput>
-    /**
-     * Choose, which permiso to update.
-     */
-    where: permisoWhereUniqueInput
-  }
-
-  /**
-   * permiso updateMany
-   */
-  export type permisoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update permisos.
-     */
-    data: XOR<permisoUpdateManyMutationInput, permisoUncheckedUpdateManyInput>
-    /**
-     * Filter which permisos to update
-     */
-    where?: permisoWhereInput
-    /**
-     * Limit how many permisos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso updateManyAndReturn
-   */
-  export type permisoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * The data used to update permisos.
-     */
-    data: XOR<permisoUpdateManyMutationInput, permisoUncheckedUpdateManyInput>
-    /**
-     * Filter which permisos to update
-     */
-    where?: permisoWhereInput
-    /**
-     * Limit how many permisos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso upsert
-   */
-  export type permisoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the permiso to update in case it exists.
-     */
-    where: permisoWhereUniqueInput
-    /**
-     * In case the permiso found by the `where` argument doesn't exist, create a new permiso with this data.
-     */
-    create: XOR<permisoCreateInput, permisoUncheckedCreateInput>
-    /**
-     * In case the permiso was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<permisoUpdateInput, permisoUncheckedUpdateInput>
-  }
-
-  /**
-   * permiso delete
-   */
-  export type permisoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-    /**
-     * Filter which permiso to delete.
-     */
-    where: permisoWhereUniqueInput
-  }
-
-  /**
-   * permiso deleteMany
-   */
-  export type permisoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permisos to delete
-     */
-    where?: permisoWhereInput
-    /**
-     * Limit how many permisos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso.permiso_rol
-   */
-  export type permiso$permiso_rolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    where?: permiso_rolWhereInput
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    cursor?: permiso_rolWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Permiso_rolScalarFieldEnum | Permiso_rolScalarFieldEnum[]
-  }
-
-  /**
-   * permiso.permiso_servicio
-   */
-  export type permiso$permiso_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    where?: permiso_servicioWhereInput
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    cursor?: permiso_servicioWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Permiso_servicioScalarFieldEnum | Permiso_servicioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso.permiso_usuario
-   */
-  export type permiso$permiso_usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    where?: permiso_usuarioWhereInput
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    cursor?: permiso_usuarioWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Permiso_usuarioScalarFieldEnum | Permiso_usuarioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso without action
-   */
-  export type permisoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso
-     */
-    select?: permisoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso
-     */
-    omit?: permisoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permisoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model permiso_rol
-   */
-
-  export type AggregatePermiso_rol = {
-    _count: Permiso_rolCountAggregateOutputType | null
-    _avg: Permiso_rolAvgAggregateOutputType | null
-    _sum: Permiso_rolSumAggregateOutputType | null
-    _min: Permiso_rolMinAggregateOutputType | null
-    _max: Permiso_rolMaxAggregateOutputType | null
-  }
-
-  export type Permiso_rolAvgAggregateOutputType = {
-    id_permiso: number | null
-    id_rol: number | null
-  }
-
-  export type Permiso_rolSumAggregateOutputType = {
-    id_permiso: number | null
-    id_rol: number | null
-  }
-
-  export type Permiso_rolMinAggregateOutputType = {
-    id_permiso: number | null
-    id_rol: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_rolMaxAggregateOutputType = {
-    id_permiso: number | null
-    id_rol: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_rolCountAggregateOutputType = {
-    id_permiso: number
-    id_rol: number
-    fecha_creacion: number
-    fecha_actualizacion: number
-    estado: number
-    _all: number
-  }
-
-
-  export type Permiso_rolAvgAggregateInputType = {
-    id_permiso?: true
-    id_rol?: true
-  }
-
-  export type Permiso_rolSumAggregateInputType = {
-    id_permiso?: true
-    id_rol?: true
-  }
-
-  export type Permiso_rolMinAggregateInputType = {
-    id_permiso?: true
-    id_rol?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_rolMaxAggregateInputType = {
-    id_permiso?: true
-    id_rol?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_rolCountAggregateInputType = {
-    id_permiso?: true
-    id_rol?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-    _all?: true
-  }
-
-  export type Permiso_rolAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_rol to aggregate.
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_rols to fetch.
-     */
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: permiso_rolWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_rols from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_rols.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned permiso_rols
-    **/
-    _count?: true | Permiso_rolCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Permiso_rolAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Permiso_rolSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Permiso_rolMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Permiso_rolMaxAggregateInputType
-  }
-
-  export type GetPermiso_rolAggregateType<T extends Permiso_rolAggregateArgs> = {
-        [P in keyof T & keyof AggregatePermiso_rol]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePermiso_rol[P]>
-      : GetScalarType<T[P], AggregatePermiso_rol[P]>
-  }
-
-
-
-
-  export type permiso_rolGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_rolWhereInput
-    orderBy?: permiso_rolOrderByWithAggregationInput | permiso_rolOrderByWithAggregationInput[]
-    by: Permiso_rolScalarFieldEnum[] | Permiso_rolScalarFieldEnum
-    having?: permiso_rolScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Permiso_rolCountAggregateInputType | true
-    _avg?: Permiso_rolAvgAggregateInputType
-    _sum?: Permiso_rolSumAggregateInputType
-    _min?: Permiso_rolMinAggregateInputType
-    _max?: Permiso_rolMaxAggregateInputType
-  }
-
-  export type Permiso_rolGroupByOutputType = {
-    id_permiso: number
-    id_rol: number
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean
-    _count: Permiso_rolCountAggregateOutputType | null
-    _avg: Permiso_rolAvgAggregateOutputType | null
-    _sum: Permiso_rolSumAggregateOutputType | null
-    _min: Permiso_rolMinAggregateOutputType | null
-    _max: Permiso_rolMaxAggregateOutputType | null
-  }
-
-  type GetPermiso_rolGroupByPayload<T extends permiso_rolGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Permiso_rolGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Permiso_rolGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Permiso_rolGroupByOutputType[P]>
-            : GetScalarType<T[P], Permiso_rolGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type permiso_rolSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_rol?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_rol"]>
-
-  export type permiso_rolSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_rol?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_rol"]>
-
-  export type permiso_rolSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_rol?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_rol"]>
-
-  export type permiso_rolSelectScalar = {
-    id_permiso?: boolean
-    id_rol?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }
-
-  export type permiso_rolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_permiso" | "id_rol" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["permiso_rol"]>
-  export type permiso_rolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }
-  export type permiso_rolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }
-  export type permiso_rolIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    rol?: boolean | rolDefaultArgs<ExtArgs>
-  }
-
-  export type $permiso_rolPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "permiso_rol"
-    objects: {
-      permiso: Prisma.$permisoPayload<ExtArgs>
-      rol: Prisma.$rolPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id_permiso: number
-      id_rol: number
-      fecha_creacion: Date | null
-      fecha_actualizacion: Date | null
-      estado: boolean
-    }, ExtArgs["result"]["permiso_rol"]>
-    composites: {}
-  }
-
-  type permiso_rolGetPayload<S extends boolean | null | undefined | permiso_rolDefaultArgs> = $Result.GetResult<Prisma.$permiso_rolPayload, S>
-
-  type permiso_rolCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<permiso_rolFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Permiso_rolCountAggregateInputType | true
-    }
-
-  export interface permiso_rolDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['permiso_rol'], meta: { name: 'permiso_rol' } }
-    /**
-     * Find zero or one Permiso_rol that matches the filter.
-     * @param {permiso_rolFindUniqueArgs} args - Arguments to find a Permiso_rol
-     * @example
-     * // Get one Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends permiso_rolFindUniqueArgs>(args: SelectSubset<T, permiso_rolFindUniqueArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Permiso_rol that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {permiso_rolFindUniqueOrThrowArgs} args - Arguments to find a Permiso_rol
-     * @example
-     * // Get one Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends permiso_rolFindUniqueOrThrowArgs>(args: SelectSubset<T, permiso_rolFindUniqueOrThrowArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_rol that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolFindFirstArgs} args - Arguments to find a Permiso_rol
-     * @example
-     * // Get one Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends permiso_rolFindFirstArgs>(args?: SelectSubset<T, permiso_rolFindFirstArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_rol that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolFindFirstOrThrowArgs} args - Arguments to find a Permiso_rol
-     * @example
-     * // Get one Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends permiso_rolFindFirstOrThrowArgs>(args?: SelectSubset<T, permiso_rolFindFirstOrThrowArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Permiso_rols that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Permiso_rols
-     * const permiso_rols = await prisma.permiso_rol.findMany()
-     * 
-     * // Get first 10 Permiso_rols
-     * const permiso_rols = await prisma.permiso_rol.findMany({ take: 10 })
-     * 
-     * // Only select the `id_permiso`
-     * const permiso_rolWithId_permisoOnly = await prisma.permiso_rol.findMany({ select: { id_permiso: true } })
-     * 
-     */
-    findMany<T extends permiso_rolFindManyArgs>(args?: SelectSubset<T, permiso_rolFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Permiso_rol.
-     * @param {permiso_rolCreateArgs} args - Arguments to create a Permiso_rol.
-     * @example
-     * // Create one Permiso_rol
-     * const Permiso_rol = await prisma.permiso_rol.create({
-     *   data: {
-     *     // ... data to create a Permiso_rol
-     *   }
-     * })
-     * 
-     */
-    create<T extends permiso_rolCreateArgs>(args: SelectSubset<T, permiso_rolCreateArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Permiso_rols.
-     * @param {permiso_rolCreateManyArgs} args - Arguments to create many Permiso_rols.
-     * @example
-     * // Create many Permiso_rols
-     * const permiso_rol = await prisma.permiso_rol.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends permiso_rolCreateManyArgs>(args?: SelectSubset<T, permiso_rolCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Permiso_rols and returns the data saved in the database.
-     * @param {permiso_rolCreateManyAndReturnArgs} args - Arguments to create many Permiso_rols.
-     * @example
-     * // Create many Permiso_rols
-     * const permiso_rol = await prisma.permiso_rol.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Permiso_rols and only return the `id_permiso`
-     * const permiso_rolWithId_permisoOnly = await prisma.permiso_rol.createManyAndReturn({
-     *   select: { id_permiso: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends permiso_rolCreateManyAndReturnArgs>(args?: SelectSubset<T, permiso_rolCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Permiso_rol.
-     * @param {permiso_rolDeleteArgs} args - Arguments to delete one Permiso_rol.
-     * @example
-     * // Delete one Permiso_rol
-     * const Permiso_rol = await prisma.permiso_rol.delete({
-     *   where: {
-     *     // ... filter to delete one Permiso_rol
-     *   }
-     * })
-     * 
-     */
-    delete<T extends permiso_rolDeleteArgs>(args: SelectSubset<T, permiso_rolDeleteArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Permiso_rol.
-     * @param {permiso_rolUpdateArgs} args - Arguments to update one Permiso_rol.
-     * @example
-     * // Update one Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends permiso_rolUpdateArgs>(args: SelectSubset<T, permiso_rolUpdateArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Permiso_rols.
-     * @param {permiso_rolDeleteManyArgs} args - Arguments to filter Permiso_rols to delete.
-     * @example
-     * // Delete a few Permiso_rols
-     * const { count } = await prisma.permiso_rol.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends permiso_rolDeleteManyArgs>(args?: SelectSubset<T, permiso_rolDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_rols.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Permiso_rols
-     * const permiso_rol = await prisma.permiso_rol.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends permiso_rolUpdateManyArgs>(args: SelectSubset<T, permiso_rolUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_rols and returns the data updated in the database.
-     * @param {permiso_rolUpdateManyAndReturnArgs} args - Arguments to update many Permiso_rols.
-     * @example
-     * // Update many Permiso_rols
-     * const permiso_rol = await prisma.permiso_rol.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Permiso_rols and only return the `id_permiso`
-     * const permiso_rolWithId_permisoOnly = await prisma.permiso_rol.updateManyAndReturn({
-     *   select: { id_permiso: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends permiso_rolUpdateManyAndReturnArgs>(args: SelectSubset<T, permiso_rolUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Permiso_rol.
-     * @param {permiso_rolUpsertArgs} args - Arguments to update or create a Permiso_rol.
-     * @example
-     * // Update or create a Permiso_rol
-     * const permiso_rol = await prisma.permiso_rol.upsert({
-     *   create: {
-     *     // ... data to create a Permiso_rol
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Permiso_rol we want to update
-     *   }
-     * })
-     */
-    upsert<T extends permiso_rolUpsertArgs>(args: SelectSubset<T, permiso_rolUpsertArgs<ExtArgs>>): Prisma__permiso_rolClient<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Permiso_rols.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolCountArgs} args - Arguments to filter Permiso_rols to count.
-     * @example
-     * // Count the number of Permiso_rols
-     * const count = await prisma.permiso_rol.count({
-     *   where: {
-     *     // ... the filter for the Permiso_rols we want to count
-     *   }
-     * })
-    **/
-    count<T extends permiso_rolCountArgs>(
-      args?: Subset<T, permiso_rolCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Permiso_rolCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Permiso_rol.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Permiso_rolAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Permiso_rolAggregateArgs>(args: Subset<T, Permiso_rolAggregateArgs>): Prisma.PrismaPromise<GetPermiso_rolAggregateType<T>>
-
-    /**
-     * Group by Permiso_rol.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_rolGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends permiso_rolGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: permiso_rolGroupByArgs['orderBy'] }
-        : { orderBy?: permiso_rolGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, permiso_rolGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermiso_rolGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the permiso_rol model
-   */
-  readonly fields: permiso_rolFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for permiso_rol.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__permiso_rolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso<T extends permisoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, permisoDefaultArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    rol<T extends rolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, rolDefaultArgs<ExtArgs>>): Prisma__rolClient<$Result.GetResult<Prisma.$rolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the permiso_rol model
-   */
-  interface permiso_rolFieldRefs {
-    readonly id_permiso: FieldRef<"permiso_rol", 'Int'>
-    readonly id_rol: FieldRef<"permiso_rol", 'Int'>
-    readonly fecha_creacion: FieldRef<"permiso_rol", 'DateTime'>
-    readonly fecha_actualizacion: FieldRef<"permiso_rol", 'DateTime'>
-    readonly estado: FieldRef<"permiso_rol", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * permiso_rol findUnique
-   */
-  export type permiso_rolFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_rol to fetch.
-     */
-    where: permiso_rolWhereUniqueInput
-  }
-
-  /**
-   * permiso_rol findUniqueOrThrow
-   */
-  export type permiso_rolFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_rol to fetch.
-     */
-    where: permiso_rolWhereUniqueInput
-  }
-
-  /**
-   * permiso_rol findFirst
-   */
-  export type permiso_rolFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_rol to fetch.
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_rols to fetch.
-     */
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_rols.
-     */
-    cursor?: permiso_rolWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_rols from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_rols.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_rols.
-     */
-    distinct?: Permiso_rolScalarFieldEnum | Permiso_rolScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_rol findFirstOrThrow
-   */
-  export type permiso_rolFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_rol to fetch.
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_rols to fetch.
-     */
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_rols.
-     */
-    cursor?: permiso_rolWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_rols from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_rols.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_rols.
-     */
-    distinct?: Permiso_rolScalarFieldEnum | Permiso_rolScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_rol findMany
-   */
-  export type permiso_rolFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_rols to fetch.
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_rols to fetch.
-     */
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing permiso_rols.
-     */
-    cursor?: permiso_rolWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_rols from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_rols.
-     */
-    skip?: number
-    distinct?: Permiso_rolScalarFieldEnum | Permiso_rolScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_rol create
-   */
-  export type permiso_rolCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * The data needed to create a permiso_rol.
-     */
-    data: XOR<permiso_rolCreateInput, permiso_rolUncheckedCreateInput>
-  }
-
-  /**
-   * permiso_rol createMany
-   */
-  export type permiso_rolCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many permiso_rols.
-     */
-    data: permiso_rolCreateManyInput | permiso_rolCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * permiso_rol createManyAndReturn
-   */
-  export type permiso_rolCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * The data used to create many permiso_rols.
-     */
-    data: permiso_rolCreateManyInput | permiso_rolCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_rol update
-   */
-  export type permiso_rolUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * The data needed to update a permiso_rol.
-     */
-    data: XOR<permiso_rolUpdateInput, permiso_rolUncheckedUpdateInput>
-    /**
-     * Choose, which permiso_rol to update.
-     */
-    where: permiso_rolWhereUniqueInput
-  }
-
-  /**
-   * permiso_rol updateMany
-   */
-  export type permiso_rolUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update permiso_rols.
-     */
-    data: XOR<permiso_rolUpdateManyMutationInput, permiso_rolUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_rols to update
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * Limit how many permiso_rols to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_rol updateManyAndReturn
-   */
-  export type permiso_rolUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * The data used to update permiso_rols.
-     */
-    data: XOR<permiso_rolUpdateManyMutationInput, permiso_rolUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_rols to update
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * Limit how many permiso_rols to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_rol upsert
-   */
-  export type permiso_rolUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * The filter to search for the permiso_rol to update in case it exists.
-     */
-    where: permiso_rolWhereUniqueInput
-    /**
-     * In case the permiso_rol found by the `where` argument doesn't exist, create a new permiso_rol with this data.
-     */
-    create: XOR<permiso_rolCreateInput, permiso_rolUncheckedCreateInput>
-    /**
-     * In case the permiso_rol was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<permiso_rolUpdateInput, permiso_rolUncheckedUpdateInput>
-  }
-
-  /**
-   * permiso_rol delete
-   */
-  export type permiso_rolDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-    /**
-     * Filter which permiso_rol to delete.
-     */
-    where: permiso_rolWhereUniqueInput
-  }
-
-  /**
-   * permiso_rol deleteMany
-   */
-  export type permiso_rolDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_rols to delete
-     */
-    where?: permiso_rolWhereInput
-    /**
-     * Limit how many permiso_rols to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_rol without action
-   */
-  export type permiso_rolDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_rol
-     */
-    select?: permiso_rolSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_rol
-     */
-    omit?: permiso_rolOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_rolInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model permiso_servicio
-   */
-
-  export type AggregatePermiso_servicio = {
-    _count: Permiso_servicioCountAggregateOutputType | null
-    _avg: Permiso_servicioAvgAggregateOutputType | null
-    _sum: Permiso_servicioSumAggregateOutputType | null
-    _min: Permiso_servicioMinAggregateOutputType | null
-    _max: Permiso_servicioMaxAggregateOutputType | null
-  }
-
-  export type Permiso_servicioAvgAggregateOutputType = {
-    id_permiso: number | null
-    id_servicio: number | null
-  }
-
-  export type Permiso_servicioSumAggregateOutputType = {
-    id_permiso: number | null
-    id_servicio: number | null
-  }
-
-  export type Permiso_servicioMinAggregateOutputType = {
-    id_permiso: number | null
-    id_servicio: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_servicioMaxAggregateOutputType = {
-    id_permiso: number | null
-    id_servicio: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_servicioCountAggregateOutputType = {
-    id_permiso: number
-    id_servicio: number
-    fecha_creacion: number
-    fecha_actualizacion: number
-    estado: number
-    _all: number
-  }
-
-
-  export type Permiso_servicioAvgAggregateInputType = {
-    id_permiso?: true
-    id_servicio?: true
-  }
-
-  export type Permiso_servicioSumAggregateInputType = {
-    id_permiso?: true
-    id_servicio?: true
-  }
-
-  export type Permiso_servicioMinAggregateInputType = {
-    id_permiso?: true
-    id_servicio?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_servicioMaxAggregateInputType = {
-    id_permiso?: true
-    id_servicio?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_servicioCountAggregateInputType = {
-    id_permiso?: true
-    id_servicio?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-    _all?: true
-  }
-
-  export type Permiso_servicioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_servicio to aggregate.
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_servicios to fetch.
-     */
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: permiso_servicioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_servicios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_servicios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned permiso_servicios
-    **/
-    _count?: true | Permiso_servicioCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Permiso_servicioAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Permiso_servicioSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Permiso_servicioMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Permiso_servicioMaxAggregateInputType
-  }
-
-  export type GetPermiso_servicioAggregateType<T extends Permiso_servicioAggregateArgs> = {
-        [P in keyof T & keyof AggregatePermiso_servicio]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePermiso_servicio[P]>
-      : GetScalarType<T[P], AggregatePermiso_servicio[P]>
-  }
-
-
-
-
-  export type permiso_servicioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_servicioWhereInput
-    orderBy?: permiso_servicioOrderByWithAggregationInput | permiso_servicioOrderByWithAggregationInput[]
-    by: Permiso_servicioScalarFieldEnum[] | Permiso_servicioScalarFieldEnum
-    having?: permiso_servicioScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Permiso_servicioCountAggregateInputType | true
-    _avg?: Permiso_servicioAvgAggregateInputType
-    _sum?: Permiso_servicioSumAggregateInputType
-    _min?: Permiso_servicioMinAggregateInputType
-    _max?: Permiso_servicioMaxAggregateInputType
-  }
-
-  export type Permiso_servicioGroupByOutputType = {
-    id_permiso: number
-    id_servicio: number
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean
-    _count: Permiso_servicioCountAggregateOutputType | null
-    _avg: Permiso_servicioAvgAggregateOutputType | null
-    _sum: Permiso_servicioSumAggregateOutputType | null
-    _min: Permiso_servicioMinAggregateOutputType | null
-    _max: Permiso_servicioMaxAggregateOutputType | null
-  }
-
-  type GetPermiso_servicioGroupByPayload<T extends permiso_servicioGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Permiso_servicioGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Permiso_servicioGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Permiso_servicioGroupByOutputType[P]>
-            : GetScalarType<T[P], Permiso_servicioGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type permiso_servicioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_servicio?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_servicio"]>
-
-  export type permiso_servicioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_servicio?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_servicio"]>
-
-  export type permiso_servicioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_servicio?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_servicio"]>
-
-  export type permiso_servicioSelectScalar = {
-    id_permiso?: boolean
-    id_servicio?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }
-
-  export type permiso_servicioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_permiso" | "id_servicio" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["permiso_servicio"]>
-  export type permiso_servicioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }
-  export type permiso_servicioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }
-  export type permiso_servicioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    servicio?: boolean | servicioDefaultArgs<ExtArgs>
-  }
-
-  export type $permiso_servicioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "permiso_servicio"
-    objects: {
-      permiso: Prisma.$permisoPayload<ExtArgs>
-      servicio: Prisma.$servicioPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id_permiso: number
-      id_servicio: number
-      fecha_creacion: Date | null
-      fecha_actualizacion: Date | null
-      estado: boolean
-    }, ExtArgs["result"]["permiso_servicio"]>
-    composites: {}
-  }
-
-  type permiso_servicioGetPayload<S extends boolean | null | undefined | permiso_servicioDefaultArgs> = $Result.GetResult<Prisma.$permiso_servicioPayload, S>
-
-  type permiso_servicioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<permiso_servicioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Permiso_servicioCountAggregateInputType | true
-    }
-
-  export interface permiso_servicioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['permiso_servicio'], meta: { name: 'permiso_servicio' } }
-    /**
-     * Find zero or one Permiso_servicio that matches the filter.
-     * @param {permiso_servicioFindUniqueArgs} args - Arguments to find a Permiso_servicio
-     * @example
-     * // Get one Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends permiso_servicioFindUniqueArgs>(args: SelectSubset<T, permiso_servicioFindUniqueArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Permiso_servicio that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {permiso_servicioFindUniqueOrThrowArgs} args - Arguments to find a Permiso_servicio
-     * @example
-     * // Get one Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends permiso_servicioFindUniqueOrThrowArgs>(args: SelectSubset<T, permiso_servicioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_servicio that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioFindFirstArgs} args - Arguments to find a Permiso_servicio
-     * @example
-     * // Get one Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends permiso_servicioFindFirstArgs>(args?: SelectSubset<T, permiso_servicioFindFirstArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_servicio that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioFindFirstOrThrowArgs} args - Arguments to find a Permiso_servicio
-     * @example
-     * // Get one Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends permiso_servicioFindFirstOrThrowArgs>(args?: SelectSubset<T, permiso_servicioFindFirstOrThrowArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Permiso_servicios that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Permiso_servicios
-     * const permiso_servicios = await prisma.permiso_servicio.findMany()
-     * 
-     * // Get first 10 Permiso_servicios
-     * const permiso_servicios = await prisma.permiso_servicio.findMany({ take: 10 })
-     * 
-     * // Only select the `id_permiso`
-     * const permiso_servicioWithId_permisoOnly = await prisma.permiso_servicio.findMany({ select: { id_permiso: true } })
-     * 
-     */
-    findMany<T extends permiso_servicioFindManyArgs>(args?: SelectSubset<T, permiso_servicioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Permiso_servicio.
-     * @param {permiso_servicioCreateArgs} args - Arguments to create a Permiso_servicio.
-     * @example
-     * // Create one Permiso_servicio
-     * const Permiso_servicio = await prisma.permiso_servicio.create({
-     *   data: {
-     *     // ... data to create a Permiso_servicio
-     *   }
-     * })
-     * 
-     */
-    create<T extends permiso_servicioCreateArgs>(args: SelectSubset<T, permiso_servicioCreateArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Permiso_servicios.
-     * @param {permiso_servicioCreateManyArgs} args - Arguments to create many Permiso_servicios.
-     * @example
-     * // Create many Permiso_servicios
-     * const permiso_servicio = await prisma.permiso_servicio.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends permiso_servicioCreateManyArgs>(args?: SelectSubset<T, permiso_servicioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Permiso_servicios and returns the data saved in the database.
-     * @param {permiso_servicioCreateManyAndReturnArgs} args - Arguments to create many Permiso_servicios.
-     * @example
-     * // Create many Permiso_servicios
-     * const permiso_servicio = await prisma.permiso_servicio.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Permiso_servicios and only return the `id_permiso`
-     * const permiso_servicioWithId_permisoOnly = await prisma.permiso_servicio.createManyAndReturn({
-     *   select: { id_permiso: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends permiso_servicioCreateManyAndReturnArgs>(args?: SelectSubset<T, permiso_servicioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Permiso_servicio.
-     * @param {permiso_servicioDeleteArgs} args - Arguments to delete one Permiso_servicio.
-     * @example
-     * // Delete one Permiso_servicio
-     * const Permiso_servicio = await prisma.permiso_servicio.delete({
-     *   where: {
-     *     // ... filter to delete one Permiso_servicio
-     *   }
-     * })
-     * 
-     */
-    delete<T extends permiso_servicioDeleteArgs>(args: SelectSubset<T, permiso_servicioDeleteArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Permiso_servicio.
-     * @param {permiso_servicioUpdateArgs} args - Arguments to update one Permiso_servicio.
-     * @example
-     * // Update one Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends permiso_servicioUpdateArgs>(args: SelectSubset<T, permiso_servicioUpdateArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Permiso_servicios.
-     * @param {permiso_servicioDeleteManyArgs} args - Arguments to filter Permiso_servicios to delete.
-     * @example
-     * // Delete a few Permiso_servicios
-     * const { count } = await prisma.permiso_servicio.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends permiso_servicioDeleteManyArgs>(args?: SelectSubset<T, permiso_servicioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_servicios.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Permiso_servicios
-     * const permiso_servicio = await prisma.permiso_servicio.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends permiso_servicioUpdateManyArgs>(args: SelectSubset<T, permiso_servicioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_servicios and returns the data updated in the database.
-     * @param {permiso_servicioUpdateManyAndReturnArgs} args - Arguments to update many Permiso_servicios.
-     * @example
-     * // Update many Permiso_servicios
-     * const permiso_servicio = await prisma.permiso_servicio.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Permiso_servicios and only return the `id_permiso`
-     * const permiso_servicioWithId_permisoOnly = await prisma.permiso_servicio.updateManyAndReturn({
-     *   select: { id_permiso: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends permiso_servicioUpdateManyAndReturnArgs>(args: SelectSubset<T, permiso_servicioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Permiso_servicio.
-     * @param {permiso_servicioUpsertArgs} args - Arguments to update or create a Permiso_servicio.
-     * @example
-     * // Update or create a Permiso_servicio
-     * const permiso_servicio = await prisma.permiso_servicio.upsert({
-     *   create: {
-     *     // ... data to create a Permiso_servicio
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Permiso_servicio we want to update
-     *   }
-     * })
-     */
-    upsert<T extends permiso_servicioUpsertArgs>(args: SelectSubset<T, permiso_servicioUpsertArgs<ExtArgs>>): Prisma__permiso_servicioClient<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Permiso_servicios.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioCountArgs} args - Arguments to filter Permiso_servicios to count.
-     * @example
-     * // Count the number of Permiso_servicios
-     * const count = await prisma.permiso_servicio.count({
-     *   where: {
-     *     // ... the filter for the Permiso_servicios we want to count
-     *   }
-     * })
-    **/
-    count<T extends permiso_servicioCountArgs>(
-      args?: Subset<T, permiso_servicioCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Permiso_servicioCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Permiso_servicio.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Permiso_servicioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Permiso_servicioAggregateArgs>(args: Subset<T, Permiso_servicioAggregateArgs>): Prisma.PrismaPromise<GetPermiso_servicioAggregateType<T>>
-
-    /**
-     * Group by Permiso_servicio.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_servicioGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends permiso_servicioGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: permiso_servicioGroupByArgs['orderBy'] }
-        : { orderBy?: permiso_servicioGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, permiso_servicioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermiso_servicioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the permiso_servicio model
-   */
-  readonly fields: permiso_servicioFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for permiso_servicio.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__permiso_servicioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso<T extends permisoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, permisoDefaultArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    servicio<T extends servicioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, servicioDefaultArgs<ExtArgs>>): Prisma__servicioClient<$Result.GetResult<Prisma.$servicioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the permiso_servicio model
-   */
-  interface permiso_servicioFieldRefs {
-    readonly id_permiso: FieldRef<"permiso_servicio", 'Int'>
-    readonly id_servicio: FieldRef<"permiso_servicio", 'Int'>
-    readonly fecha_creacion: FieldRef<"permiso_servicio", 'DateTime'>
-    readonly fecha_actualizacion: FieldRef<"permiso_servicio", 'DateTime'>
-    readonly estado: FieldRef<"permiso_servicio", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * permiso_servicio findUnique
-   */
-  export type permiso_servicioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_servicio to fetch.
-     */
-    where: permiso_servicioWhereUniqueInput
-  }
-
-  /**
-   * permiso_servicio findUniqueOrThrow
-   */
-  export type permiso_servicioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_servicio to fetch.
-     */
-    where: permiso_servicioWhereUniqueInput
-  }
-
-  /**
-   * permiso_servicio findFirst
-   */
-  export type permiso_servicioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_servicio to fetch.
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_servicios to fetch.
-     */
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_servicios.
-     */
-    cursor?: permiso_servicioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_servicios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_servicios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_servicios.
-     */
-    distinct?: Permiso_servicioScalarFieldEnum | Permiso_servicioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_servicio findFirstOrThrow
-   */
-  export type permiso_servicioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_servicio to fetch.
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_servicios to fetch.
-     */
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_servicios.
-     */
-    cursor?: permiso_servicioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_servicios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_servicios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_servicios.
-     */
-    distinct?: Permiso_servicioScalarFieldEnum | Permiso_servicioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_servicio findMany
-   */
-  export type permiso_servicioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_servicios to fetch.
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_servicios to fetch.
-     */
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing permiso_servicios.
-     */
-    cursor?: permiso_servicioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_servicios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_servicios.
-     */
-    skip?: number
-    distinct?: Permiso_servicioScalarFieldEnum | Permiso_servicioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_servicio create
-   */
-  export type permiso_servicioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * The data needed to create a permiso_servicio.
-     */
-    data: XOR<permiso_servicioCreateInput, permiso_servicioUncheckedCreateInput>
-  }
-
-  /**
-   * permiso_servicio createMany
-   */
-  export type permiso_servicioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many permiso_servicios.
-     */
-    data: permiso_servicioCreateManyInput | permiso_servicioCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * permiso_servicio createManyAndReturn
-   */
-  export type permiso_servicioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * The data used to create many permiso_servicios.
-     */
-    data: permiso_servicioCreateManyInput | permiso_servicioCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_servicio update
-   */
-  export type permiso_servicioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * The data needed to update a permiso_servicio.
-     */
-    data: XOR<permiso_servicioUpdateInput, permiso_servicioUncheckedUpdateInput>
-    /**
-     * Choose, which permiso_servicio to update.
-     */
-    where: permiso_servicioWhereUniqueInput
-  }
-
-  /**
-   * permiso_servicio updateMany
-   */
-  export type permiso_servicioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update permiso_servicios.
-     */
-    data: XOR<permiso_servicioUpdateManyMutationInput, permiso_servicioUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_servicios to update
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * Limit how many permiso_servicios to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_servicio updateManyAndReturn
-   */
-  export type permiso_servicioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * The data used to update permiso_servicios.
-     */
-    data: XOR<permiso_servicioUpdateManyMutationInput, permiso_servicioUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_servicios to update
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * Limit how many permiso_servicios to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_servicio upsert
-   */
-  export type permiso_servicioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * The filter to search for the permiso_servicio to update in case it exists.
-     */
-    where: permiso_servicioWhereUniqueInput
-    /**
-     * In case the permiso_servicio found by the `where` argument doesn't exist, create a new permiso_servicio with this data.
-     */
-    create: XOR<permiso_servicioCreateInput, permiso_servicioUncheckedCreateInput>
-    /**
-     * In case the permiso_servicio was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<permiso_servicioUpdateInput, permiso_servicioUncheckedUpdateInput>
-  }
-
-  /**
-   * permiso_servicio delete
-   */
-  export type permiso_servicioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    /**
-     * Filter which permiso_servicio to delete.
-     */
-    where: permiso_servicioWhereUniqueInput
-  }
-
-  /**
-   * permiso_servicio deleteMany
-   */
-  export type permiso_servicioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_servicios to delete
-     */
-    where?: permiso_servicioWhereInput
-    /**
-     * Limit how many permiso_servicios to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_servicio without action
-   */
-  export type permiso_servicioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_servicio
-     */
-    select?: permiso_servicioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_servicio
-     */
-    omit?: permiso_servicioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_servicioInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model permiso_usuario
-   */
-
-  export type AggregatePermiso_usuario = {
-    _count: Permiso_usuarioCountAggregateOutputType | null
-    _avg: Permiso_usuarioAvgAggregateOutputType | null
-    _sum: Permiso_usuarioSumAggregateOutputType | null
-    _min: Permiso_usuarioMinAggregateOutputType | null
-    _max: Permiso_usuarioMaxAggregateOutputType | null
-  }
-
-  export type Permiso_usuarioAvgAggregateOutputType = {
-    id_permiso: number | null
-    id_usuario: number | null
-  }
-
-  export type Permiso_usuarioSumAggregateOutputType = {
-    id_permiso: number | null
-    id_usuario: number | null
-  }
-
-  export type Permiso_usuarioMinAggregateOutputType = {
-    id_permiso: number | null
-    id_usuario: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_usuarioMaxAggregateOutputType = {
-    id_permiso: number | null
-    id_usuario: number | null
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean | null
-  }
-
-  export type Permiso_usuarioCountAggregateOutputType = {
-    id_permiso: number
-    id_usuario: number
-    fecha_creacion: number
-    fecha_actualizacion: number
-    estado: number
-    _all: number
-  }
-
-
-  export type Permiso_usuarioAvgAggregateInputType = {
-    id_permiso?: true
-    id_usuario?: true
-  }
-
-  export type Permiso_usuarioSumAggregateInputType = {
-    id_permiso?: true
-    id_usuario?: true
-  }
-
-  export type Permiso_usuarioMinAggregateInputType = {
-    id_permiso?: true
-    id_usuario?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_usuarioMaxAggregateInputType = {
-    id_permiso?: true
-    id_usuario?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-  }
-
-  export type Permiso_usuarioCountAggregateInputType = {
-    id_permiso?: true
-    id_usuario?: true
-    fecha_creacion?: true
-    fecha_actualizacion?: true
-    estado?: true
-    _all?: true
-  }
-
-  export type Permiso_usuarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_usuario to aggregate.
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_usuarios to fetch.
-     */
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: permiso_usuarioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_usuarios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_usuarios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned permiso_usuarios
-    **/
-    _count?: true | Permiso_usuarioCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Permiso_usuarioAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Permiso_usuarioSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Permiso_usuarioMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Permiso_usuarioMaxAggregateInputType
-  }
-
-  export type GetPermiso_usuarioAggregateType<T extends Permiso_usuarioAggregateArgs> = {
-        [P in keyof T & keyof AggregatePermiso_usuario]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePermiso_usuario[P]>
-      : GetScalarType<T[P], AggregatePermiso_usuario[P]>
-  }
-
-
-
-
-  export type permiso_usuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: permiso_usuarioWhereInput
-    orderBy?: permiso_usuarioOrderByWithAggregationInput | permiso_usuarioOrderByWithAggregationInput[]
-    by: Permiso_usuarioScalarFieldEnum[] | Permiso_usuarioScalarFieldEnum
-    having?: permiso_usuarioScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Permiso_usuarioCountAggregateInputType | true
-    _avg?: Permiso_usuarioAvgAggregateInputType
-    _sum?: Permiso_usuarioSumAggregateInputType
-    _min?: Permiso_usuarioMinAggregateInputType
-    _max?: Permiso_usuarioMaxAggregateInputType
-  }
-
-  export type Permiso_usuarioGroupByOutputType = {
-    id_permiso: number
-    id_usuario: number
-    fecha_creacion: Date | null
-    fecha_actualizacion: Date | null
-    estado: boolean
-    _count: Permiso_usuarioCountAggregateOutputType | null
-    _avg: Permiso_usuarioAvgAggregateOutputType | null
-    _sum: Permiso_usuarioSumAggregateOutputType | null
-    _min: Permiso_usuarioMinAggregateOutputType | null
-    _max: Permiso_usuarioMaxAggregateOutputType | null
-  }
-
-  type GetPermiso_usuarioGroupByPayload<T extends permiso_usuarioGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Permiso_usuarioGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Permiso_usuarioGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Permiso_usuarioGroupByOutputType[P]>
-            : GetScalarType<T[P], Permiso_usuarioGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type permiso_usuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_usuario?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_usuario"]>
-
-  export type permiso_usuarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_usuario?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_usuario"]>
-
-  export type permiso_usuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_permiso?: boolean
-    id_usuario?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["permiso_usuario"]>
-
-  export type permiso_usuarioSelectScalar = {
-    id_permiso?: boolean
-    id_usuario?: boolean
-    fecha_creacion?: boolean
-    fecha_actualizacion?: boolean
-    estado?: boolean
-  }
-
-  export type permiso_usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_permiso" | "id_usuario" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["permiso_usuario"]>
-  export type permiso_usuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }
-  export type permiso_usuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }
-  export type permiso_usuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso?: boolean | permisoDefaultArgs<ExtArgs>
-    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
-  }
-
-  export type $permiso_usuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "permiso_usuario"
-    objects: {
-      permiso: Prisma.$permisoPayload<ExtArgs>
-      usuario: Prisma.$usuarioPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id_permiso: number
-      id_usuario: number
-      fecha_creacion: Date | null
-      fecha_actualizacion: Date | null
-      estado: boolean
-    }, ExtArgs["result"]["permiso_usuario"]>
-    composites: {}
-  }
-
-  type permiso_usuarioGetPayload<S extends boolean | null | undefined | permiso_usuarioDefaultArgs> = $Result.GetResult<Prisma.$permiso_usuarioPayload, S>
-
-  type permiso_usuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<permiso_usuarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Permiso_usuarioCountAggregateInputType | true
-    }
-
-  export interface permiso_usuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['permiso_usuario'], meta: { name: 'permiso_usuario' } }
-    /**
-     * Find zero or one Permiso_usuario that matches the filter.
-     * @param {permiso_usuarioFindUniqueArgs} args - Arguments to find a Permiso_usuario
-     * @example
-     * // Get one Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends permiso_usuarioFindUniqueArgs>(args: SelectSubset<T, permiso_usuarioFindUniqueArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Permiso_usuario that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {permiso_usuarioFindUniqueOrThrowArgs} args - Arguments to find a Permiso_usuario
-     * @example
-     * // Get one Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends permiso_usuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, permiso_usuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_usuario that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioFindFirstArgs} args - Arguments to find a Permiso_usuario
-     * @example
-     * // Get one Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends permiso_usuarioFindFirstArgs>(args?: SelectSubset<T, permiso_usuarioFindFirstArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Permiso_usuario that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioFindFirstOrThrowArgs} args - Arguments to find a Permiso_usuario
-     * @example
-     * // Get one Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends permiso_usuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, permiso_usuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Permiso_usuarios that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Permiso_usuarios
-     * const permiso_usuarios = await prisma.permiso_usuario.findMany()
-     * 
-     * // Get first 10 Permiso_usuarios
-     * const permiso_usuarios = await prisma.permiso_usuario.findMany({ take: 10 })
-     * 
-     * // Only select the `id_permiso`
-     * const permiso_usuarioWithId_permisoOnly = await prisma.permiso_usuario.findMany({ select: { id_permiso: true } })
-     * 
-     */
-    findMany<T extends permiso_usuarioFindManyArgs>(args?: SelectSubset<T, permiso_usuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Permiso_usuario.
-     * @param {permiso_usuarioCreateArgs} args - Arguments to create a Permiso_usuario.
-     * @example
-     * // Create one Permiso_usuario
-     * const Permiso_usuario = await prisma.permiso_usuario.create({
-     *   data: {
-     *     // ... data to create a Permiso_usuario
-     *   }
-     * })
-     * 
-     */
-    create<T extends permiso_usuarioCreateArgs>(args: SelectSubset<T, permiso_usuarioCreateArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Permiso_usuarios.
-     * @param {permiso_usuarioCreateManyArgs} args - Arguments to create many Permiso_usuarios.
-     * @example
-     * // Create many Permiso_usuarios
-     * const permiso_usuario = await prisma.permiso_usuario.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends permiso_usuarioCreateManyArgs>(args?: SelectSubset<T, permiso_usuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Permiso_usuarios and returns the data saved in the database.
-     * @param {permiso_usuarioCreateManyAndReturnArgs} args - Arguments to create many Permiso_usuarios.
-     * @example
-     * // Create many Permiso_usuarios
-     * const permiso_usuario = await prisma.permiso_usuario.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Permiso_usuarios and only return the `id_permiso`
-     * const permiso_usuarioWithId_permisoOnly = await prisma.permiso_usuario.createManyAndReturn({
-     *   select: { id_permiso: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends permiso_usuarioCreateManyAndReturnArgs>(args?: SelectSubset<T, permiso_usuarioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Permiso_usuario.
-     * @param {permiso_usuarioDeleteArgs} args - Arguments to delete one Permiso_usuario.
-     * @example
-     * // Delete one Permiso_usuario
-     * const Permiso_usuario = await prisma.permiso_usuario.delete({
-     *   where: {
-     *     // ... filter to delete one Permiso_usuario
-     *   }
-     * })
-     * 
-     */
-    delete<T extends permiso_usuarioDeleteArgs>(args: SelectSubset<T, permiso_usuarioDeleteArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Permiso_usuario.
-     * @param {permiso_usuarioUpdateArgs} args - Arguments to update one Permiso_usuario.
-     * @example
-     * // Update one Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends permiso_usuarioUpdateArgs>(args: SelectSubset<T, permiso_usuarioUpdateArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Permiso_usuarios.
-     * @param {permiso_usuarioDeleteManyArgs} args - Arguments to filter Permiso_usuarios to delete.
-     * @example
-     * // Delete a few Permiso_usuarios
-     * const { count } = await prisma.permiso_usuario.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends permiso_usuarioDeleteManyArgs>(args?: SelectSubset<T, permiso_usuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_usuarios.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Permiso_usuarios
-     * const permiso_usuario = await prisma.permiso_usuario.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends permiso_usuarioUpdateManyArgs>(args: SelectSubset<T, permiso_usuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Permiso_usuarios and returns the data updated in the database.
-     * @param {permiso_usuarioUpdateManyAndReturnArgs} args - Arguments to update many Permiso_usuarios.
-     * @example
-     * // Update many Permiso_usuarios
-     * const permiso_usuario = await prisma.permiso_usuario.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Permiso_usuarios and only return the `id_permiso`
-     * const permiso_usuarioWithId_permisoOnly = await prisma.permiso_usuario.updateManyAndReturn({
-     *   select: { id_permiso: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends permiso_usuarioUpdateManyAndReturnArgs>(args: SelectSubset<T, permiso_usuarioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Permiso_usuario.
-     * @param {permiso_usuarioUpsertArgs} args - Arguments to update or create a Permiso_usuario.
-     * @example
-     * // Update or create a Permiso_usuario
-     * const permiso_usuario = await prisma.permiso_usuario.upsert({
-     *   create: {
-     *     // ... data to create a Permiso_usuario
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Permiso_usuario we want to update
-     *   }
-     * })
-     */
-    upsert<T extends permiso_usuarioUpsertArgs>(args: SelectSubset<T, permiso_usuarioUpsertArgs<ExtArgs>>): Prisma__permiso_usuarioClient<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Permiso_usuarios.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioCountArgs} args - Arguments to filter Permiso_usuarios to count.
-     * @example
-     * // Count the number of Permiso_usuarios
-     * const count = await prisma.permiso_usuario.count({
-     *   where: {
-     *     // ... the filter for the Permiso_usuarios we want to count
-     *   }
-     * })
-    **/
-    count<T extends permiso_usuarioCountArgs>(
-      args?: Subset<T, permiso_usuarioCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Permiso_usuarioCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Permiso_usuario.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Permiso_usuarioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Permiso_usuarioAggregateArgs>(args: Subset<T, Permiso_usuarioAggregateArgs>): Prisma.PrismaPromise<GetPermiso_usuarioAggregateType<T>>
-
-    /**
-     * Group by Permiso_usuario.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {permiso_usuarioGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends permiso_usuarioGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: permiso_usuarioGroupByArgs['orderBy'] }
-        : { orderBy?: permiso_usuarioGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, permiso_usuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermiso_usuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the permiso_usuario model
-   */
-  readonly fields: permiso_usuarioFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for permiso_usuario.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__permiso_usuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso<T extends permisoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, permisoDefaultArgs<ExtArgs>>): Prisma__permisoClient<$Result.GetResult<Prisma.$permisoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    usuario<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the permiso_usuario model
-   */
-  interface permiso_usuarioFieldRefs {
-    readonly id_permiso: FieldRef<"permiso_usuario", 'Int'>
-    readonly id_usuario: FieldRef<"permiso_usuario", 'Int'>
-    readonly fecha_creacion: FieldRef<"permiso_usuario", 'DateTime'>
-    readonly fecha_actualizacion: FieldRef<"permiso_usuario", 'DateTime'>
-    readonly estado: FieldRef<"permiso_usuario", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * permiso_usuario findUnique
-   */
-  export type permiso_usuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_usuario to fetch.
-     */
-    where: permiso_usuarioWhereUniqueInput
-  }
-
-  /**
-   * permiso_usuario findUniqueOrThrow
-   */
-  export type permiso_usuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_usuario to fetch.
-     */
-    where: permiso_usuarioWhereUniqueInput
-  }
-
-  /**
-   * permiso_usuario findFirst
-   */
-  export type permiso_usuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_usuario to fetch.
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_usuarios to fetch.
-     */
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_usuarios.
-     */
-    cursor?: permiso_usuarioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_usuarios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_usuarios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_usuarios.
-     */
-    distinct?: Permiso_usuarioScalarFieldEnum | Permiso_usuarioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_usuario findFirstOrThrow
-   */
-  export type permiso_usuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_usuario to fetch.
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_usuarios to fetch.
-     */
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for permiso_usuarios.
-     */
-    cursor?: permiso_usuarioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_usuarios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_usuarios.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of permiso_usuarios.
-     */
-    distinct?: Permiso_usuarioScalarFieldEnum | Permiso_usuarioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_usuario findMany
-   */
-  export type permiso_usuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter, which permiso_usuarios to fetch.
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of permiso_usuarios to fetch.
-     */
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing permiso_usuarios.
-     */
-    cursor?: permiso_usuarioWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` permiso_usuarios from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` permiso_usuarios.
-     */
-    skip?: number
-    distinct?: Permiso_usuarioScalarFieldEnum | Permiso_usuarioScalarFieldEnum[]
-  }
-
-  /**
-   * permiso_usuario create
-   */
-  export type permiso_usuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * The data needed to create a permiso_usuario.
-     */
-    data: XOR<permiso_usuarioCreateInput, permiso_usuarioUncheckedCreateInput>
-  }
-
-  /**
-   * permiso_usuario createMany
-   */
-  export type permiso_usuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many permiso_usuarios.
-     */
-    data: permiso_usuarioCreateManyInput | permiso_usuarioCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * permiso_usuario createManyAndReturn
-   */
-  export type permiso_usuarioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * The data used to create many permiso_usuarios.
-     */
-    data: permiso_usuarioCreateManyInput | permiso_usuarioCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_usuario update
-   */
-  export type permiso_usuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * The data needed to update a permiso_usuario.
-     */
-    data: XOR<permiso_usuarioUpdateInput, permiso_usuarioUncheckedUpdateInput>
-    /**
-     * Choose, which permiso_usuario to update.
-     */
-    where: permiso_usuarioWhereUniqueInput
-  }
-
-  /**
-   * permiso_usuario updateMany
-   */
-  export type permiso_usuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update permiso_usuarios.
-     */
-    data: XOR<permiso_usuarioUpdateManyMutationInput, permiso_usuarioUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_usuarios to update
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * Limit how many permiso_usuarios to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_usuario updateManyAndReturn
-   */
-  export type permiso_usuarioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * The data used to update permiso_usuarios.
-     */
-    data: XOR<permiso_usuarioUpdateManyMutationInput, permiso_usuarioUncheckedUpdateManyInput>
-    /**
-     * Filter which permiso_usuarios to update
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * Limit how many permiso_usuarios to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * permiso_usuario upsert
-   */
-  export type permiso_usuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * The filter to search for the permiso_usuario to update in case it exists.
-     */
-    where: permiso_usuarioWhereUniqueInput
-    /**
-     * In case the permiso_usuario found by the `where` argument doesn't exist, create a new permiso_usuario with this data.
-     */
-    create: XOR<permiso_usuarioCreateInput, permiso_usuarioUncheckedCreateInput>
-    /**
-     * In case the permiso_usuario was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<permiso_usuarioUpdateInput, permiso_usuarioUncheckedUpdateInput>
-  }
-
-  /**
-   * permiso_usuario delete
-   */
-  export type permiso_usuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    /**
-     * Filter which permiso_usuario to delete.
-     */
-    where: permiso_usuarioWhereUniqueInput
-  }
-
-  /**
-   * permiso_usuario deleteMany
-   */
-  export type permiso_usuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which permiso_usuarios to delete
-     */
-    where?: permiso_usuarioWhereInput
-    /**
-     * Limit how many permiso_usuarios to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * permiso_usuario without action
-   */
-  export type permiso_usuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model rol
    */
 
@@ -17756,7 +12940,7 @@ export namespace Prisma {
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
-    permiso_rol?: boolean | rol$permiso_rolArgs<ExtArgs>
+    rol_servicio?: boolean | rol$rol_servicioArgs<ExtArgs>
     usuario_rol?: boolean | rol$usuario_rolArgs<ExtArgs>
     _count?: boolean | RolCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rol"]>
@@ -17787,7 +12971,7 @@ export namespace Prisma {
 
   export type rolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_rol" | "rol" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["rol"]>
   export type rolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_rol?: boolean | rol$permiso_rolArgs<ExtArgs>
+    rol_servicio?: boolean | rol$rol_servicioArgs<ExtArgs>
     usuario_rol?: boolean | rol$usuario_rolArgs<ExtArgs>
     _count?: boolean | RolCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -17797,7 +12981,7 @@ export namespace Prisma {
   export type $rolPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "rol"
     objects: {
-      permiso_rol: Prisma.$permiso_rolPayload<ExtArgs>[]
+      rol_servicio: Prisma.$rol_servicioPayload<ExtArgs>[]
       usuario_rol: Prisma.$usuario_rolPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -18200,7 +13384,7 @@ export namespace Prisma {
    */
   export interface Prisma__rolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso_rol<T extends rol$permiso_rolArgs<ExtArgs> = {}>(args?: Subset<T, rol$permiso_rolArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_rolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rol_servicio<T extends rol$rol_servicioArgs<ExtArgs> = {}>(args?: Subset<T, rol$rol_servicioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usuario_rol<T extends rol$usuario_rolArgs<ExtArgs> = {}>(args?: Subset<T, rol$usuario_rolArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuario_rolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -18624,27 +13808,27 @@ export namespace Prisma {
   }
 
   /**
-   * rol.permiso_rol
+   * rol.rol_servicio
    */
-  export type rol$permiso_rolArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type rol$rol_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permiso_rol
+     * Select specific fields to fetch from the rol_servicio
      */
-    select?: permiso_rolSelect<ExtArgs> | null
+    select?: rol_servicioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permiso_rol
+     * Omit specific fields from the rol_servicio
      */
-    omit?: permiso_rolOmit<ExtArgs> | null
+    omit?: rol_servicioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: permiso_rolInclude<ExtArgs> | null
-    where?: permiso_rolWhereInput
-    orderBy?: permiso_rolOrderByWithRelationInput | permiso_rolOrderByWithRelationInput[]
-    cursor?: permiso_rolWhereUniqueInput
+    include?: rol_servicioInclude<ExtArgs> | null
+    where?: rol_servicioWhereInput
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    cursor?: rol_servicioWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Permiso_rolScalarFieldEnum | Permiso_rolScalarFieldEnum[]
+    distinct?: Rol_servicioScalarFieldEnum | Rol_servicioScalarFieldEnum[]
   }
 
   /**
@@ -18912,7 +14096,7 @@ export namespace Prisma {
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
-    permiso_servicio?: boolean | servicio$permiso_servicioArgs<ExtArgs>
+    rol_servicio?: boolean | servicio$rol_servicioArgs<ExtArgs>
     _count?: boolean | ServicioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["servicio"]>
 
@@ -18951,7 +14135,7 @@ export namespace Prisma {
 
   export type servicioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_servicio" | "nombre" | "descripcion" | "url" | "metodo" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["servicio"]>
   export type servicioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    permiso_servicio?: boolean | servicio$permiso_servicioArgs<ExtArgs>
+    rol_servicio?: boolean | servicio$rol_servicioArgs<ExtArgs>
     _count?: boolean | ServicioCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type servicioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -18960,7 +14144,7 @@ export namespace Prisma {
   export type $servicioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "servicio"
     objects: {
-      permiso_servicio: Prisma.$permiso_servicioPayload<ExtArgs>[]
+      rol_servicio: Prisma.$rol_servicioPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_servicio: number
@@ -19365,7 +14549,7 @@ export namespace Prisma {
    */
   export interface Prisma__servicioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    permiso_servicio<T extends servicio$permiso_servicioArgs<ExtArgs> = {}>(args?: Subset<T, servicio$permiso_servicioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rol_servicio<T extends servicio$rol_servicioArgs<ExtArgs> = {}>(args?: Subset<T, servicio$rol_servicioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19791,27 +14975,27 @@ export namespace Prisma {
   }
 
   /**
-   * servicio.permiso_servicio
+   * servicio.rol_servicio
    */
-  export type servicio$permiso_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type servicio$rol_servicioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the permiso_servicio
+     * Select specific fields to fetch from the rol_servicio
      */
-    select?: permiso_servicioSelect<ExtArgs> | null
+    select?: rol_servicioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the permiso_servicio
+     * Omit specific fields from the rol_servicio
      */
-    omit?: permiso_servicioOmit<ExtArgs> | null
+    omit?: rol_servicioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: permiso_servicioInclude<ExtArgs> | null
-    where?: permiso_servicioWhereInput
-    orderBy?: permiso_servicioOrderByWithRelationInput | permiso_servicioOrderByWithRelationInput[]
-    cursor?: permiso_servicioWhereUniqueInput
+    include?: rol_servicioInclude<ExtArgs> | null
+    where?: rol_servicioWhereInput
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    cursor?: rol_servicioWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Permiso_servicioScalarFieldEnum | Permiso_servicioScalarFieldEnum[]
+    distinct?: Rol_servicioScalarFieldEnum | Rol_servicioScalarFieldEnum[]
   }
 
   /**
@@ -19830,6 +15014,1110 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: servicioInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model rol_servicio
+   */
+
+  export type AggregateRol_servicio = {
+    _count: Rol_servicioCountAggregateOutputType | null
+    _avg: Rol_servicioAvgAggregateOutputType | null
+    _sum: Rol_servicioSumAggregateOutputType | null
+    _min: Rol_servicioMinAggregateOutputType | null
+    _max: Rol_servicioMaxAggregateOutputType | null
+  }
+
+  export type Rol_servicioAvgAggregateOutputType = {
+    id_rol: number | null
+    id_servicio: number | null
+  }
+
+  export type Rol_servicioSumAggregateOutputType = {
+    id_rol: number | null
+    id_servicio: number | null
+  }
+
+  export type Rol_servicioMinAggregateOutputType = {
+    id_rol: number | null
+    id_servicio: number | null
+    fecha_creacion: Date | null
+    fecha_actualizacion: Date | null
+    estado: boolean | null
+  }
+
+  export type Rol_servicioMaxAggregateOutputType = {
+    id_rol: number | null
+    id_servicio: number | null
+    fecha_creacion: Date | null
+    fecha_actualizacion: Date | null
+    estado: boolean | null
+  }
+
+  export type Rol_servicioCountAggregateOutputType = {
+    id_rol: number
+    id_servicio: number
+    fecha_creacion: number
+    fecha_actualizacion: number
+    estado: number
+    _all: number
+  }
+
+
+  export type Rol_servicioAvgAggregateInputType = {
+    id_rol?: true
+    id_servicio?: true
+  }
+
+  export type Rol_servicioSumAggregateInputType = {
+    id_rol?: true
+    id_servicio?: true
+  }
+
+  export type Rol_servicioMinAggregateInputType = {
+    id_rol?: true
+    id_servicio?: true
+    fecha_creacion?: true
+    fecha_actualizacion?: true
+    estado?: true
+  }
+
+  export type Rol_servicioMaxAggregateInputType = {
+    id_rol?: true
+    id_servicio?: true
+    fecha_creacion?: true
+    fecha_actualizacion?: true
+    estado?: true
+  }
+
+  export type Rol_servicioCountAggregateInputType = {
+    id_rol?: true
+    id_servicio?: true
+    fecha_creacion?: true
+    fecha_actualizacion?: true
+    estado?: true
+    _all?: true
+  }
+
+  export type Rol_servicioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which rol_servicio to aggregate.
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of rol_servicios to fetch.
+     */
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: rol_servicioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` rol_servicios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` rol_servicios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned rol_servicios
+    **/
+    _count?: true | Rol_servicioCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Rol_servicioAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Rol_servicioSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Rol_servicioMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Rol_servicioMaxAggregateInputType
+  }
+
+  export type GetRol_servicioAggregateType<T extends Rol_servicioAggregateArgs> = {
+        [P in keyof T & keyof AggregateRol_servicio]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRol_servicio[P]>
+      : GetScalarType<T[P], AggregateRol_servicio[P]>
+  }
+
+
+
+
+  export type rol_servicioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: rol_servicioWhereInput
+    orderBy?: rol_servicioOrderByWithAggregationInput | rol_servicioOrderByWithAggregationInput[]
+    by: Rol_servicioScalarFieldEnum[] | Rol_servicioScalarFieldEnum
+    having?: rol_servicioScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Rol_servicioCountAggregateInputType | true
+    _avg?: Rol_servicioAvgAggregateInputType
+    _sum?: Rol_servicioSumAggregateInputType
+    _min?: Rol_servicioMinAggregateInputType
+    _max?: Rol_servicioMaxAggregateInputType
+  }
+
+  export type Rol_servicioGroupByOutputType = {
+    id_rol: number
+    id_servicio: number
+    fecha_creacion: Date | null
+    fecha_actualizacion: Date | null
+    estado: boolean
+    _count: Rol_servicioCountAggregateOutputType | null
+    _avg: Rol_servicioAvgAggregateOutputType | null
+    _sum: Rol_servicioSumAggregateOutputType | null
+    _min: Rol_servicioMinAggregateOutputType | null
+    _max: Rol_servicioMaxAggregateOutputType | null
+  }
+
+  type GetRol_servicioGroupByPayload<T extends rol_servicioGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Rol_servicioGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Rol_servicioGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Rol_servicioGroupByOutputType[P]>
+            : GetScalarType<T[P], Rol_servicioGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type rol_servicioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_rol?: boolean
+    id_servicio?: boolean
+    fecha_creacion?: boolean
+    fecha_actualizacion?: boolean
+    estado?: boolean
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rol_servicio"]>
+
+  export type rol_servicioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_rol?: boolean
+    id_servicio?: boolean
+    fecha_creacion?: boolean
+    fecha_actualizacion?: boolean
+    estado?: boolean
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rol_servicio"]>
+
+  export type rol_servicioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_rol?: boolean
+    id_servicio?: boolean
+    fecha_creacion?: boolean
+    fecha_actualizacion?: boolean
+    estado?: boolean
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rol_servicio"]>
+
+  export type rol_servicioSelectScalar = {
+    id_rol?: boolean
+    id_servicio?: boolean
+    fecha_creacion?: boolean
+    fecha_actualizacion?: boolean
+    estado?: boolean
+  }
+
+  export type rol_servicioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_rol" | "id_servicio" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["rol_servicio"]>
+  export type rol_servicioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }
+  export type rol_servicioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }
+  export type rol_servicioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rol?: boolean | rolDefaultArgs<ExtArgs>
+    servicio?: boolean | servicioDefaultArgs<ExtArgs>
+  }
+
+  export type $rol_servicioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "rol_servicio"
+    objects: {
+      rol: Prisma.$rolPayload<ExtArgs>
+      servicio: Prisma.$servicioPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_rol: number
+      id_servicio: number
+      fecha_creacion: Date | null
+      fecha_actualizacion: Date | null
+      estado: boolean
+    }, ExtArgs["result"]["rol_servicio"]>
+    composites: {}
+  }
+
+  type rol_servicioGetPayload<S extends boolean | null | undefined | rol_servicioDefaultArgs> = $Result.GetResult<Prisma.$rol_servicioPayload, S>
+
+  type rol_servicioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<rol_servicioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Rol_servicioCountAggregateInputType | true
+    }
+
+  export interface rol_servicioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['rol_servicio'], meta: { name: 'rol_servicio' } }
+    /**
+     * Find zero or one Rol_servicio that matches the filter.
+     * @param {rol_servicioFindUniqueArgs} args - Arguments to find a Rol_servicio
+     * @example
+     * // Get one Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends rol_servicioFindUniqueArgs>(args: SelectSubset<T, rol_servicioFindUniqueArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Rol_servicio that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {rol_servicioFindUniqueOrThrowArgs} args - Arguments to find a Rol_servicio
+     * @example
+     * // Get one Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends rol_servicioFindUniqueOrThrowArgs>(args: SelectSubset<T, rol_servicioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Rol_servicio that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioFindFirstArgs} args - Arguments to find a Rol_servicio
+     * @example
+     * // Get one Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends rol_servicioFindFirstArgs>(args?: SelectSubset<T, rol_servicioFindFirstArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Rol_servicio that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioFindFirstOrThrowArgs} args - Arguments to find a Rol_servicio
+     * @example
+     * // Get one Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends rol_servicioFindFirstOrThrowArgs>(args?: SelectSubset<T, rol_servicioFindFirstOrThrowArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Rol_servicios that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Rol_servicios
+     * const rol_servicios = await prisma.rol_servicio.findMany()
+     * 
+     * // Get first 10 Rol_servicios
+     * const rol_servicios = await prisma.rol_servicio.findMany({ take: 10 })
+     * 
+     * // Only select the `id_rol`
+     * const rol_servicioWithId_rolOnly = await prisma.rol_servicio.findMany({ select: { id_rol: true } })
+     * 
+     */
+    findMany<T extends rol_servicioFindManyArgs>(args?: SelectSubset<T, rol_servicioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Rol_servicio.
+     * @param {rol_servicioCreateArgs} args - Arguments to create a Rol_servicio.
+     * @example
+     * // Create one Rol_servicio
+     * const Rol_servicio = await prisma.rol_servicio.create({
+     *   data: {
+     *     // ... data to create a Rol_servicio
+     *   }
+     * })
+     * 
+     */
+    create<T extends rol_servicioCreateArgs>(args: SelectSubset<T, rol_servicioCreateArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Rol_servicios.
+     * @param {rol_servicioCreateManyArgs} args - Arguments to create many Rol_servicios.
+     * @example
+     * // Create many Rol_servicios
+     * const rol_servicio = await prisma.rol_servicio.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends rol_servicioCreateManyArgs>(args?: SelectSubset<T, rol_servicioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Rol_servicios and returns the data saved in the database.
+     * @param {rol_servicioCreateManyAndReturnArgs} args - Arguments to create many Rol_servicios.
+     * @example
+     * // Create many Rol_servicios
+     * const rol_servicio = await prisma.rol_servicio.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Rol_servicios and only return the `id_rol`
+     * const rol_servicioWithId_rolOnly = await prisma.rol_servicio.createManyAndReturn({
+     *   select: { id_rol: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends rol_servicioCreateManyAndReturnArgs>(args?: SelectSubset<T, rol_servicioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Rol_servicio.
+     * @param {rol_servicioDeleteArgs} args - Arguments to delete one Rol_servicio.
+     * @example
+     * // Delete one Rol_servicio
+     * const Rol_servicio = await prisma.rol_servicio.delete({
+     *   where: {
+     *     // ... filter to delete one Rol_servicio
+     *   }
+     * })
+     * 
+     */
+    delete<T extends rol_servicioDeleteArgs>(args: SelectSubset<T, rol_servicioDeleteArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Rol_servicio.
+     * @param {rol_servicioUpdateArgs} args - Arguments to update one Rol_servicio.
+     * @example
+     * // Update one Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends rol_servicioUpdateArgs>(args: SelectSubset<T, rol_servicioUpdateArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Rol_servicios.
+     * @param {rol_servicioDeleteManyArgs} args - Arguments to filter Rol_servicios to delete.
+     * @example
+     * // Delete a few Rol_servicios
+     * const { count } = await prisma.rol_servicio.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends rol_servicioDeleteManyArgs>(args?: SelectSubset<T, rol_servicioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rol_servicios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Rol_servicios
+     * const rol_servicio = await prisma.rol_servicio.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends rol_servicioUpdateManyArgs>(args: SelectSubset<T, rol_servicioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rol_servicios and returns the data updated in the database.
+     * @param {rol_servicioUpdateManyAndReturnArgs} args - Arguments to update many Rol_servicios.
+     * @example
+     * // Update many Rol_servicios
+     * const rol_servicio = await prisma.rol_servicio.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Rol_servicios and only return the `id_rol`
+     * const rol_servicioWithId_rolOnly = await prisma.rol_servicio.updateManyAndReturn({
+     *   select: { id_rol: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends rol_servicioUpdateManyAndReturnArgs>(args: SelectSubset<T, rol_servicioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Rol_servicio.
+     * @param {rol_servicioUpsertArgs} args - Arguments to update or create a Rol_servicio.
+     * @example
+     * // Update or create a Rol_servicio
+     * const rol_servicio = await prisma.rol_servicio.upsert({
+     *   create: {
+     *     // ... data to create a Rol_servicio
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Rol_servicio we want to update
+     *   }
+     * })
+     */
+    upsert<T extends rol_servicioUpsertArgs>(args: SelectSubset<T, rol_servicioUpsertArgs<ExtArgs>>): Prisma__rol_servicioClient<$Result.GetResult<Prisma.$rol_servicioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Rol_servicios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioCountArgs} args - Arguments to filter Rol_servicios to count.
+     * @example
+     * // Count the number of Rol_servicios
+     * const count = await prisma.rol_servicio.count({
+     *   where: {
+     *     // ... the filter for the Rol_servicios we want to count
+     *   }
+     * })
+    **/
+    count<T extends rol_servicioCountArgs>(
+      args?: Subset<T, rol_servicioCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Rol_servicioCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Rol_servicio.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Rol_servicioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Rol_servicioAggregateArgs>(args: Subset<T, Rol_servicioAggregateArgs>): Prisma.PrismaPromise<GetRol_servicioAggregateType<T>>
+
+    /**
+     * Group by Rol_servicio.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {rol_servicioGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends rol_servicioGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: rol_servicioGroupByArgs['orderBy'] }
+        : { orderBy?: rol_servicioGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, rol_servicioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRol_servicioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the rol_servicio model
+   */
+  readonly fields: rol_servicioFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for rol_servicio.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__rol_servicioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    rol<T extends rolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, rolDefaultArgs<ExtArgs>>): Prisma__rolClient<$Result.GetResult<Prisma.$rolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    servicio<T extends servicioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, servicioDefaultArgs<ExtArgs>>): Prisma__servicioClient<$Result.GetResult<Prisma.$servicioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the rol_servicio model
+   */
+  interface rol_servicioFieldRefs {
+    readonly id_rol: FieldRef<"rol_servicio", 'Int'>
+    readonly id_servicio: FieldRef<"rol_servicio", 'Int'>
+    readonly fecha_creacion: FieldRef<"rol_servicio", 'DateTime'>
+    readonly fecha_actualizacion: FieldRef<"rol_servicio", 'DateTime'>
+    readonly estado: FieldRef<"rol_servicio", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * rol_servicio findUnique
+   */
+  export type rol_servicioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter, which rol_servicio to fetch.
+     */
+    where: rol_servicioWhereUniqueInput
+  }
+
+  /**
+   * rol_servicio findUniqueOrThrow
+   */
+  export type rol_servicioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter, which rol_servicio to fetch.
+     */
+    where: rol_servicioWhereUniqueInput
+  }
+
+  /**
+   * rol_servicio findFirst
+   */
+  export type rol_servicioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter, which rol_servicio to fetch.
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of rol_servicios to fetch.
+     */
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for rol_servicios.
+     */
+    cursor?: rol_servicioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` rol_servicios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` rol_servicios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of rol_servicios.
+     */
+    distinct?: Rol_servicioScalarFieldEnum | Rol_servicioScalarFieldEnum[]
+  }
+
+  /**
+   * rol_servicio findFirstOrThrow
+   */
+  export type rol_servicioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter, which rol_servicio to fetch.
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of rol_servicios to fetch.
+     */
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for rol_servicios.
+     */
+    cursor?: rol_servicioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` rol_servicios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` rol_servicios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of rol_servicios.
+     */
+    distinct?: Rol_servicioScalarFieldEnum | Rol_servicioScalarFieldEnum[]
+  }
+
+  /**
+   * rol_servicio findMany
+   */
+  export type rol_servicioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter, which rol_servicios to fetch.
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of rol_servicios to fetch.
+     */
+    orderBy?: rol_servicioOrderByWithRelationInput | rol_servicioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing rol_servicios.
+     */
+    cursor?: rol_servicioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` rol_servicios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` rol_servicios.
+     */
+    skip?: number
+    distinct?: Rol_servicioScalarFieldEnum | Rol_servicioScalarFieldEnum[]
+  }
+
+  /**
+   * rol_servicio create
+   */
+  export type rol_servicioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * The data needed to create a rol_servicio.
+     */
+    data: XOR<rol_servicioCreateInput, rol_servicioUncheckedCreateInput>
+  }
+
+  /**
+   * rol_servicio createMany
+   */
+  export type rol_servicioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many rol_servicios.
+     */
+    data: rol_servicioCreateManyInput | rol_servicioCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * rol_servicio createManyAndReturn
+   */
+  export type rol_servicioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * The data used to create many rol_servicios.
+     */
+    data: rol_servicioCreateManyInput | rol_servicioCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * rol_servicio update
+   */
+  export type rol_servicioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * The data needed to update a rol_servicio.
+     */
+    data: XOR<rol_servicioUpdateInput, rol_servicioUncheckedUpdateInput>
+    /**
+     * Choose, which rol_servicio to update.
+     */
+    where: rol_servicioWhereUniqueInput
+  }
+
+  /**
+   * rol_servicio updateMany
+   */
+  export type rol_servicioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update rol_servicios.
+     */
+    data: XOR<rol_servicioUpdateManyMutationInput, rol_servicioUncheckedUpdateManyInput>
+    /**
+     * Filter which rol_servicios to update
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * Limit how many rol_servicios to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * rol_servicio updateManyAndReturn
+   */
+  export type rol_servicioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * The data used to update rol_servicios.
+     */
+    data: XOR<rol_servicioUpdateManyMutationInput, rol_servicioUncheckedUpdateManyInput>
+    /**
+     * Filter which rol_servicios to update
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * Limit how many rol_servicios to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * rol_servicio upsert
+   */
+  export type rol_servicioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * The filter to search for the rol_servicio to update in case it exists.
+     */
+    where: rol_servicioWhereUniqueInput
+    /**
+     * In case the rol_servicio found by the `where` argument doesn't exist, create a new rol_servicio with this data.
+     */
+    create: XOR<rol_servicioCreateInput, rol_servicioUncheckedCreateInput>
+    /**
+     * In case the rol_servicio was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<rol_servicioUpdateInput, rol_servicioUncheckedUpdateInput>
+  }
+
+  /**
+   * rol_servicio delete
+   */
+  export type rol_servicioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
+    /**
+     * Filter which rol_servicio to delete.
+     */
+    where: rol_servicioWhereUniqueInput
+  }
+
+  /**
+   * rol_servicio deleteMany
+   */
+  export type rol_servicioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which rol_servicios to delete
+     */
+    where?: rol_servicioWhereInput
+    /**
+     * Limit how many rol_servicios to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * rol_servicio without action
+   */
+  export type rol_servicioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the rol_servicio
+     */
+    select?: rol_servicioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the rol_servicio
+     */
+    omit?: rol_servicioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: rol_servicioInclude<ExtArgs> | null
   }
 
 
@@ -20055,7 +16343,7 @@ export namespace Prisma {
     correo: string
     confirmado: boolean
     token_confirmacion: string
-    ultima_conexion: Date
+    ultima_conexion: Date | null
     password: string | null
     fecha_actualizacion: Date
     fecha_creacion: Date | null
@@ -20097,7 +16385,6 @@ export namespace Prisma {
     estado?: boolean
     evaluacion?: boolean | usuario$evaluacionArgs<ExtArgs>
     nrc?: boolean | usuario$nrcArgs<ExtArgs>
-    permiso_usuario?: boolean | usuario$permiso_usuarioArgs<ExtArgs>
     usuario_rol?: boolean | usuario$usuario_rolArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
@@ -20154,7 +16441,6 @@ export namespace Prisma {
   export type usuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     evaluacion?: boolean | usuario$evaluacionArgs<ExtArgs>
     nrc?: boolean | usuario$nrcArgs<ExtArgs>
-    permiso_usuario?: boolean | usuario$permiso_usuarioArgs<ExtArgs>
     usuario_rol?: boolean | usuario$usuario_rolArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -20166,7 +16452,6 @@ export namespace Prisma {
     objects: {
       evaluacion: Prisma.$evaluacionPayload<ExtArgs>[]
       nrc: Prisma.$nrcPayload<ExtArgs>[]
-      permiso_usuario: Prisma.$permiso_usuarioPayload<ExtArgs>[]
       usuario_rol: Prisma.$usuario_rolPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -20178,7 +16463,7 @@ export namespace Prisma {
       correo: string
       confirmado: boolean
       token_confirmacion: string
-      ultima_conexion: Date
+      ultima_conexion: Date | null
       password: string | null
       fecha_actualizacion: Date
       fecha_creacion: Date | null
@@ -20579,7 +16864,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     evaluacion<T extends usuario$evaluacionArgs<ExtArgs> = {}>(args?: Subset<T, usuario$evaluacionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$evaluacionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     nrc<T extends usuario$nrcArgs<ExtArgs> = {}>(args?: Subset<T, usuario$nrcArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$nrcPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    permiso_usuario<T extends usuario$permiso_usuarioArgs<ExtArgs> = {}>(args?: Subset<T, usuario$permiso_usuarioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$permiso_usuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usuario_rol<T extends usuario$usuario_rolArgs<ExtArgs> = {}>(args?: Subset<T, usuario$usuario_rolArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuario_rolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21056,30 +17340,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NrcScalarFieldEnum | NrcScalarFieldEnum[]
-  }
-
-  /**
-   * usuario.permiso_usuario
-   */
-  export type usuario$permiso_usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the permiso_usuario
-     */
-    select?: permiso_usuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the permiso_usuario
-     */
-    omit?: permiso_usuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: permiso_usuarioInclude<ExtArgs> | null
-    where?: permiso_usuarioWhereInput
-    orderBy?: permiso_usuarioOrderByWithRelationInput | permiso_usuarioOrderByWithRelationInput[]
-    cursor?: permiso_usuarioWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Permiso_usuarioScalarFieldEnum | Permiso_usuarioScalarFieldEnum[]
   }
 
   /**
@@ -22254,34 +18514,34 @@ export namespace Prisma {
   export type VideojuegoMinAggregateOutputType = {
     id_videojuego: number | null
     id_equipo: number | null
-    token_captcha: string | null
     nombre: string | null
     descripcion: string | null
     fecha_creacion: Date | null
     fecha_actualizacion: Date | null
     estado: boolean | null
+    token_captcha: string | null
   }
 
   export type VideojuegoMaxAggregateOutputType = {
     id_videojuego: number | null
     id_equipo: number | null
-    token_captcha: string | null
     nombre: string | null
     descripcion: string | null
     fecha_creacion: Date | null
     fecha_actualizacion: Date | null
     estado: boolean | null
+    token_captcha: string | null
   }
 
   export type VideojuegoCountAggregateOutputType = {
     id_videojuego: number
     id_equipo: number
-    token_captcha: number
     nombre: number
     descripcion: number
     fecha_creacion: number
     fecha_actualizacion: number
     estado: number
+    token_captcha: number
     _all: number
   }
 
@@ -22299,34 +18559,34 @@ export namespace Prisma {
   export type VideojuegoMinAggregateInputType = {
     id_videojuego?: true
     id_equipo?: true
-    token_captcha?: true
     nombre?: true
     descripcion?: true
     fecha_creacion?: true
     fecha_actualizacion?: true
     estado?: true
+    token_captcha?: true
   }
 
   export type VideojuegoMaxAggregateInputType = {
     id_videojuego?: true
     id_equipo?: true
-    token_captcha?: true
     nombre?: true
     descripcion?: true
     fecha_creacion?: true
     fecha_actualizacion?: true
     estado?: true
+    token_captcha?: true
   }
 
   export type VideojuegoCountAggregateInputType = {
     id_videojuego?: true
     id_equipo?: true
-    token_captcha?: true
     nombre?: true
     descripcion?: true
     fecha_creacion?: true
     fecha_actualizacion?: true
     estado?: true
+    token_captcha?: true
     _all?: true
   }
 
@@ -22419,12 +18679,12 @@ export namespace Prisma {
   export type VideojuegoGroupByOutputType = {
     id_videojuego: number
     id_equipo: number
-    token_captcha: string
     nombre: string
     descripcion: string | null
     fecha_creacion: Date
     fecha_actualizacion: Date | null
     estado: boolean
+    token_captcha: string | null
     _count: VideojuegoCountAggregateOutputType | null
     _avg: VideojuegoAvgAggregateOutputType | null
     _sum: VideojuegoSumAggregateOutputType | null
@@ -22449,12 +18709,12 @@ export namespace Prisma {
   export type videojuegoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_videojuego?: boolean
     id_equipo?: boolean
-    token_captcha?: boolean
     nombre?: boolean
     descripcion?: boolean
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
+    token_captcha?: boolean
     evaluacion?: boolean | videojuego$evaluacionArgs<ExtArgs>
     equipo?: boolean | equipoDefaultArgs<ExtArgs>
     _count?: boolean | VideojuegoCountOutputTypeDefaultArgs<ExtArgs>
@@ -22463,39 +18723,39 @@ export namespace Prisma {
   export type videojuegoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_videojuego?: boolean
     id_equipo?: boolean
-    token_captcha?: boolean
     nombre?: boolean
     descripcion?: boolean
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
+    token_captcha?: boolean
     equipo?: boolean | equipoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videojuego"]>
 
   export type videojuegoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_videojuego?: boolean
     id_equipo?: boolean
-    token_captcha?: boolean
     nombre?: boolean
     descripcion?: boolean
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
+    token_captcha?: boolean
     equipo?: boolean | equipoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videojuego"]>
 
   export type videojuegoSelectScalar = {
     id_videojuego?: boolean
     id_equipo?: boolean
-    token_captcha?: boolean
     nombre?: boolean
     descripcion?: boolean
     fecha_creacion?: boolean
     fecha_actualizacion?: boolean
     estado?: boolean
+    token_captcha?: boolean
   }
 
-  export type videojuegoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_videojuego" | "id_equipo" | "token_captcha" | "nombre" | "descripcion" | "fecha_creacion" | "fecha_actualizacion" | "estado", ExtArgs["result"]["videojuego"]>
+  export type videojuegoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_videojuego" | "id_equipo" | "nombre" | "descripcion" | "fecha_creacion" | "fecha_actualizacion" | "estado" | "token_captcha", ExtArgs["result"]["videojuego"]>
   export type videojuegoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     evaluacion?: boolean | videojuego$evaluacionArgs<ExtArgs>
     equipo?: boolean | equipoDefaultArgs<ExtArgs>
@@ -22517,12 +18777,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id_videojuego: number
       id_equipo: number
-      token_captcha: string
       nombre: string
       descripcion: string | null
       fecha_creacion: Date
       fecha_actualizacion: Date | null
       estado: boolean
+      token_captcha: string | null
     }, ExtArgs["result"]["videojuego"]>
     composites: {}
   }
@@ -22950,12 +19210,12 @@ export namespace Prisma {
   interface videojuegoFieldRefs {
     readonly id_videojuego: FieldRef<"videojuego", 'Int'>
     readonly id_equipo: FieldRef<"videojuego", 'Int'>
-    readonly token_captcha: FieldRef<"videojuego", 'String'>
     readonly nombre: FieldRef<"videojuego", 'String'>
     readonly descripcion: FieldRef<"videojuego", 'String'>
     readonly fecha_creacion: FieldRef<"videojuego", 'DateTime'>
     readonly fecha_actualizacion: FieldRef<"videojuego", 'DateTime'>
     readonly estado: FieldRef<"videojuego", 'Boolean'>
+    readonly token_captcha: FieldRef<"videojuego", 'String'>
   }
     
 
@@ -23518,51 +19778,6 @@ export namespace Prisma {
   export type NrcScalarFieldEnum = (typeof NrcScalarFieldEnum)[keyof typeof NrcScalarFieldEnum]
 
 
-  export const PermisoScalarFieldEnum: {
-    id_permiso: 'id_permiso',
-    nombre: 'nombre',
-    descripcion: 'descripcion',
-    fecha_creacion: 'fecha_creacion',
-    fecha_actualizacion: 'fecha_actualizacion',
-    estado: 'estado'
-  };
-
-  export type PermisoScalarFieldEnum = (typeof PermisoScalarFieldEnum)[keyof typeof PermisoScalarFieldEnum]
-
-
-  export const Permiso_rolScalarFieldEnum: {
-    id_permiso: 'id_permiso',
-    id_rol: 'id_rol',
-    fecha_creacion: 'fecha_creacion',
-    fecha_actualizacion: 'fecha_actualizacion',
-    estado: 'estado'
-  };
-
-  export type Permiso_rolScalarFieldEnum = (typeof Permiso_rolScalarFieldEnum)[keyof typeof Permiso_rolScalarFieldEnum]
-
-
-  export const Permiso_servicioScalarFieldEnum: {
-    id_permiso: 'id_permiso',
-    id_servicio: 'id_servicio',
-    fecha_creacion: 'fecha_creacion',
-    fecha_actualizacion: 'fecha_actualizacion',
-    estado: 'estado'
-  };
-
-  export type Permiso_servicioScalarFieldEnum = (typeof Permiso_servicioScalarFieldEnum)[keyof typeof Permiso_servicioScalarFieldEnum]
-
-
-  export const Permiso_usuarioScalarFieldEnum: {
-    id_permiso: 'id_permiso',
-    id_usuario: 'id_usuario',
-    fecha_creacion: 'fecha_creacion',
-    fecha_actualizacion: 'fecha_actualizacion',
-    estado: 'estado'
-  };
-
-  export type Permiso_usuarioScalarFieldEnum = (typeof Permiso_usuarioScalarFieldEnum)[keyof typeof Permiso_usuarioScalarFieldEnum]
-
-
   export const RolScalarFieldEnum: {
     id_rol: 'id_rol',
     rol: 'rol',
@@ -23586,6 +19801,17 @@ export namespace Prisma {
   };
 
   export type ServicioScalarFieldEnum = (typeof ServicioScalarFieldEnum)[keyof typeof ServicioScalarFieldEnum]
+
+
+  export const Rol_servicioScalarFieldEnum: {
+    id_rol: 'id_rol',
+    id_servicio: 'id_servicio',
+    fecha_creacion: 'fecha_creacion',
+    fecha_actualizacion: 'fecha_actualizacion',
+    estado: 'estado'
+  };
+
+  export type Rol_servicioScalarFieldEnum = (typeof Rol_servicioScalarFieldEnum)[keyof typeof Rol_servicioScalarFieldEnum]
 
 
   export const UsuarioScalarFieldEnum: {
@@ -23621,12 +19847,12 @@ export namespace Prisma {
   export const VideojuegoScalarFieldEnum: {
     id_videojuego: 'id_videojuego',
     id_equipo: 'id_equipo',
-    token_captcha: 'token_captcha',
     nombre: 'nombre',
     descripcion: 'descripcion',
     fecha_creacion: 'fecha_creacion',
     fecha_actualizacion: 'fecha_actualizacion',
-    estado: 'estado'
+    estado: 'estado',
+    token_captcha: 'token_captcha'
   };
 
   export type VideojuegoScalarFieldEnum = (typeof VideojuegoScalarFieldEnum)[keyof typeof VideojuegoScalarFieldEnum]
@@ -23737,7 +19963,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"criterio"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"criterio"> | Date | string | null
     estado?: BoolFilter<"criterio"> | boolean
-    porcentaje?: IntFilter<"criterio"> | number
+    porcentaje?: FloatFilter<"criterio"> | number
     criterio_evaluacion?: Criterio_evaluacionListRelationFilter
   }
 
@@ -23762,7 +19988,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"criterio"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"criterio"> | Date | string | null
     estado?: BoolFilter<"criterio"> | boolean
-    porcentaje?: IntFilter<"criterio"> | number
+    porcentaje?: FloatFilter<"criterio"> | number
     criterio_evaluacion?: Criterio_evaluacionListRelationFilter
   }, "id_criterio">
 
@@ -23791,7 +20017,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeWithAggregatesFilter<"criterio"> | Date | string
     fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"criterio"> | Date | string | null
     estado?: BoolWithAggregatesFilter<"criterio"> | boolean
-    porcentaje?: IntWithAggregatesFilter<"criterio"> | number
+    porcentaje?: FloatWithAggregatesFilter<"criterio"> | number
   }
 
   export type criterio_evaluacionWhereInput = {
@@ -23870,9 +20096,9 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"equipo"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"equipo"> | Date | string | null
     estado?: BoolFilter<"equipo"> | boolean
+    estado_equipo?: XOR<EstadoScalarRelationFilter, estadoWhereInput>
     integrante?: IntegranteListRelationFilter
     videojuego?: VideojuegoListRelationFilter
-    estado_equipo?: XOR<EstadoScalarRelationFilter, estadoWhereInput>
   }
 
   export type equipoOrderByWithRelationInput = {
@@ -23882,9 +20108,9 @@ export namespace Prisma {
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrderInput | SortOrder
     estado?: SortOrder
+    estado_equipo?: estadoOrderByWithRelationInput
     integrante?: integranteOrderByRelationAggregateInput
     videojuego?: videojuegoOrderByRelationAggregateInput
-    estado_equipo?: estadoOrderByWithRelationInput
   }
 
   export type equipoWhereUniqueInput = Prisma.AtLeast<{
@@ -23897,9 +20123,9 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"equipo"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"equipo"> | Date | string | null
     estado?: BoolFilter<"equipo"> | boolean
+    estado_equipo?: XOR<EstadoScalarRelationFilter, estadoWhereInput>
     integrante?: IntegranteListRelationFilter
     videojuego?: VideojuegoListRelationFilter
-    estado_equipo?: XOR<EstadoScalarRelationFilter, estadoWhereInput>
   }, "id_equipo">
 
   export type equipoOrderByWithAggregationInput = {
@@ -24209,16 +20435,16 @@ export namespace Prisma {
 
   export type materiaWhereUniqueInput = Prisma.AtLeast<{
     id_materia?: number
-    codigo?: string
     AND?: materiaWhereInput | materiaWhereInput[]
     OR?: materiaWhereInput[]
     NOT?: materiaWhereInput | materiaWhereInput[]
     nombre?: StringFilter<"materia"> | string
+    codigo?: StringFilter<"materia"> | string
     fecha_creacion?: DateTimeFilter<"materia"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"materia"> | Date | string | null
     estado?: BoolFilter<"materia"> | boolean
     nrc?: NrcListRelationFilter
-  }, "id_materia" | "codigo">
+  }, "id_materia">
 
   export type materiaOrderByWithAggregationInput = {
     id_materia?: SortOrder
@@ -24279,11 +20505,11 @@ export namespace Prisma {
 
   export type nrcWhereUniqueInput = Prisma.AtLeast<{
     id_nrc?: number
-    codigo?: string
     AND?: nrcWhereInput | nrcWhereInput[]
     OR?: nrcWhereInput[]
     NOT?: nrcWhereInput | nrcWhereInput[]
     id_materia?: IntFilter<"nrc"> | number
+    codigo?: StringFilter<"nrc"> | string
     activo?: BoolFilter<"nrc"> | boolean
     id_usuario?: IntFilter<"nrc"> | number
     fecha_creacion?: DateTimeFilter<"nrc"> | Date | string
@@ -24292,7 +20518,7 @@ export namespace Prisma {
     integrante_nrc?: Integrante_nrcListRelationFilter
     materia?: XOR<MateriaScalarRelationFilter, materiaWhereInput>
     usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
-  }, "id_nrc" | "codigo">
+  }, "id_nrc">
 
   export type nrcOrderByWithAggregationInput = {
     id_nrc?: SortOrder
@@ -24324,257 +20550,6 @@ export namespace Prisma {
     estado?: BoolWithAggregatesFilter<"nrc"> | boolean
   }
 
-  export type permisoWhereInput = {
-    AND?: permisoWhereInput | permisoWhereInput[]
-    OR?: permisoWhereInput[]
-    NOT?: permisoWhereInput | permisoWhereInput[]
-    id_permiso?: IntFilter<"permiso"> | number
-    nombre?: StringFilter<"permiso"> | string
-    descripcion?: StringFilter<"permiso"> | string
-    fecha_creacion?: DateTimeNullableFilter<"permiso"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso"> | Date | string | null
-    estado?: BoolFilter<"permiso"> | boolean
-    permiso_rol?: Permiso_rolListRelationFilter
-    permiso_servicio?: Permiso_servicioListRelationFilter
-    permiso_usuario?: Permiso_usuarioListRelationFilter
-  }
-
-  export type permisoOrderByWithRelationInput = {
-    id_permiso?: SortOrder
-    nombre?: SortOrder
-    descripcion?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    permiso_rol?: permiso_rolOrderByRelationAggregateInput
-    permiso_servicio?: permiso_servicioOrderByRelationAggregateInput
-    permiso_usuario?: permiso_usuarioOrderByRelationAggregateInput
-  }
-
-  export type permisoWhereUniqueInput = Prisma.AtLeast<{
-    id_permiso?: number
-    AND?: permisoWhereInput | permisoWhereInput[]
-    OR?: permisoWhereInput[]
-    NOT?: permisoWhereInput | permisoWhereInput[]
-    nombre?: StringFilter<"permiso"> | string
-    descripcion?: StringFilter<"permiso"> | string
-    fecha_creacion?: DateTimeNullableFilter<"permiso"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso"> | Date | string | null
-    estado?: BoolFilter<"permiso"> | boolean
-    permiso_rol?: Permiso_rolListRelationFilter
-    permiso_servicio?: Permiso_servicioListRelationFilter
-    permiso_usuario?: Permiso_usuarioListRelationFilter
-  }, "id_permiso">
-
-  export type permisoOrderByWithAggregationInput = {
-    id_permiso?: SortOrder
-    nombre?: SortOrder
-    descripcion?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    _count?: permisoCountOrderByAggregateInput
-    _avg?: permisoAvgOrderByAggregateInput
-    _max?: permisoMaxOrderByAggregateInput
-    _min?: permisoMinOrderByAggregateInput
-    _sum?: permisoSumOrderByAggregateInput
-  }
-
-  export type permisoScalarWhereWithAggregatesInput = {
-    AND?: permisoScalarWhereWithAggregatesInput | permisoScalarWhereWithAggregatesInput[]
-    OR?: permisoScalarWhereWithAggregatesInput[]
-    NOT?: permisoScalarWhereWithAggregatesInput | permisoScalarWhereWithAggregatesInput[]
-    id_permiso?: IntWithAggregatesFilter<"permiso"> | number
-    nombre?: StringWithAggregatesFilter<"permiso"> | string
-    descripcion?: StringWithAggregatesFilter<"permiso"> | string
-    fecha_creacion?: DateTimeNullableWithAggregatesFilter<"permiso"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"permiso"> | Date | string | null
-    estado?: BoolWithAggregatesFilter<"permiso"> | boolean
-  }
-
-  export type permiso_rolWhereInput = {
-    AND?: permiso_rolWhereInput | permiso_rolWhereInput[]
-    OR?: permiso_rolWhereInput[]
-    NOT?: permiso_rolWhereInput | permiso_rolWhereInput[]
-    id_permiso?: IntFilter<"permiso_rol"> | number
-    id_rol?: IntFilter<"permiso_rol"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    estado?: BoolFilter<"permiso_rol"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    rol?: XOR<RolScalarRelationFilter, rolWhereInput>
-  }
-
-  export type permiso_rolOrderByWithRelationInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    permiso?: permisoOrderByWithRelationInput
-    rol?: rolOrderByWithRelationInput
-  }
-
-  export type permiso_rolWhereUniqueInput = Prisma.AtLeast<{
-    id_permiso_id_rol?: permiso_rolId_permisoId_rolCompoundUniqueInput
-    AND?: permiso_rolWhereInput | permiso_rolWhereInput[]
-    OR?: permiso_rolWhereInput[]
-    NOT?: permiso_rolWhereInput | permiso_rolWhereInput[]
-    id_permiso?: IntFilter<"permiso_rol"> | number
-    id_rol?: IntFilter<"permiso_rol"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    estado?: BoolFilter<"permiso_rol"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    rol?: XOR<RolScalarRelationFilter, rolWhereInput>
-  }, "id_permiso_id_rol">
-
-  export type permiso_rolOrderByWithAggregationInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    _count?: permiso_rolCountOrderByAggregateInput
-    _avg?: permiso_rolAvgOrderByAggregateInput
-    _max?: permiso_rolMaxOrderByAggregateInput
-    _min?: permiso_rolMinOrderByAggregateInput
-    _sum?: permiso_rolSumOrderByAggregateInput
-  }
-
-  export type permiso_rolScalarWhereWithAggregatesInput = {
-    AND?: permiso_rolScalarWhereWithAggregatesInput | permiso_rolScalarWhereWithAggregatesInput[]
-    OR?: permiso_rolScalarWhereWithAggregatesInput[]
-    NOT?: permiso_rolScalarWhereWithAggregatesInput | permiso_rolScalarWhereWithAggregatesInput[]
-    id_permiso?: IntWithAggregatesFilter<"permiso_rol"> | number
-    id_rol?: IntWithAggregatesFilter<"permiso_rol"> | number
-    fecha_creacion?: DateTimeNullableWithAggregatesFilter<"permiso_rol"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"permiso_rol"> | Date | string | null
-    estado?: BoolWithAggregatesFilter<"permiso_rol"> | boolean
-  }
-
-  export type permiso_servicioWhereInput = {
-    AND?: permiso_servicioWhereInput | permiso_servicioWhereInput[]
-    OR?: permiso_servicioWhereInput[]
-    NOT?: permiso_servicioWhereInput | permiso_servicioWhereInput[]
-    id_permiso?: IntFilter<"permiso_servicio"> | number
-    id_servicio?: IntFilter<"permiso_servicio"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    estado?: BoolFilter<"permiso_servicio"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    servicio?: XOR<ServicioScalarRelationFilter, servicioWhereInput>
-  }
-
-  export type permiso_servicioOrderByWithRelationInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    permiso?: permisoOrderByWithRelationInput
-    servicio?: servicioOrderByWithRelationInput
-  }
-
-  export type permiso_servicioWhereUniqueInput = Prisma.AtLeast<{
-    id_permiso_id_servicio?: permiso_servicioId_permisoId_servicioCompoundUniqueInput
-    AND?: permiso_servicioWhereInput | permiso_servicioWhereInput[]
-    OR?: permiso_servicioWhereInput[]
-    NOT?: permiso_servicioWhereInput | permiso_servicioWhereInput[]
-    id_permiso?: IntFilter<"permiso_servicio"> | number
-    id_servicio?: IntFilter<"permiso_servicio"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    estado?: BoolFilter<"permiso_servicio"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    servicio?: XOR<ServicioScalarRelationFilter, servicioWhereInput>
-  }, "id_permiso_id_servicio">
-
-  export type permiso_servicioOrderByWithAggregationInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    _count?: permiso_servicioCountOrderByAggregateInput
-    _avg?: permiso_servicioAvgOrderByAggregateInput
-    _max?: permiso_servicioMaxOrderByAggregateInput
-    _min?: permiso_servicioMinOrderByAggregateInput
-    _sum?: permiso_servicioSumOrderByAggregateInput
-  }
-
-  export type permiso_servicioScalarWhereWithAggregatesInput = {
-    AND?: permiso_servicioScalarWhereWithAggregatesInput | permiso_servicioScalarWhereWithAggregatesInput[]
-    OR?: permiso_servicioScalarWhereWithAggregatesInput[]
-    NOT?: permiso_servicioScalarWhereWithAggregatesInput | permiso_servicioScalarWhereWithAggregatesInput[]
-    id_permiso?: IntWithAggregatesFilter<"permiso_servicio"> | number
-    id_servicio?: IntWithAggregatesFilter<"permiso_servicio"> | number
-    fecha_creacion?: DateTimeNullableWithAggregatesFilter<"permiso_servicio"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"permiso_servicio"> | Date | string | null
-    estado?: BoolWithAggregatesFilter<"permiso_servicio"> | boolean
-  }
-
-  export type permiso_usuarioWhereInput = {
-    AND?: permiso_usuarioWhereInput | permiso_usuarioWhereInput[]
-    OR?: permiso_usuarioWhereInput[]
-    NOT?: permiso_usuarioWhereInput | permiso_usuarioWhereInput[]
-    id_permiso?: IntFilter<"permiso_usuario"> | number
-    id_usuario?: IntFilter<"permiso_usuario"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    estado?: BoolFilter<"permiso_usuario"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
-  }
-
-  export type permiso_usuarioOrderByWithRelationInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    permiso?: permisoOrderByWithRelationInput
-    usuario?: usuarioOrderByWithRelationInput
-  }
-
-  export type permiso_usuarioWhereUniqueInput = Prisma.AtLeast<{
-    id_permiso_id_usuario?: permiso_usuarioId_permisoId_usuarioCompoundUniqueInput
-    AND?: permiso_usuarioWhereInput | permiso_usuarioWhereInput[]
-    OR?: permiso_usuarioWhereInput[]
-    NOT?: permiso_usuarioWhereInput | permiso_usuarioWhereInput[]
-    id_permiso?: IntFilter<"permiso_usuario"> | number
-    id_usuario?: IntFilter<"permiso_usuario"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    estado?: BoolFilter<"permiso_usuario"> | boolean
-    permiso?: XOR<PermisoScalarRelationFilter, permisoWhereInput>
-    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
-  }, "id_permiso_id_usuario">
-
-  export type permiso_usuarioOrderByWithAggregationInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-    fecha_creacion?: SortOrderInput | SortOrder
-    fecha_actualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrder
-    _count?: permiso_usuarioCountOrderByAggregateInput
-    _avg?: permiso_usuarioAvgOrderByAggregateInput
-    _max?: permiso_usuarioMaxOrderByAggregateInput
-    _min?: permiso_usuarioMinOrderByAggregateInput
-    _sum?: permiso_usuarioSumOrderByAggregateInput
-  }
-
-  export type permiso_usuarioScalarWhereWithAggregatesInput = {
-    AND?: permiso_usuarioScalarWhereWithAggregatesInput | permiso_usuarioScalarWhereWithAggregatesInput[]
-    OR?: permiso_usuarioScalarWhereWithAggregatesInput[]
-    NOT?: permiso_usuarioScalarWhereWithAggregatesInput | permiso_usuarioScalarWhereWithAggregatesInput[]
-    id_permiso?: IntWithAggregatesFilter<"permiso_usuario"> | number
-    id_usuario?: IntWithAggregatesFilter<"permiso_usuario"> | number
-    fecha_creacion?: DateTimeNullableWithAggregatesFilter<"permiso_usuario"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"permiso_usuario"> | Date | string | null
-    estado?: BoolWithAggregatesFilter<"permiso_usuario"> | boolean
-  }
-
   export type rolWhereInput = {
     AND?: rolWhereInput | rolWhereInput[]
     OR?: rolWhereInput[]
@@ -24584,7 +20559,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"rol"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"rol"> | Date | string | null
     estado?: BoolFilter<"rol"> | boolean
-    permiso_rol?: Permiso_rolListRelationFilter
+    rol_servicio?: Rol_servicioListRelationFilter
     usuario_rol?: Usuario_rolListRelationFilter
   }
 
@@ -24594,7 +20569,7 @@ export namespace Prisma {
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrderInput | SortOrder
     estado?: SortOrder
-    permiso_rol?: permiso_rolOrderByRelationAggregateInput
+    rol_servicio?: rol_servicioOrderByRelationAggregateInput
     usuario_rol?: usuario_rolOrderByRelationAggregateInput
   }
 
@@ -24607,7 +20582,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFilter<"rol"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"rol"> | Date | string | null
     estado?: BoolFilter<"rol"> | boolean
-    permiso_rol?: Permiso_rolListRelationFilter
+    rol_servicio?: Rol_servicioListRelationFilter
     usuario_rol?: Usuario_rolListRelationFilter
   }, "id_rol">
 
@@ -24647,7 +20622,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeNullableFilter<"servicio"> | Date | string | null
     fecha_actualizacion?: DateTimeNullableFilter<"servicio"> | Date | string | null
     estado?: BoolFilter<"servicio"> | boolean
-    permiso_servicio?: Permiso_servicioListRelationFilter
+    rol_servicio?: Rol_servicioListRelationFilter
   }
 
   export type servicioOrderByWithRelationInput = {
@@ -24659,7 +20634,7 @@ export namespace Prisma {
     fecha_creacion?: SortOrderInput | SortOrder
     fecha_actualizacion?: SortOrderInput | SortOrder
     estado?: SortOrder
-    permiso_servicio?: permiso_servicioOrderByRelationAggregateInput
+    rol_servicio?: rol_servicioOrderByRelationAggregateInput
   }
 
   export type servicioWhereUniqueInput = Prisma.AtLeast<{
@@ -24674,7 +20649,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeNullableFilter<"servicio"> | Date | string | null
     fecha_actualizacion?: DateTimeNullableFilter<"servicio"> | Date | string | null
     estado?: BoolFilter<"servicio"> | boolean
-    permiso_servicio?: Permiso_servicioListRelationFilter
+    rol_servicio?: Rol_servicioListRelationFilter
   }, "id_servicio">
 
   export type servicioOrderByWithAggregationInput = {
@@ -24707,6 +20682,67 @@ export namespace Prisma {
     estado?: BoolWithAggregatesFilter<"servicio"> | boolean
   }
 
+  export type rol_servicioWhereInput = {
+    AND?: rol_servicioWhereInput | rol_servicioWhereInput[]
+    OR?: rol_servicioWhereInput[]
+    NOT?: rol_servicioWhereInput | rol_servicioWhereInput[]
+    id_rol?: IntFilter<"rol_servicio"> | number
+    id_servicio?: IntFilter<"rol_servicio"> | number
+    fecha_creacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    fecha_actualizacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    estado?: BoolFilter<"rol_servicio"> | boolean
+    rol?: XOR<RolScalarRelationFilter, rolWhereInput>
+    servicio?: XOR<ServicioScalarRelationFilter, servicioWhereInput>
+  }
+
+  export type rol_servicioOrderByWithRelationInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+    fecha_creacion?: SortOrderInput | SortOrder
+    fecha_actualizacion?: SortOrderInput | SortOrder
+    estado?: SortOrder
+    rol?: rolOrderByWithRelationInput
+    servicio?: servicioOrderByWithRelationInput
+  }
+
+  export type rol_servicioWhereUniqueInput = Prisma.AtLeast<{
+    id_rol_id_servicio?: rol_servicioId_rolId_servicioCompoundUniqueInput
+    AND?: rol_servicioWhereInput | rol_servicioWhereInput[]
+    OR?: rol_servicioWhereInput[]
+    NOT?: rol_servicioWhereInput | rol_servicioWhereInput[]
+    id_rol?: IntFilter<"rol_servicio"> | number
+    id_servicio?: IntFilter<"rol_servicio"> | number
+    fecha_creacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    fecha_actualizacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    estado?: BoolFilter<"rol_servicio"> | boolean
+    rol?: XOR<RolScalarRelationFilter, rolWhereInput>
+    servicio?: XOR<ServicioScalarRelationFilter, servicioWhereInput>
+  }, "id_rol_id_servicio">
+
+  export type rol_servicioOrderByWithAggregationInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+    fecha_creacion?: SortOrderInput | SortOrder
+    fecha_actualizacion?: SortOrderInput | SortOrder
+    estado?: SortOrder
+    _count?: rol_servicioCountOrderByAggregateInput
+    _avg?: rol_servicioAvgOrderByAggregateInput
+    _max?: rol_servicioMaxOrderByAggregateInput
+    _min?: rol_servicioMinOrderByAggregateInput
+    _sum?: rol_servicioSumOrderByAggregateInput
+  }
+
+  export type rol_servicioScalarWhereWithAggregatesInput = {
+    AND?: rol_servicioScalarWhereWithAggregatesInput | rol_servicioScalarWhereWithAggregatesInput[]
+    OR?: rol_servicioScalarWhereWithAggregatesInput[]
+    NOT?: rol_servicioScalarWhereWithAggregatesInput | rol_servicioScalarWhereWithAggregatesInput[]
+    id_rol?: IntWithAggregatesFilter<"rol_servicio"> | number
+    id_servicio?: IntWithAggregatesFilter<"rol_servicio"> | number
+    fecha_creacion?: DateTimeNullableWithAggregatesFilter<"rol_servicio"> | Date | string | null
+    fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"rol_servicio"> | Date | string | null
+    estado?: BoolWithAggregatesFilter<"rol_servicio"> | boolean
+  }
+
   export type usuarioWhereInput = {
     AND?: usuarioWhereInput | usuarioWhereInput[]
     OR?: usuarioWhereInput[]
@@ -24719,14 +20755,13 @@ export namespace Prisma {
     correo?: StringFilter<"usuario"> | string
     confirmado?: BoolFilter<"usuario"> | boolean
     token_confirmacion?: StringFilter<"usuario"> | string
-    ultima_conexion?: DateTimeFilter<"usuario"> | Date | string
+    ultima_conexion?: DateTimeNullableFilter<"usuario"> | Date | string | null
     password?: StringNullableFilter<"usuario"> | string | null
     fecha_actualizacion?: DateTimeFilter<"usuario"> | Date | string
     fecha_creacion?: DateTimeNullableFilter<"usuario"> | Date | string | null
     estado?: BoolFilter<"usuario"> | boolean
     evaluacion?: EvaluacionListRelationFilter
     nrc?: NrcListRelationFilter
-    permiso_usuario?: Permiso_usuarioListRelationFilter
     usuario_rol?: Usuario_rolListRelationFilter
   }
 
@@ -24739,20 +20774,18 @@ export namespace Prisma {
     correo?: SortOrder
     confirmado?: SortOrder
     token_confirmacion?: SortOrder
-    ultima_conexion?: SortOrder
+    ultima_conexion?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     fecha_actualizacion?: SortOrder
     fecha_creacion?: SortOrderInput | SortOrder
     estado?: SortOrder
     evaluacion?: evaluacionOrderByRelationAggregateInput
     nrc?: nrcOrderByRelationAggregateInput
-    permiso_usuario?: permiso_usuarioOrderByRelationAggregateInput
     usuario_rol?: usuario_rolOrderByRelationAggregateInput
   }
 
   export type usuarioWhereUniqueInput = Prisma.AtLeast<{
     id_usuario?: number
-    correo?: string
     AND?: usuarioWhereInput | usuarioWhereInput[]
     OR?: usuarioWhereInput[]
     NOT?: usuarioWhereInput | usuarioWhereInput[]
@@ -24760,18 +20793,18 @@ export namespace Prisma {
     segundo_nombre?: StringNullableFilter<"usuario"> | string | null
     primer_apellido?: StringFilter<"usuario"> | string
     segundo_apellido?: StringFilter<"usuario"> | string
+    correo?: StringFilter<"usuario"> | string
     confirmado?: BoolFilter<"usuario"> | boolean
     token_confirmacion?: StringFilter<"usuario"> | string
-    ultima_conexion?: DateTimeFilter<"usuario"> | Date | string
+    ultima_conexion?: DateTimeNullableFilter<"usuario"> | Date | string | null
     password?: StringNullableFilter<"usuario"> | string | null
     fecha_actualizacion?: DateTimeFilter<"usuario"> | Date | string
     fecha_creacion?: DateTimeNullableFilter<"usuario"> | Date | string | null
     estado?: BoolFilter<"usuario"> | boolean
     evaluacion?: EvaluacionListRelationFilter
     nrc?: NrcListRelationFilter
-    permiso_usuario?: Permiso_usuarioListRelationFilter
     usuario_rol?: Usuario_rolListRelationFilter
-  }, "id_usuario" | "correo">
+  }, "id_usuario">
 
   export type usuarioOrderByWithAggregationInput = {
     id_usuario?: SortOrder
@@ -24782,7 +20815,7 @@ export namespace Prisma {
     correo?: SortOrder
     confirmado?: SortOrder
     token_confirmacion?: SortOrder
-    ultima_conexion?: SortOrder
+    ultima_conexion?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     fecha_actualizacion?: SortOrder
     fecha_creacion?: SortOrderInput | SortOrder
@@ -24806,7 +20839,7 @@ export namespace Prisma {
     correo?: StringWithAggregatesFilter<"usuario"> | string
     confirmado?: BoolWithAggregatesFilter<"usuario"> | boolean
     token_confirmacion?: StringWithAggregatesFilter<"usuario"> | string
-    ultima_conexion?: DateTimeWithAggregatesFilter<"usuario"> | Date | string
+    ultima_conexion?: DateTimeNullableWithAggregatesFilter<"usuario"> | Date | string | null
     password?: StringNullableWithAggregatesFilter<"usuario"> | string | null
     fecha_actualizacion?: DateTimeWithAggregatesFilter<"usuario"> | Date | string
     fecha_creacion?: DateTimeNullableWithAggregatesFilter<"usuario"> | Date | string | null
@@ -24880,12 +20913,12 @@ export namespace Prisma {
     NOT?: videojuegoWhereInput | videojuegoWhereInput[]
     id_videojuego?: IntFilter<"videojuego"> | number
     id_equipo?: IntFilter<"videojuego"> | number
-    token_captcha?: StringFilter<"videojuego"> | string
     nombre?: StringFilter<"videojuego"> | string
     descripcion?: StringNullableFilter<"videojuego"> | string | null
     fecha_creacion?: DateTimeFilter<"videojuego"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"videojuego"> | Date | string | null
     estado?: BoolFilter<"videojuego"> | boolean
+    token_captcha?: StringNullableFilter<"videojuego"> | string | null
     evaluacion?: EvaluacionListRelationFilter
     equipo?: XOR<EquipoScalarRelationFilter, equipoWhereInput>
   }
@@ -24893,12 +20926,12 @@ export namespace Prisma {
   export type videojuegoOrderByWithRelationInput = {
     id_videojuego?: SortOrder
     id_equipo?: SortOrder
-    token_captcha?: SortOrder
     nombre?: SortOrder
     descripcion?: SortOrderInput | SortOrder
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrderInput | SortOrder
     estado?: SortOrder
+    token_captcha?: SortOrderInput | SortOrder
     evaluacion?: evaluacionOrderByRelationAggregateInput
     equipo?: equipoOrderByWithRelationInput
   }
@@ -24909,12 +20942,12 @@ export namespace Prisma {
     OR?: videojuegoWhereInput[]
     NOT?: videojuegoWhereInput | videojuegoWhereInput[]
     id_equipo?: IntFilter<"videojuego"> | number
-    token_captcha?: StringFilter<"videojuego"> | string
     nombre?: StringFilter<"videojuego"> | string
     descripcion?: StringNullableFilter<"videojuego"> | string | null
     fecha_creacion?: DateTimeFilter<"videojuego"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"videojuego"> | Date | string | null
     estado?: BoolFilter<"videojuego"> | boolean
+    token_captcha?: StringNullableFilter<"videojuego"> | string | null
     evaluacion?: EvaluacionListRelationFilter
     equipo?: XOR<EquipoScalarRelationFilter, equipoWhereInput>
   }, "id_videojuego">
@@ -24922,12 +20955,12 @@ export namespace Prisma {
   export type videojuegoOrderByWithAggregationInput = {
     id_videojuego?: SortOrder
     id_equipo?: SortOrder
-    token_captcha?: SortOrder
     nombre?: SortOrder
     descripcion?: SortOrderInput | SortOrder
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrderInput | SortOrder
     estado?: SortOrder
+    token_captcha?: SortOrderInput | SortOrder
     _count?: videojuegoCountOrderByAggregateInput
     _avg?: videojuegoAvgOrderByAggregateInput
     _max?: videojuegoMaxOrderByAggregateInput
@@ -24941,12 +20974,12 @@ export namespace Prisma {
     NOT?: videojuegoScalarWhereWithAggregatesInput | videojuegoScalarWhereWithAggregatesInput[]
     id_videojuego?: IntWithAggregatesFilter<"videojuego"> | number
     id_equipo?: IntWithAggregatesFilter<"videojuego"> | number
-    token_captcha?: StringWithAggregatesFilter<"videojuego"> | string
     nombre?: StringWithAggregatesFilter<"videojuego"> | string
     descripcion?: StringNullableWithAggregatesFilter<"videojuego"> | string | null
     fecha_creacion?: DateTimeWithAggregatesFilter<"videojuego"> | Date | string
     fecha_actualizacion?: DateTimeNullableWithAggregatesFilter<"videojuego"> | Date | string | null
     estado?: BoolWithAggregatesFilter<"videojuego"> | boolean
+    token_captcha?: StringNullableWithAggregatesFilter<"videojuego"> | string | null
   }
 
   export type criterioCreateInput = {
@@ -24955,7 +20988,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    porcentaje: number
+    porcentaje?: number
     criterio_evaluacion?: criterio_evaluacionCreateNestedManyWithoutCriterioInput
   }
 
@@ -24966,7 +20999,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    porcentaje: number
+    porcentaje?: number
     criterio_evaluacion?: criterio_evaluacionUncheckedCreateNestedManyWithoutCriterioInput
   }
 
@@ -24976,7 +21009,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
     criterio_evaluacion?: criterio_evaluacionUpdateManyWithoutCriterioNestedInput
   }
 
@@ -24987,7 +21020,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
     criterio_evaluacion?: criterio_evaluacionUncheckedUpdateManyWithoutCriterioNestedInput
   }
 
@@ -24998,7 +21031,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    porcentaje: number
+    porcentaje?: number
   }
 
   export type criterioUpdateManyMutationInput = {
@@ -25007,7 +21040,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
   }
 
   export type criterioUncheckedUpdateManyInput = {
@@ -25017,7 +21050,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
   }
 
   export type criterio_evaluacionCreateInput = {
@@ -25086,9 +21119,9 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    estado_equipo: estadoCreateNestedOneWithoutEquiposInput
     integrante?: integranteCreateNestedManyWithoutEquipoInput
     videojuego?: videojuegoCreateNestedManyWithoutEquipoInput
-    estado_equipo: estadoCreateNestedOneWithoutEquiposInput
   }
 
   export type equipoUncheckedCreateInput = {
@@ -25107,9 +21140,9 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    estado_equipo?: estadoUpdateOneRequiredWithoutEquiposNestedInput
     integrante?: integranteUpdateManyWithoutEquipoNestedInput
     videojuego?: videojuegoUpdateManyWithoutEquipoNestedInput
-    estado_equipo?: estadoUpdateOneRequiredWithoutEquiposNestedInput
   }
 
   export type equipoUncheckedUpdateInput = {
@@ -25531,246 +21564,12 @@ export namespace Prisma {
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type permisoCreateInput = {
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolCreateNestedManyWithoutPermisoInput
-    permiso_servicio?: permiso_servicioCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoUncheckedCreateInput = {
-    id_permiso?: number
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolUncheckedCreateNestedManyWithoutPermisoInput
-    permiso_servicio?: permiso_servicioUncheckedCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoUpdateInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUpdateManyWithoutPermisoNestedInput
-    permiso_servicio?: permiso_servicioUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type permisoUncheckedUpdateInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUncheckedUpdateManyWithoutPermisoNestedInput
-    permiso_servicio?: permiso_servicioUncheckedUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type permisoCreateManyInput = {
-    id_permiso?: number
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permisoUpdateManyMutationInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permisoUncheckedUpdateManyInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_rolCreateInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_rolInput
-    rol: rolCreateNestedOneWithoutPermiso_rolInput
-  }
-
-  export type permiso_rolUncheckedCreateInput = {
-    id_permiso: number
-    id_rol: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_rolUpdateInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_rolNestedInput
-    rol?: rolUpdateOneRequiredWithoutPermiso_rolNestedInput
-  }
-
-  export type permiso_rolUncheckedUpdateInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_rol?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_rolCreateManyInput = {
-    id_permiso: number
-    id_rol: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_rolUpdateManyMutationInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_rolUncheckedUpdateManyInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_rol?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_servicioCreateInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_servicioInput
-    servicio: servicioCreateNestedOneWithoutPermiso_servicioInput
-  }
-
-  export type permiso_servicioUncheckedCreateInput = {
-    id_permiso: number
-    id_servicio: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_servicioUpdateInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_servicioNestedInput
-    servicio?: servicioUpdateOneRequiredWithoutPermiso_servicioNestedInput
-  }
-
-  export type permiso_servicioUncheckedUpdateInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_servicio?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_servicioCreateManyInput = {
-    id_permiso: number
-    id_servicio: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_servicioUpdateManyMutationInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_servicioUncheckedUpdateManyInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_servicio?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioCreateInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_usuarioInput
-    usuario: usuarioCreateNestedOneWithoutPermiso_usuarioInput
-  }
-
-  export type permiso_usuarioUncheckedCreateInput = {
-    id_permiso: number
-    id_usuario: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioUpdateInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_usuarioNestedInput
-    usuario?: usuarioUpdateOneRequiredWithoutPermiso_usuarioNestedInput
-  }
-
-  export type permiso_usuarioUncheckedUpdateInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_usuario?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioCreateManyInput = {
-    id_permiso: number
-    id_usuario: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioUpdateManyMutationInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioUncheckedUpdateManyInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    id_usuario?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
   export type rolCreateInput = {
     rol: string
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_rol?: permiso_rolCreateNestedManyWithoutRolInput
+    rol_servicio?: rol_servicioCreateNestedManyWithoutRolInput
     usuario_rol?: usuario_rolCreateNestedManyWithoutRolInput
   }
 
@@ -25780,7 +21579,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_rol?: permiso_rolUncheckedCreateNestedManyWithoutRolInput
+    rol_servicio?: rol_servicioUncheckedCreateNestedManyWithoutRolInput
     usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutRolInput
   }
 
@@ -25789,7 +21588,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUpdateManyWithoutRolNestedInput
+    rol_servicio?: rol_servicioUpdateManyWithoutRolNestedInput
     usuario_rol?: usuario_rolUpdateManyWithoutRolNestedInput
   }
 
@@ -25799,7 +21598,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUncheckedUpdateManyWithoutRolNestedInput
+    rol_servicio?: rol_servicioUncheckedUpdateManyWithoutRolNestedInput
     usuario_rol?: usuario_rolUncheckedUpdateManyWithoutRolNestedInput
   }
 
@@ -25834,7 +21633,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_servicio?: permiso_servicioCreateNestedManyWithoutServicioInput
+    rol_servicio?: rol_servicioCreateNestedManyWithoutServicioInput
   }
 
   export type servicioUncheckedCreateInput = {
@@ -25846,7 +21645,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_servicio?: permiso_servicioUncheckedCreateNestedManyWithoutServicioInput
+    rol_servicio?: rol_servicioUncheckedCreateNestedManyWithoutServicioInput
   }
 
   export type servicioUpdateInput = {
@@ -25857,7 +21656,7 @@ export namespace Prisma {
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_servicio?: permiso_servicioUpdateManyWithoutServicioNestedInput
+    rol_servicio?: rol_servicioUpdateManyWithoutServicioNestedInput
   }
 
   export type servicioUncheckedUpdateInput = {
@@ -25869,7 +21668,7 @@ export namespace Prisma {
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_servicio?: permiso_servicioUncheckedUpdateManyWithoutServicioNestedInput
+    rol_servicio?: rol_servicioUncheckedUpdateManyWithoutServicioNestedInput
   }
 
   export type servicioCreateManyInput = {
@@ -25904,22 +21703,75 @@ export namespace Prisma {
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type rol_servicioCreateInput = {
+    fecha_creacion?: Date | string | null
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+    rol: rolCreateNestedOneWithoutRol_servicioInput
+    servicio: servicioCreateNestedOneWithoutRol_servicioInput
+  }
+
+  export type rol_servicioUncheckedCreateInput = {
+    id_rol: number
+    id_servicio: number
+    fecha_creacion?: Date | string | null
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+  }
+
+  export type rol_servicioUpdateInput = {
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+    rol?: rolUpdateOneRequiredWithoutRol_servicioNestedInput
+    servicio?: servicioUpdateOneRequiredWithoutRol_servicioNestedInput
+  }
+
+  export type rol_servicioUncheckedUpdateInput = {
+    id_rol?: IntFieldUpdateOperationsInput | number
+    id_servicio?: IntFieldUpdateOperationsInput | number
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type rol_servicioCreateManyInput = {
+    id_rol: number
+    id_servicio: number
+    fecha_creacion?: Date | string | null
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+  }
+
+  export type rol_servicioUpdateManyMutationInput = {
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type rol_servicioUncheckedUpdateManyInput = {
+    id_rol?: IntFieldUpdateOperationsInput | number
+    id_servicio?: IntFieldUpdateOperationsInput | number
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type usuarioCreateInput = {
     primer_nombre: string
     segundo_nombre?: string | null
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionCreateNestedManyWithoutUsuarioInput
     nrc?: nrcCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolCreateNestedManyWithoutUsuarioInput
   }
 
@@ -25930,16 +21782,15 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionUncheckedCreateNestedManyWithoutUsuarioInput
     nrc?: nrcUncheckedCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
@@ -25951,14 +21802,13 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUpdateManyWithoutUsuarioNestedInput
     nrc?: nrcUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -25971,14 +21821,13 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUncheckedUpdateManyWithoutUsuarioNestedInput
     nrc?: nrcUncheckedUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -25989,9 +21838,9 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
@@ -26006,7 +21855,7 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26022,7 +21871,7 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26084,12 +21933,12 @@ export namespace Prisma {
   }
 
   export type videojuegoCreateInput = {
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
     evaluacion?: evaluacionCreateNestedManyWithoutVideojuegoInput
     equipo: equipoCreateNestedOneWithoutVideojuegoInput
   }
@@ -26097,22 +21946,22 @@ export namespace Prisma {
   export type videojuegoUncheckedCreateInput = {
     id_videojuego?: number
     id_equipo: number
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
     evaluacion?: evaluacionUncheckedCreateNestedManyWithoutVideojuegoInput
   }
 
   export type videojuegoUpdateInput = {
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
     evaluacion?: evaluacionUpdateManyWithoutVideojuegoNestedInput
     equipo?: equipoUpdateOneRequiredWithoutVideojuegoNestedInput
   }
@@ -26120,44 +21969,44 @@ export namespace Prisma {
   export type videojuegoUncheckedUpdateInput = {
     id_videojuego?: IntFieldUpdateOperationsInput | number
     id_equipo?: IntFieldUpdateOperationsInput | number
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
     evaluacion?: evaluacionUncheckedUpdateManyWithoutVideojuegoNestedInput
   }
 
   export type videojuegoCreateManyInput = {
     id_videojuego?: number
     id_equipo: number
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
   }
 
   export type videojuegoUpdateManyMutationInput = {
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type videojuegoUncheckedUpdateManyInput = {
     id_videojuego?: IntFieldUpdateOperationsInput | number
     id_equipo?: IntFieldUpdateOperationsInput | number
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -26211,6 +22060,17 @@ export namespace Prisma {
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type Criterio_evaluacionListRelationFilter = {
@@ -26338,6 +22198,22 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type CriterioScalarRelationFilter = {
     is?: criterioWhereInput
     isNot?: criterioWhereInput
@@ -26390,6 +22266,11 @@ export namespace Prisma {
     id_evaluacion?: SortOrder
   }
 
+  export type EstadoScalarRelationFilter = {
+    is?: estadoWhereInput
+    isNot?: estadoWhereInput
+  }
+
   export type IntegranteListRelationFilter = {
     every?: integranteWhereInput
     some?: integranteWhereInput
@@ -26400,11 +22281,6 @@ export namespace Prisma {
     every?: videojuegoWhereInput
     some?: videojuegoWhereInput
     none?: videojuegoWhereInput
-  }
-
-  export type EstadoScalarRelationFilter = {
-    is?: estadoWhereInput
-    isNot?: estadoWhereInput
   }
 
   export type integranteOrderByRelationAggregateInput = {
@@ -26775,207 +22651,20 @@ export namespace Prisma {
     id_usuario?: SortOrder
   }
 
-  export type Permiso_rolListRelationFilter = {
-    every?: permiso_rolWhereInput
-    some?: permiso_rolWhereInput
-    none?: permiso_rolWhereInput
-  }
-
-  export type Permiso_servicioListRelationFilter = {
-    every?: permiso_servicioWhereInput
-    some?: permiso_servicioWhereInput
-    none?: permiso_servicioWhereInput
-  }
-
-  export type Permiso_usuarioListRelationFilter = {
-    every?: permiso_usuarioWhereInput
-    some?: permiso_usuarioWhereInput
-    none?: permiso_usuarioWhereInput
-  }
-
-  export type permiso_rolOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type permiso_servicioOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type permiso_usuarioOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type permisoCountOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    nombre?: SortOrder
-    descripcion?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permisoAvgOrderByAggregateInput = {
-    id_permiso?: SortOrder
-  }
-
-  export type permisoMaxOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    nombre?: SortOrder
-    descripcion?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permisoMinOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    nombre?: SortOrder
-    descripcion?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permisoSumOrderByAggregateInput = {
-    id_permiso?: SortOrder
-  }
-
-  export type PermisoScalarRelationFilter = {
-    is?: permisoWhereInput
-    isNot?: permisoWhereInput
-  }
-
-  export type RolScalarRelationFilter = {
-    is?: rolWhereInput
-    isNot?: rolWhereInput
-  }
-
-  export type permiso_rolId_permisoId_rolCompoundUniqueInput = {
-    id_permiso: number
-    id_rol: number
-  }
-
-  export type permiso_rolCountOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_rolAvgOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-  }
-
-  export type permiso_rolMaxOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_rolMinOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_rolSumOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_rol?: SortOrder
-  }
-
-  export type ServicioScalarRelationFilter = {
-    is?: servicioWhereInput
-    isNot?: servicioWhereInput
-  }
-
-  export type permiso_servicioId_permisoId_servicioCompoundUniqueInput = {
-    id_permiso: number
-    id_servicio: number
-  }
-
-  export type permiso_servicioCountOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_servicioAvgOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-  }
-
-  export type permiso_servicioMaxOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_servicioMinOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_servicioSumOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_servicio?: SortOrder
-  }
-
-  export type permiso_usuarioId_permisoId_usuarioCompoundUniqueInput = {
-    id_permiso: number
-    id_usuario: number
-  }
-
-  export type permiso_usuarioCountOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_usuarioAvgOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-  }
-
-  export type permiso_usuarioMaxOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_usuarioMinOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
-    fecha_creacion?: SortOrder
-    fecha_actualizacion?: SortOrder
-    estado?: SortOrder
-  }
-
-  export type permiso_usuarioSumOrderByAggregateInput = {
-    id_permiso?: SortOrder
-    id_usuario?: SortOrder
+  export type Rol_servicioListRelationFilter = {
+    every?: rol_servicioWhereInput
+    some?: rol_servicioWhereInput
+    none?: rol_servicioWhereInput
   }
 
   export type Usuario_rolListRelationFilter = {
     every?: usuario_rolWhereInput
     some?: usuario_rolWhereInput
     none?: usuario_rolWhereInput
+  }
+
+  export type rol_servicioOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type usuario_rolOrderByRelationAggregateInput = {
@@ -27052,6 +22741,55 @@ export namespace Prisma {
   }
 
   export type servicioSumOrderByAggregateInput = {
+    id_servicio?: SortOrder
+  }
+
+  export type RolScalarRelationFilter = {
+    is?: rolWhereInput
+    isNot?: rolWhereInput
+  }
+
+  export type ServicioScalarRelationFilter = {
+    is?: servicioWhereInput
+    isNot?: servicioWhereInput
+  }
+
+  export type rol_servicioId_rolId_servicioCompoundUniqueInput = {
+    id_rol: number
+    id_servicio: number
+  }
+
+  export type rol_servicioCountOrderByAggregateInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+    fecha_creacion?: SortOrder
+    fecha_actualizacion?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type rol_servicioAvgOrderByAggregateInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+  }
+
+  export type rol_servicioMaxOrderByAggregateInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+    fecha_creacion?: SortOrder
+    fecha_actualizacion?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type rol_servicioMinOrderByAggregateInput = {
+    id_rol?: SortOrder
+    id_servicio?: SortOrder
+    fecha_creacion?: SortOrder
+    fecha_actualizacion?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type rol_servicioSumOrderByAggregateInput = {
+    id_rol?: SortOrder
     id_servicio?: SortOrder
   }
 
@@ -27163,12 +22901,12 @@ export namespace Prisma {
   export type videojuegoCountOrderByAggregateInput = {
     id_videojuego?: SortOrder
     id_equipo?: SortOrder
-    token_captcha?: SortOrder
     nombre?: SortOrder
     descripcion?: SortOrder
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrder
     estado?: SortOrder
+    token_captcha?: SortOrder
   }
 
   export type videojuegoAvgOrderByAggregateInput = {
@@ -27179,23 +22917,23 @@ export namespace Prisma {
   export type videojuegoMaxOrderByAggregateInput = {
     id_videojuego?: SortOrder
     id_equipo?: SortOrder
-    token_captcha?: SortOrder
     nombre?: SortOrder
     descripcion?: SortOrder
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrder
     estado?: SortOrder
+    token_captcha?: SortOrder
   }
 
   export type videojuegoMinOrderByAggregateInput = {
     id_videojuego?: SortOrder
     id_equipo?: SortOrder
-    token_captcha?: SortOrder
     nombre?: SortOrder
     descripcion?: SortOrder
     fecha_creacion?: SortOrder
     fecha_actualizacion?: SortOrder
     estado?: SortOrder
+    token_captcha?: SortOrder
   }
 
   export type videojuegoSumOrderByAggregateInput = {
@@ -27233,7 +22971,7 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type IntFieldUpdateOperationsInput = {
+  export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
@@ -27253,6 +22991,14 @@ export namespace Prisma {
     update?: criterio_evaluacionUpdateWithWhereUniqueWithoutCriterioInput | criterio_evaluacionUpdateWithWhereUniqueWithoutCriterioInput[]
     updateMany?: criterio_evaluacionUpdateManyWithWhereWithoutCriterioInput | criterio_evaluacionUpdateManyWithWhereWithoutCriterioInput[]
     deleteMany?: criterio_evaluacionScalarWhereInput | criterio_evaluacionScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type criterio_evaluacionUncheckedUpdateManyWithoutCriterioNestedInput = {
@@ -27297,6 +23043,12 @@ export namespace Prisma {
     update?: XOR<XOR<evaluacionUpdateToOneWithWhereWithoutCriterio_evaluacionInput, evaluacionUpdateWithoutCriterio_evaluacionInput>, evaluacionUncheckedUpdateWithoutCriterio_evaluacionInput>
   }
 
+  export type estadoCreateNestedOneWithoutEquiposInput = {
+    create?: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
+    connectOrCreate?: estadoCreateOrConnectWithoutEquiposInput
+    connect?: estadoWhereUniqueInput
+  }
+
   export type integranteCreateNestedManyWithoutEquipoInput = {
     create?: XOR<integranteCreateWithoutEquipoInput, integranteUncheckedCreateWithoutEquipoInput> | integranteCreateWithoutEquipoInput[] | integranteUncheckedCreateWithoutEquipoInput[]
     connectOrCreate?: integranteCreateOrConnectWithoutEquipoInput | integranteCreateOrConnectWithoutEquipoInput[]
@@ -27311,12 +23063,6 @@ export namespace Prisma {
     connect?: videojuegoWhereUniqueInput | videojuegoWhereUniqueInput[]
   }
 
-  export type estadoCreateNestedOneWithoutEquiposInput = {
-    create?: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
-    connectOrCreate?: estadoCreateOrConnectWithoutEquiposInput
-    connect?: estadoWhereUniqueInput
-  }
-
   export type integranteUncheckedCreateNestedManyWithoutEquipoInput = {
     create?: XOR<integranteCreateWithoutEquipoInput, integranteUncheckedCreateWithoutEquipoInput> | integranteCreateWithoutEquipoInput[] | integranteUncheckedCreateWithoutEquipoInput[]
     connectOrCreate?: integranteCreateOrConnectWithoutEquipoInput | integranteCreateOrConnectWithoutEquipoInput[]
@@ -27329,6 +23075,14 @@ export namespace Prisma {
     connectOrCreate?: videojuegoCreateOrConnectWithoutEquipoInput | videojuegoCreateOrConnectWithoutEquipoInput[]
     createMany?: videojuegoCreateManyEquipoInputEnvelope
     connect?: videojuegoWhereUniqueInput | videojuegoWhereUniqueInput[]
+  }
+
+  export type estadoUpdateOneRequiredWithoutEquiposNestedInput = {
+    create?: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
+    connectOrCreate?: estadoCreateOrConnectWithoutEquiposInput
+    upsert?: estadoUpsertWithoutEquiposInput
+    connect?: estadoWhereUniqueInput
+    update?: XOR<XOR<estadoUpdateToOneWithWhereWithoutEquiposInput, estadoUpdateWithoutEquiposInput>, estadoUncheckedUpdateWithoutEquiposInput>
   }
 
   export type integranteUpdateManyWithoutEquipoNestedInput = {
@@ -27357,14 +23111,6 @@ export namespace Prisma {
     update?: videojuegoUpdateWithWhereUniqueWithoutEquipoInput | videojuegoUpdateWithWhereUniqueWithoutEquipoInput[]
     updateMany?: videojuegoUpdateManyWithWhereWithoutEquipoInput | videojuegoUpdateManyWithWhereWithoutEquipoInput[]
     deleteMany?: videojuegoScalarWhereInput | videojuegoScalarWhereInput[]
-  }
-
-  export type estadoUpdateOneRequiredWithoutEquiposNestedInput = {
-    create?: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
-    connectOrCreate?: estadoCreateOrConnectWithoutEquiposInput
-    upsert?: estadoUpsertWithoutEquiposInput
-    connect?: estadoWhereUniqueInput
-    update?: XOR<XOR<estadoUpdateToOneWithWhereWithoutEquiposInput, estadoUpdateWithoutEquiposInput>, estadoUncheckedUpdateWithoutEquiposInput>
   }
 
   export type integranteUncheckedUpdateManyWithoutEquipoNestedInput = {
@@ -27707,221 +23453,11 @@ export namespace Prisma {
     deleteMany?: integrante_nrcScalarWhereInput | integrante_nrcScalarWhereInput[]
   }
 
-  export type permiso_rolCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput> | permiso_rolCreateWithoutPermisoInput[] | permiso_rolUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutPermisoInput | permiso_rolCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_rolCreateManyPermisoInputEnvelope
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-  }
-
-  export type permiso_servicioCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput> | permiso_servicioCreateWithoutPermisoInput[] | permiso_servicioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutPermisoInput | permiso_servicioCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_servicioCreateManyPermisoInputEnvelope
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-  }
-
-  export type permiso_usuarioCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput> | permiso_usuarioCreateWithoutPermisoInput[] | permiso_usuarioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutPermisoInput | permiso_usuarioCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_usuarioCreateManyPermisoInputEnvelope
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-  }
-
-  export type permiso_rolUncheckedCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput> | permiso_rolCreateWithoutPermisoInput[] | permiso_rolUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutPermisoInput | permiso_rolCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_rolCreateManyPermisoInputEnvelope
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-  }
-
-  export type permiso_servicioUncheckedCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput> | permiso_servicioCreateWithoutPermisoInput[] | permiso_servicioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutPermisoInput | permiso_servicioCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_servicioCreateManyPermisoInputEnvelope
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-  }
-
-  export type permiso_usuarioUncheckedCreateNestedManyWithoutPermisoInput = {
-    create?: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput> | permiso_usuarioCreateWithoutPermisoInput[] | permiso_usuarioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutPermisoInput | permiso_usuarioCreateOrConnectWithoutPermisoInput[]
-    createMany?: permiso_usuarioCreateManyPermisoInputEnvelope
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-  }
-
-  export type permiso_rolUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput> | permiso_rolCreateWithoutPermisoInput[] | permiso_rolUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutPermisoInput | permiso_rolCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_rolUpsertWithWhereUniqueWithoutPermisoInput | permiso_rolUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_rolCreateManyPermisoInputEnvelope
-    set?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    disconnect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    delete?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    update?: permiso_rolUpdateWithWhereUniqueWithoutPermisoInput | permiso_rolUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_rolUpdateManyWithWhereWithoutPermisoInput | permiso_rolUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
-  }
-
-  export type permiso_servicioUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput> | permiso_servicioCreateWithoutPermisoInput[] | permiso_servicioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutPermisoInput | permiso_servicioCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_servicioUpsertWithWhereUniqueWithoutPermisoInput | permiso_servicioUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_servicioCreateManyPermisoInputEnvelope
-    set?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    disconnect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    delete?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    update?: permiso_servicioUpdateWithWhereUniqueWithoutPermisoInput | permiso_servicioUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_servicioUpdateManyWithWhereWithoutPermisoInput | permiso_servicioUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
-  }
-
-  export type permiso_usuarioUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput> | permiso_usuarioCreateWithoutPermisoInput[] | permiso_usuarioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutPermisoInput | permiso_usuarioCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_usuarioUpsertWithWhereUniqueWithoutPermisoInput | permiso_usuarioUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_usuarioCreateManyPermisoInputEnvelope
-    set?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    disconnect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    delete?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    update?: permiso_usuarioUpdateWithWhereUniqueWithoutPermisoInput | permiso_usuarioUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_usuarioUpdateManyWithWhereWithoutPermisoInput | permiso_usuarioUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
-  }
-
-  export type permiso_rolUncheckedUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput> | permiso_rolCreateWithoutPermisoInput[] | permiso_rolUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutPermisoInput | permiso_rolCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_rolUpsertWithWhereUniqueWithoutPermisoInput | permiso_rolUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_rolCreateManyPermisoInputEnvelope
-    set?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    disconnect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    delete?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    update?: permiso_rolUpdateWithWhereUniqueWithoutPermisoInput | permiso_rolUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_rolUpdateManyWithWhereWithoutPermisoInput | permiso_rolUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
-  }
-
-  export type permiso_servicioUncheckedUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput> | permiso_servicioCreateWithoutPermisoInput[] | permiso_servicioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutPermisoInput | permiso_servicioCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_servicioUpsertWithWhereUniqueWithoutPermisoInput | permiso_servicioUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_servicioCreateManyPermisoInputEnvelope
-    set?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    disconnect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    delete?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    update?: permiso_servicioUpdateWithWhereUniqueWithoutPermisoInput | permiso_servicioUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_servicioUpdateManyWithWhereWithoutPermisoInput | permiso_servicioUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
-  }
-
-  export type permiso_usuarioUncheckedUpdateManyWithoutPermisoNestedInput = {
-    create?: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput> | permiso_usuarioCreateWithoutPermisoInput[] | permiso_usuarioUncheckedCreateWithoutPermisoInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutPermisoInput | permiso_usuarioCreateOrConnectWithoutPermisoInput[]
-    upsert?: permiso_usuarioUpsertWithWhereUniqueWithoutPermisoInput | permiso_usuarioUpsertWithWhereUniqueWithoutPermisoInput[]
-    createMany?: permiso_usuarioCreateManyPermisoInputEnvelope
-    set?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    disconnect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    delete?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    update?: permiso_usuarioUpdateWithWhereUniqueWithoutPermisoInput | permiso_usuarioUpdateWithWhereUniqueWithoutPermisoInput[]
-    updateMany?: permiso_usuarioUpdateManyWithWhereWithoutPermisoInput | permiso_usuarioUpdateManyWithWhereWithoutPermisoInput[]
-    deleteMany?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
-  }
-
-  export type permisoCreateNestedOneWithoutPermiso_rolInput = {
-    create?: XOR<permisoCreateWithoutPermiso_rolInput, permisoUncheckedCreateWithoutPermiso_rolInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_rolInput
-    connect?: permisoWhereUniqueInput
-  }
-
-  export type rolCreateNestedOneWithoutPermiso_rolInput = {
-    create?: XOR<rolCreateWithoutPermiso_rolInput, rolUncheckedCreateWithoutPermiso_rolInput>
-    connectOrCreate?: rolCreateOrConnectWithoutPermiso_rolInput
-    connect?: rolWhereUniqueInput
-  }
-
-  export type permisoUpdateOneRequiredWithoutPermiso_rolNestedInput = {
-    create?: XOR<permisoCreateWithoutPermiso_rolInput, permisoUncheckedCreateWithoutPermiso_rolInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_rolInput
-    upsert?: permisoUpsertWithoutPermiso_rolInput
-    connect?: permisoWhereUniqueInput
-    update?: XOR<XOR<permisoUpdateToOneWithWhereWithoutPermiso_rolInput, permisoUpdateWithoutPermiso_rolInput>, permisoUncheckedUpdateWithoutPermiso_rolInput>
-  }
-
-  export type rolUpdateOneRequiredWithoutPermiso_rolNestedInput = {
-    create?: XOR<rolCreateWithoutPermiso_rolInput, rolUncheckedCreateWithoutPermiso_rolInput>
-    connectOrCreate?: rolCreateOrConnectWithoutPermiso_rolInput
-    upsert?: rolUpsertWithoutPermiso_rolInput
-    connect?: rolWhereUniqueInput
-    update?: XOR<XOR<rolUpdateToOneWithWhereWithoutPermiso_rolInput, rolUpdateWithoutPermiso_rolInput>, rolUncheckedUpdateWithoutPermiso_rolInput>
-  }
-
-  export type permisoCreateNestedOneWithoutPermiso_servicioInput = {
-    create?: XOR<permisoCreateWithoutPermiso_servicioInput, permisoUncheckedCreateWithoutPermiso_servicioInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_servicioInput
-    connect?: permisoWhereUniqueInput
-  }
-
-  export type servicioCreateNestedOneWithoutPermiso_servicioInput = {
-    create?: XOR<servicioCreateWithoutPermiso_servicioInput, servicioUncheckedCreateWithoutPermiso_servicioInput>
-    connectOrCreate?: servicioCreateOrConnectWithoutPermiso_servicioInput
-    connect?: servicioWhereUniqueInput
-  }
-
-  export type permisoUpdateOneRequiredWithoutPermiso_servicioNestedInput = {
-    create?: XOR<permisoCreateWithoutPermiso_servicioInput, permisoUncheckedCreateWithoutPermiso_servicioInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_servicioInput
-    upsert?: permisoUpsertWithoutPermiso_servicioInput
-    connect?: permisoWhereUniqueInput
-    update?: XOR<XOR<permisoUpdateToOneWithWhereWithoutPermiso_servicioInput, permisoUpdateWithoutPermiso_servicioInput>, permisoUncheckedUpdateWithoutPermiso_servicioInput>
-  }
-
-  export type servicioUpdateOneRequiredWithoutPermiso_servicioNestedInput = {
-    create?: XOR<servicioCreateWithoutPermiso_servicioInput, servicioUncheckedCreateWithoutPermiso_servicioInput>
-    connectOrCreate?: servicioCreateOrConnectWithoutPermiso_servicioInput
-    upsert?: servicioUpsertWithoutPermiso_servicioInput
-    connect?: servicioWhereUniqueInput
-    update?: XOR<XOR<servicioUpdateToOneWithWhereWithoutPermiso_servicioInput, servicioUpdateWithoutPermiso_servicioInput>, servicioUncheckedUpdateWithoutPermiso_servicioInput>
-  }
-
-  export type permisoCreateNestedOneWithoutPermiso_usuarioInput = {
-    create?: XOR<permisoCreateWithoutPermiso_usuarioInput, permisoUncheckedCreateWithoutPermiso_usuarioInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_usuarioInput
-    connect?: permisoWhereUniqueInput
-  }
-
-  export type usuarioCreateNestedOneWithoutPermiso_usuarioInput = {
-    create?: XOR<usuarioCreateWithoutPermiso_usuarioInput, usuarioUncheckedCreateWithoutPermiso_usuarioInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutPermiso_usuarioInput
-    connect?: usuarioWhereUniqueInput
-  }
-
-  export type permisoUpdateOneRequiredWithoutPermiso_usuarioNestedInput = {
-    create?: XOR<permisoCreateWithoutPermiso_usuarioInput, permisoUncheckedCreateWithoutPermiso_usuarioInput>
-    connectOrCreate?: permisoCreateOrConnectWithoutPermiso_usuarioInput
-    upsert?: permisoUpsertWithoutPermiso_usuarioInput
-    connect?: permisoWhereUniqueInput
-    update?: XOR<XOR<permisoUpdateToOneWithWhereWithoutPermiso_usuarioInput, permisoUpdateWithoutPermiso_usuarioInput>, permisoUncheckedUpdateWithoutPermiso_usuarioInput>
-  }
-
-  export type usuarioUpdateOneRequiredWithoutPermiso_usuarioNestedInput = {
-    create?: XOR<usuarioCreateWithoutPermiso_usuarioInput, usuarioUncheckedCreateWithoutPermiso_usuarioInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutPermiso_usuarioInput
-    upsert?: usuarioUpsertWithoutPermiso_usuarioInput
-    connect?: usuarioWhereUniqueInput
-    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutPermiso_usuarioInput, usuarioUpdateWithoutPermiso_usuarioInput>, usuarioUncheckedUpdateWithoutPermiso_usuarioInput>
-  }
-
-  export type permiso_rolCreateNestedManyWithoutRolInput = {
-    create?: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput> | permiso_rolCreateWithoutRolInput[] | permiso_rolUncheckedCreateWithoutRolInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutRolInput | permiso_rolCreateOrConnectWithoutRolInput[]
-    createMany?: permiso_rolCreateManyRolInputEnvelope
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
+  export type rol_servicioCreateNestedManyWithoutRolInput = {
+    create?: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput> | rol_servicioCreateWithoutRolInput[] | rol_servicioUncheckedCreateWithoutRolInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutRolInput | rol_servicioCreateOrConnectWithoutRolInput[]
+    createMany?: rol_servicioCreateManyRolInputEnvelope
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
   }
 
   export type usuario_rolCreateNestedManyWithoutRolInput = {
@@ -27931,11 +23467,11 @@ export namespace Prisma {
     connect?: usuario_rolWhereUniqueInput | usuario_rolWhereUniqueInput[]
   }
 
-  export type permiso_rolUncheckedCreateNestedManyWithoutRolInput = {
-    create?: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput> | permiso_rolCreateWithoutRolInput[] | permiso_rolUncheckedCreateWithoutRolInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutRolInput | permiso_rolCreateOrConnectWithoutRolInput[]
-    createMany?: permiso_rolCreateManyRolInputEnvelope
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
+  export type rol_servicioUncheckedCreateNestedManyWithoutRolInput = {
+    create?: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput> | rol_servicioCreateWithoutRolInput[] | rol_servicioUncheckedCreateWithoutRolInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutRolInput | rol_servicioCreateOrConnectWithoutRolInput[]
+    createMany?: rol_servicioCreateManyRolInputEnvelope
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
   }
 
   export type usuario_rolUncheckedCreateNestedManyWithoutRolInput = {
@@ -27945,18 +23481,18 @@ export namespace Prisma {
     connect?: usuario_rolWhereUniqueInput | usuario_rolWhereUniqueInput[]
   }
 
-  export type permiso_rolUpdateManyWithoutRolNestedInput = {
-    create?: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput> | permiso_rolCreateWithoutRolInput[] | permiso_rolUncheckedCreateWithoutRolInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutRolInput | permiso_rolCreateOrConnectWithoutRolInput[]
-    upsert?: permiso_rolUpsertWithWhereUniqueWithoutRolInput | permiso_rolUpsertWithWhereUniqueWithoutRolInput[]
-    createMany?: permiso_rolCreateManyRolInputEnvelope
-    set?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    disconnect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    delete?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    update?: permiso_rolUpdateWithWhereUniqueWithoutRolInput | permiso_rolUpdateWithWhereUniqueWithoutRolInput[]
-    updateMany?: permiso_rolUpdateManyWithWhereWithoutRolInput | permiso_rolUpdateManyWithWhereWithoutRolInput[]
-    deleteMany?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
+  export type rol_servicioUpdateManyWithoutRolNestedInput = {
+    create?: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput> | rol_servicioCreateWithoutRolInput[] | rol_servicioUncheckedCreateWithoutRolInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutRolInput | rol_servicioCreateOrConnectWithoutRolInput[]
+    upsert?: rol_servicioUpsertWithWhereUniqueWithoutRolInput | rol_servicioUpsertWithWhereUniqueWithoutRolInput[]
+    createMany?: rol_servicioCreateManyRolInputEnvelope
+    set?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    disconnect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    delete?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    update?: rol_servicioUpdateWithWhereUniqueWithoutRolInput | rol_servicioUpdateWithWhereUniqueWithoutRolInput[]
+    updateMany?: rol_servicioUpdateManyWithWhereWithoutRolInput | rol_servicioUpdateManyWithWhereWithoutRolInput[]
+    deleteMany?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
   }
 
   export type usuario_rolUpdateManyWithoutRolNestedInput = {
@@ -27973,18 +23509,18 @@ export namespace Prisma {
     deleteMany?: usuario_rolScalarWhereInput | usuario_rolScalarWhereInput[]
   }
 
-  export type permiso_rolUncheckedUpdateManyWithoutRolNestedInput = {
-    create?: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput> | permiso_rolCreateWithoutRolInput[] | permiso_rolUncheckedCreateWithoutRolInput[]
-    connectOrCreate?: permiso_rolCreateOrConnectWithoutRolInput | permiso_rolCreateOrConnectWithoutRolInput[]
-    upsert?: permiso_rolUpsertWithWhereUniqueWithoutRolInput | permiso_rolUpsertWithWhereUniqueWithoutRolInput[]
-    createMany?: permiso_rolCreateManyRolInputEnvelope
-    set?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    disconnect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    delete?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    connect?: permiso_rolWhereUniqueInput | permiso_rolWhereUniqueInput[]
-    update?: permiso_rolUpdateWithWhereUniqueWithoutRolInput | permiso_rolUpdateWithWhereUniqueWithoutRolInput[]
-    updateMany?: permiso_rolUpdateManyWithWhereWithoutRolInput | permiso_rolUpdateManyWithWhereWithoutRolInput[]
-    deleteMany?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
+  export type rol_servicioUncheckedUpdateManyWithoutRolNestedInput = {
+    create?: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput> | rol_servicioCreateWithoutRolInput[] | rol_servicioUncheckedCreateWithoutRolInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutRolInput | rol_servicioCreateOrConnectWithoutRolInput[]
+    upsert?: rol_servicioUpsertWithWhereUniqueWithoutRolInput | rol_servicioUpsertWithWhereUniqueWithoutRolInput[]
+    createMany?: rol_servicioCreateManyRolInputEnvelope
+    set?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    disconnect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    delete?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    update?: rol_servicioUpdateWithWhereUniqueWithoutRolInput | rol_servicioUpdateWithWhereUniqueWithoutRolInput[]
+    updateMany?: rol_servicioUpdateManyWithWhereWithoutRolInput | rol_servicioUpdateManyWithWhereWithoutRolInput[]
+    deleteMany?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
   }
 
   export type usuario_rolUncheckedUpdateManyWithoutRolNestedInput = {
@@ -28001,46 +23537,74 @@ export namespace Prisma {
     deleteMany?: usuario_rolScalarWhereInput | usuario_rolScalarWhereInput[]
   }
 
-  export type permiso_servicioCreateNestedManyWithoutServicioInput = {
-    create?: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput> | permiso_servicioCreateWithoutServicioInput[] | permiso_servicioUncheckedCreateWithoutServicioInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutServicioInput | permiso_servicioCreateOrConnectWithoutServicioInput[]
-    createMany?: permiso_servicioCreateManyServicioInputEnvelope
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
+  export type rol_servicioCreateNestedManyWithoutServicioInput = {
+    create?: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput> | rol_servicioCreateWithoutServicioInput[] | rol_servicioUncheckedCreateWithoutServicioInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutServicioInput | rol_servicioCreateOrConnectWithoutServicioInput[]
+    createMany?: rol_servicioCreateManyServicioInputEnvelope
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
   }
 
-  export type permiso_servicioUncheckedCreateNestedManyWithoutServicioInput = {
-    create?: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput> | permiso_servicioCreateWithoutServicioInput[] | permiso_servicioUncheckedCreateWithoutServicioInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutServicioInput | permiso_servicioCreateOrConnectWithoutServicioInput[]
-    createMany?: permiso_servicioCreateManyServicioInputEnvelope
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
+  export type rol_servicioUncheckedCreateNestedManyWithoutServicioInput = {
+    create?: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput> | rol_servicioCreateWithoutServicioInput[] | rol_servicioUncheckedCreateWithoutServicioInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutServicioInput | rol_servicioCreateOrConnectWithoutServicioInput[]
+    createMany?: rol_servicioCreateManyServicioInputEnvelope
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
   }
 
-  export type permiso_servicioUpdateManyWithoutServicioNestedInput = {
-    create?: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput> | permiso_servicioCreateWithoutServicioInput[] | permiso_servicioUncheckedCreateWithoutServicioInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutServicioInput | permiso_servicioCreateOrConnectWithoutServicioInput[]
-    upsert?: permiso_servicioUpsertWithWhereUniqueWithoutServicioInput | permiso_servicioUpsertWithWhereUniqueWithoutServicioInput[]
-    createMany?: permiso_servicioCreateManyServicioInputEnvelope
-    set?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    disconnect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    delete?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    update?: permiso_servicioUpdateWithWhereUniqueWithoutServicioInput | permiso_servicioUpdateWithWhereUniqueWithoutServicioInput[]
-    updateMany?: permiso_servicioUpdateManyWithWhereWithoutServicioInput | permiso_servicioUpdateManyWithWhereWithoutServicioInput[]
-    deleteMany?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
+  export type rol_servicioUpdateManyWithoutServicioNestedInput = {
+    create?: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput> | rol_servicioCreateWithoutServicioInput[] | rol_servicioUncheckedCreateWithoutServicioInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutServicioInput | rol_servicioCreateOrConnectWithoutServicioInput[]
+    upsert?: rol_servicioUpsertWithWhereUniqueWithoutServicioInput | rol_servicioUpsertWithWhereUniqueWithoutServicioInput[]
+    createMany?: rol_servicioCreateManyServicioInputEnvelope
+    set?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    disconnect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    delete?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    update?: rol_servicioUpdateWithWhereUniqueWithoutServicioInput | rol_servicioUpdateWithWhereUniqueWithoutServicioInput[]
+    updateMany?: rol_servicioUpdateManyWithWhereWithoutServicioInput | rol_servicioUpdateManyWithWhereWithoutServicioInput[]
+    deleteMany?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
   }
 
-  export type permiso_servicioUncheckedUpdateManyWithoutServicioNestedInput = {
-    create?: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput> | permiso_servicioCreateWithoutServicioInput[] | permiso_servicioUncheckedCreateWithoutServicioInput[]
-    connectOrCreate?: permiso_servicioCreateOrConnectWithoutServicioInput | permiso_servicioCreateOrConnectWithoutServicioInput[]
-    upsert?: permiso_servicioUpsertWithWhereUniqueWithoutServicioInput | permiso_servicioUpsertWithWhereUniqueWithoutServicioInput[]
-    createMany?: permiso_servicioCreateManyServicioInputEnvelope
-    set?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    disconnect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    delete?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    connect?: permiso_servicioWhereUniqueInput | permiso_servicioWhereUniqueInput[]
-    update?: permiso_servicioUpdateWithWhereUniqueWithoutServicioInput | permiso_servicioUpdateWithWhereUniqueWithoutServicioInput[]
-    updateMany?: permiso_servicioUpdateManyWithWhereWithoutServicioInput | permiso_servicioUpdateManyWithWhereWithoutServicioInput[]
-    deleteMany?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
+  export type rol_servicioUncheckedUpdateManyWithoutServicioNestedInput = {
+    create?: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput> | rol_servicioCreateWithoutServicioInput[] | rol_servicioUncheckedCreateWithoutServicioInput[]
+    connectOrCreate?: rol_servicioCreateOrConnectWithoutServicioInput | rol_servicioCreateOrConnectWithoutServicioInput[]
+    upsert?: rol_servicioUpsertWithWhereUniqueWithoutServicioInput | rol_servicioUpsertWithWhereUniqueWithoutServicioInput[]
+    createMany?: rol_servicioCreateManyServicioInputEnvelope
+    set?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    disconnect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    delete?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    connect?: rol_servicioWhereUniqueInput | rol_servicioWhereUniqueInput[]
+    update?: rol_servicioUpdateWithWhereUniqueWithoutServicioInput | rol_servicioUpdateWithWhereUniqueWithoutServicioInput[]
+    updateMany?: rol_servicioUpdateManyWithWhereWithoutServicioInput | rol_servicioUpdateManyWithWhereWithoutServicioInput[]
+    deleteMany?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
+  }
+
+  export type rolCreateNestedOneWithoutRol_servicioInput = {
+    create?: XOR<rolCreateWithoutRol_servicioInput, rolUncheckedCreateWithoutRol_servicioInput>
+    connectOrCreate?: rolCreateOrConnectWithoutRol_servicioInput
+    connect?: rolWhereUniqueInput
+  }
+
+  export type servicioCreateNestedOneWithoutRol_servicioInput = {
+    create?: XOR<servicioCreateWithoutRol_servicioInput, servicioUncheckedCreateWithoutRol_servicioInput>
+    connectOrCreate?: servicioCreateOrConnectWithoutRol_servicioInput
+    connect?: servicioWhereUniqueInput
+  }
+
+  export type rolUpdateOneRequiredWithoutRol_servicioNestedInput = {
+    create?: XOR<rolCreateWithoutRol_servicioInput, rolUncheckedCreateWithoutRol_servicioInput>
+    connectOrCreate?: rolCreateOrConnectWithoutRol_servicioInput
+    upsert?: rolUpsertWithoutRol_servicioInput
+    connect?: rolWhereUniqueInput
+    update?: XOR<XOR<rolUpdateToOneWithWhereWithoutRol_servicioInput, rolUpdateWithoutRol_servicioInput>, rolUncheckedUpdateWithoutRol_servicioInput>
+  }
+
+  export type servicioUpdateOneRequiredWithoutRol_servicioNestedInput = {
+    create?: XOR<servicioCreateWithoutRol_servicioInput, servicioUncheckedCreateWithoutRol_servicioInput>
+    connectOrCreate?: servicioCreateOrConnectWithoutRol_servicioInput
+    upsert?: servicioUpsertWithoutRol_servicioInput
+    connect?: servicioWhereUniqueInput
+    update?: XOR<XOR<servicioUpdateToOneWithWhereWithoutRol_servicioInput, servicioUpdateWithoutRol_servicioInput>, servicioUncheckedUpdateWithoutRol_servicioInput>
   }
 
   export type evaluacionCreateNestedManyWithoutUsuarioInput = {
@@ -28055,13 +23619,6 @@ export namespace Prisma {
     connectOrCreate?: nrcCreateOrConnectWithoutUsuarioInput | nrcCreateOrConnectWithoutUsuarioInput[]
     createMany?: nrcCreateManyUsuarioInputEnvelope
     connect?: nrcWhereUniqueInput | nrcWhereUniqueInput[]
-  }
-
-  export type permiso_usuarioCreateNestedManyWithoutUsuarioInput = {
-    create?: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput> | permiso_usuarioCreateWithoutUsuarioInput[] | permiso_usuarioUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutUsuarioInput | permiso_usuarioCreateOrConnectWithoutUsuarioInput[]
-    createMany?: permiso_usuarioCreateManyUsuarioInputEnvelope
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
   }
 
   export type usuario_rolCreateNestedManyWithoutUsuarioInput = {
@@ -28083,13 +23640,6 @@ export namespace Prisma {
     connectOrCreate?: nrcCreateOrConnectWithoutUsuarioInput | nrcCreateOrConnectWithoutUsuarioInput[]
     createMany?: nrcCreateManyUsuarioInputEnvelope
     connect?: nrcWhereUniqueInput | nrcWhereUniqueInput[]
-  }
-
-  export type permiso_usuarioUncheckedCreateNestedManyWithoutUsuarioInput = {
-    create?: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput> | permiso_usuarioCreateWithoutUsuarioInput[] | permiso_usuarioUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutUsuarioInput | permiso_usuarioCreateOrConnectWithoutUsuarioInput[]
-    createMany?: permiso_usuarioCreateManyUsuarioInputEnvelope
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
   }
 
   export type usuario_rolUncheckedCreateNestedManyWithoutUsuarioInput = {
@@ -28125,20 +23675,6 @@ export namespace Prisma {
     update?: nrcUpdateWithWhereUniqueWithoutUsuarioInput | nrcUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: nrcUpdateManyWithWhereWithoutUsuarioInput | nrcUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: nrcScalarWhereInput | nrcScalarWhereInput[]
-  }
-
-  export type permiso_usuarioUpdateManyWithoutUsuarioNestedInput = {
-    create?: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput> | permiso_usuarioCreateWithoutUsuarioInput[] | permiso_usuarioUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutUsuarioInput | permiso_usuarioCreateOrConnectWithoutUsuarioInput[]
-    upsert?: permiso_usuarioUpsertWithWhereUniqueWithoutUsuarioInput | permiso_usuarioUpsertWithWhereUniqueWithoutUsuarioInput[]
-    createMany?: permiso_usuarioCreateManyUsuarioInputEnvelope
-    set?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    disconnect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    delete?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    update?: permiso_usuarioUpdateWithWhereUniqueWithoutUsuarioInput | permiso_usuarioUpdateWithWhereUniqueWithoutUsuarioInput[]
-    updateMany?: permiso_usuarioUpdateManyWithWhereWithoutUsuarioInput | permiso_usuarioUpdateManyWithWhereWithoutUsuarioInput[]
-    deleteMany?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
   }
 
   export type usuario_rolUpdateManyWithoutUsuarioNestedInput = {
@@ -28181,20 +23717,6 @@ export namespace Prisma {
     update?: nrcUpdateWithWhereUniqueWithoutUsuarioInput | nrcUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: nrcUpdateManyWithWhereWithoutUsuarioInput | nrcUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: nrcScalarWhereInput | nrcScalarWhereInput[]
-  }
-
-  export type permiso_usuarioUncheckedUpdateManyWithoutUsuarioNestedInput = {
-    create?: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput> | permiso_usuarioCreateWithoutUsuarioInput[] | permiso_usuarioUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: permiso_usuarioCreateOrConnectWithoutUsuarioInput | permiso_usuarioCreateOrConnectWithoutUsuarioInput[]
-    upsert?: permiso_usuarioUpsertWithWhereUniqueWithoutUsuarioInput | permiso_usuarioUpsertWithWhereUniqueWithoutUsuarioInput[]
-    createMany?: permiso_usuarioCreateManyUsuarioInputEnvelope
-    set?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    disconnect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    delete?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    connect?: permiso_usuarioWhereUniqueInput | permiso_usuarioWhereUniqueInput[]
-    update?: permiso_usuarioUpdateWithWhereUniqueWithoutUsuarioInput | permiso_usuarioUpdateWithWhereUniqueWithoutUsuarioInput[]
-    updateMany?: permiso_usuarioUpdateManyWithWhereWithoutUsuarioInput | permiso_usuarioUpdateManyWithWhereWithoutUsuarioInput[]
-    deleteMany?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
   }
 
   export type usuario_rolUncheckedUpdateManyWithoutUsuarioNestedInput = {
@@ -28347,6 +23869,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -28361,17 +23894,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -28436,6 +23958,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -28529,7 +24067,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    porcentaje: number
+    porcentaje?: number
   }
 
   export type criterioUncheckedCreateWithoutCriterio_evaluacionInput = {
@@ -28539,7 +24077,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    porcentaje: number
+    porcentaje?: number
   }
 
   export type criterioCreateOrConnectWithoutCriterio_evaluacionInput = {
@@ -28588,7 +24126,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
   }
 
   export type criterioUncheckedUpdateWithoutCriterio_evaluacionInput = {
@@ -28598,7 +24136,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    porcentaje?: IntFieldUpdateOperationsInput | number
+    porcentaje?: FloatFieldUpdateOperationsInput | number
   }
 
   export type evaluacionUpsertWithoutCriterio_evaluacionInput = {
@@ -28629,6 +24167,22 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type estadoCreateWithoutEquiposInput = {
+    estado: string
+    created_at?: Date | string
+  }
+
+  export type estadoUncheckedCreateWithoutEquiposInput = {
+    id_estado?: number
+    estado: string
+    created_at?: Date | string
+  }
+
+  export type estadoCreateOrConnectWithoutEquiposInput = {
+    where: estadoWhereUniqueInput
+    create: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
   }
 
   export type integranteCreateWithoutEquipoInput = {
@@ -28663,23 +24217,23 @@ export namespace Prisma {
   }
 
   export type videojuegoCreateWithoutEquipoInput = {
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
     evaluacion?: evaluacionCreateNestedManyWithoutVideojuegoInput
   }
 
   export type videojuegoUncheckedCreateWithoutEquipoInput = {
     id_videojuego?: number
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
     evaluacion?: evaluacionUncheckedCreateNestedManyWithoutVideojuegoInput
   }
 
@@ -28693,20 +24247,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type estadoCreateWithoutEquiposInput = {
-    estado: string
-    created_at?: Date | string
-  }
-
-  export type estadoUncheckedCreateWithoutEquiposInput = {
-    id_estado?: number
-    estado: string
-    created_at?: Date | string
-  }
-
-  export type estadoCreateOrConnectWithoutEquiposInput = {
-    where: estadoWhereUniqueInput
+  export type estadoUpsertWithoutEquiposInput = {
+    update: XOR<estadoUpdateWithoutEquiposInput, estadoUncheckedUpdateWithoutEquiposInput>
     create: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
+    where?: estadoWhereInput
+  }
+
+  export type estadoUpdateToOneWithWhereWithoutEquiposInput = {
+    where?: estadoWhereInput
+    data: XOR<estadoUpdateWithoutEquiposInput, estadoUncheckedUpdateWithoutEquiposInput>
+  }
+
+  export type estadoUpdateWithoutEquiposInput = {
+    estado?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type estadoUncheckedUpdateWithoutEquiposInput = {
+    id_estado?: IntFieldUpdateOperationsInput | number
+    estado?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type integranteUpsertWithWhereUniqueWithoutEquipoInput = {
@@ -28761,34 +24321,12 @@ export namespace Prisma {
     NOT?: videojuegoScalarWhereInput | videojuegoScalarWhereInput[]
     id_videojuego?: IntFilter<"videojuego"> | number
     id_equipo?: IntFilter<"videojuego"> | number
-    token_captcha?: StringFilter<"videojuego"> | string
     nombre?: StringFilter<"videojuego"> | string
     descripcion?: StringNullableFilter<"videojuego"> | string | null
     fecha_creacion?: DateTimeFilter<"videojuego"> | Date | string
     fecha_actualizacion?: DateTimeNullableFilter<"videojuego"> | Date | string | null
     estado?: BoolFilter<"videojuego"> | boolean
-  }
-
-  export type estadoUpsertWithoutEquiposInput = {
-    update: XOR<estadoUpdateWithoutEquiposInput, estadoUncheckedUpdateWithoutEquiposInput>
-    create: XOR<estadoCreateWithoutEquiposInput, estadoUncheckedCreateWithoutEquiposInput>
-    where?: estadoWhereInput
-  }
-
-  export type estadoUpdateToOneWithWhereWithoutEquiposInput = {
-    where?: estadoWhereInput
-    data: XOR<estadoUpdateWithoutEquiposInput, estadoUncheckedUpdateWithoutEquiposInput>
-  }
-
-  export type estadoUpdateWithoutEquiposInput = {
-    estado?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type estadoUncheckedUpdateWithoutEquiposInput = {
-    id_estado?: IntFieldUpdateOperationsInput | number
-    estado?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    token_captcha?: StringNullableFilter<"videojuego"> | string | null
   }
 
   export type equipoCreateWithoutEstado_equipoInput = {
@@ -28880,15 +24418,14 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     nrc?: nrcCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolCreateNestedManyWithoutUsuarioInput
   }
 
@@ -28899,15 +24436,14 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     nrc?: nrcUncheckedCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
@@ -28917,24 +24453,24 @@ export namespace Prisma {
   }
 
   export type videojuegoCreateWithoutEvaluacionInput = {
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
     equipo: equipoCreateNestedOneWithoutVideojuegoInput
   }
 
   export type videojuegoUncheckedCreateWithoutEvaluacionInput = {
     id_videojuego?: number
     id_equipo: number
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
   }
 
   export type videojuegoCreateOrConnectWithoutEvaluacionInput = {
@@ -28977,13 +24513,12 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     nrc?: nrcUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -28996,13 +24531,12 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     nrc?: nrcUncheckedUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -29018,24 +24552,24 @@ export namespace Prisma {
   }
 
   export type videojuegoUpdateWithoutEvaluacionInput = {
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
     equipo?: equipoUpdateOneRequiredWithoutVideojuegoNestedInput
   }
 
   export type videojuegoUncheckedUpdateWithoutEvaluacionInput = {
     id_videojuego?: IntFieldUpdateOperationsInput | number
     id_equipo?: IntFieldUpdateOperationsInput | number
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type equipoCreateWithoutIntegranteInput = {
@@ -29043,8 +24577,8 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    videojuego?: videojuegoCreateNestedManyWithoutEquipoInput
     estado_equipo: estadoCreateNestedOneWithoutEquiposInput
+    videojuego?: videojuegoCreateNestedManyWithoutEquipoInput
   }
 
   export type equipoUncheckedCreateWithoutIntegranteInput = {
@@ -29102,8 +24636,8 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    videojuego?: videojuegoUpdateManyWithoutEquipoNestedInput
     estado_equipo?: estadoUpdateOneRequiredWithoutEquiposNestedInput
+    videojuego?: videojuegoUpdateManyWithoutEquipoNestedInput
   }
 
   export type equipoUncheckedUpdateWithoutIntegranteInput = {
@@ -29372,15 +24906,14 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolCreateNestedManyWithoutUsuarioInput
   }
 
@@ -29391,15 +24924,14 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionUncheckedCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutUsuarioInput
     usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
@@ -29471,13 +25003,12 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -29490,562 +25021,36 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUncheckedUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutUsuarioNestedInput
     usuario_rol?: usuario_rolUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
-  export type permiso_rolCreateWithoutPermisoInput = {
+  export type rol_servicioCreateWithoutRolInput = {
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    rol: rolCreateNestedOneWithoutPermiso_rolInput
+    servicio: servicioCreateNestedOneWithoutRol_servicioInput
   }
 
-  export type permiso_rolUncheckedCreateWithoutPermisoInput = {
-    id_rol: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_rolCreateOrConnectWithoutPermisoInput = {
-    where: permiso_rolWhereUniqueInput
-    create: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput>
-  }
-
-  export type permiso_rolCreateManyPermisoInputEnvelope = {
-    data: permiso_rolCreateManyPermisoInput | permiso_rolCreateManyPermisoInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type permiso_servicioCreateWithoutPermisoInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    servicio: servicioCreateNestedOneWithoutPermiso_servicioInput
-  }
-
-  export type permiso_servicioUncheckedCreateWithoutPermisoInput = {
+  export type rol_servicioUncheckedCreateWithoutRolInput = {
     id_servicio: number
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
   }
 
-  export type permiso_servicioCreateOrConnectWithoutPermisoInput = {
-    where: permiso_servicioWhereUniqueInput
-    create: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput>
+  export type rol_servicioCreateOrConnectWithoutRolInput = {
+    where: rol_servicioWhereUniqueInput
+    create: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput>
   }
 
-  export type permiso_servicioCreateManyPermisoInputEnvelope = {
-    data: permiso_servicioCreateManyPermisoInput | permiso_servicioCreateManyPermisoInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type permiso_usuarioCreateWithoutPermisoInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    usuario: usuarioCreateNestedOneWithoutPermiso_usuarioInput
-  }
-
-  export type permiso_usuarioUncheckedCreateWithoutPermisoInput = {
-    id_usuario: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioCreateOrConnectWithoutPermisoInput = {
-    where: permiso_usuarioWhereUniqueInput
-    create: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput>
-  }
-
-  export type permiso_usuarioCreateManyPermisoInputEnvelope = {
-    data: permiso_usuarioCreateManyPermisoInput | permiso_usuarioCreateManyPermisoInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type permiso_rolUpsertWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_rolWhereUniqueInput
-    update: XOR<permiso_rolUpdateWithoutPermisoInput, permiso_rolUncheckedUpdateWithoutPermisoInput>
-    create: XOR<permiso_rolCreateWithoutPermisoInput, permiso_rolUncheckedCreateWithoutPermisoInput>
-  }
-
-  export type permiso_rolUpdateWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_rolWhereUniqueInput
-    data: XOR<permiso_rolUpdateWithoutPermisoInput, permiso_rolUncheckedUpdateWithoutPermisoInput>
-  }
-
-  export type permiso_rolUpdateManyWithWhereWithoutPermisoInput = {
-    where: permiso_rolScalarWhereInput
-    data: XOR<permiso_rolUpdateManyMutationInput, permiso_rolUncheckedUpdateManyWithoutPermisoInput>
-  }
-
-  export type permiso_rolScalarWhereInput = {
-    AND?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
-    OR?: permiso_rolScalarWhereInput[]
-    NOT?: permiso_rolScalarWhereInput | permiso_rolScalarWhereInput[]
-    id_permiso?: IntFilter<"permiso_rol"> | number
-    id_rol?: IntFilter<"permiso_rol"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_rol"> | Date | string | null
-    estado?: BoolFilter<"permiso_rol"> | boolean
-  }
-
-  export type permiso_servicioUpsertWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_servicioWhereUniqueInput
-    update: XOR<permiso_servicioUpdateWithoutPermisoInput, permiso_servicioUncheckedUpdateWithoutPermisoInput>
-    create: XOR<permiso_servicioCreateWithoutPermisoInput, permiso_servicioUncheckedCreateWithoutPermisoInput>
-  }
-
-  export type permiso_servicioUpdateWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_servicioWhereUniqueInput
-    data: XOR<permiso_servicioUpdateWithoutPermisoInput, permiso_servicioUncheckedUpdateWithoutPermisoInput>
-  }
-
-  export type permiso_servicioUpdateManyWithWhereWithoutPermisoInput = {
-    where: permiso_servicioScalarWhereInput
-    data: XOR<permiso_servicioUpdateManyMutationInput, permiso_servicioUncheckedUpdateManyWithoutPermisoInput>
-  }
-
-  export type permiso_servicioScalarWhereInput = {
-    AND?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
-    OR?: permiso_servicioScalarWhereInput[]
-    NOT?: permiso_servicioScalarWhereInput | permiso_servicioScalarWhereInput[]
-    id_permiso?: IntFilter<"permiso_servicio"> | number
-    id_servicio?: IntFilter<"permiso_servicio"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_servicio"> | Date | string | null
-    estado?: BoolFilter<"permiso_servicio"> | boolean
-  }
-
-  export type permiso_usuarioUpsertWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_usuarioWhereUniqueInput
-    update: XOR<permiso_usuarioUpdateWithoutPermisoInput, permiso_usuarioUncheckedUpdateWithoutPermisoInput>
-    create: XOR<permiso_usuarioCreateWithoutPermisoInput, permiso_usuarioUncheckedCreateWithoutPermisoInput>
-  }
-
-  export type permiso_usuarioUpdateWithWhereUniqueWithoutPermisoInput = {
-    where: permiso_usuarioWhereUniqueInput
-    data: XOR<permiso_usuarioUpdateWithoutPermisoInput, permiso_usuarioUncheckedUpdateWithoutPermisoInput>
-  }
-
-  export type permiso_usuarioUpdateManyWithWhereWithoutPermisoInput = {
-    where: permiso_usuarioScalarWhereInput
-    data: XOR<permiso_usuarioUpdateManyMutationInput, permiso_usuarioUncheckedUpdateManyWithoutPermisoInput>
-  }
-
-  export type permiso_usuarioScalarWhereInput = {
-    AND?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
-    OR?: permiso_usuarioScalarWhereInput[]
-    NOT?: permiso_usuarioScalarWhereInput | permiso_usuarioScalarWhereInput[]
-    id_permiso?: IntFilter<"permiso_usuario"> | number
-    id_usuario?: IntFilter<"permiso_usuario"> | number
-    fecha_creacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    fecha_actualizacion?: DateTimeNullableFilter<"permiso_usuario"> | Date | string | null
-    estado?: BoolFilter<"permiso_usuario"> | boolean
-  }
-
-  export type permisoCreateWithoutPermiso_rolInput = {
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_servicio?: permiso_servicioCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoUncheckedCreateWithoutPermiso_rolInput = {
-    id_permiso?: number
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_servicio?: permiso_servicioUncheckedCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoCreateOrConnectWithoutPermiso_rolInput = {
-    where: permisoWhereUniqueInput
-    create: XOR<permisoCreateWithoutPermiso_rolInput, permisoUncheckedCreateWithoutPermiso_rolInput>
-  }
-
-  export type rolCreateWithoutPermiso_rolInput = {
-    rol: string
-    fecha_creacion?: Date | string
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    usuario_rol?: usuario_rolCreateNestedManyWithoutRolInput
-  }
-
-  export type rolUncheckedCreateWithoutPermiso_rolInput = {
-    id_rol?: number
-    rol: string
-    fecha_creacion?: Date | string
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutRolInput
-  }
-
-  export type rolCreateOrConnectWithoutPermiso_rolInput = {
-    where: rolWhereUniqueInput
-    create: XOR<rolCreateWithoutPermiso_rolInput, rolUncheckedCreateWithoutPermiso_rolInput>
-  }
-
-  export type permisoUpsertWithoutPermiso_rolInput = {
-    update: XOR<permisoUpdateWithoutPermiso_rolInput, permisoUncheckedUpdateWithoutPermiso_rolInput>
-    create: XOR<permisoCreateWithoutPermiso_rolInput, permisoUncheckedCreateWithoutPermiso_rolInput>
-    where?: permisoWhereInput
-  }
-
-  export type permisoUpdateToOneWithWhereWithoutPermiso_rolInput = {
-    where?: permisoWhereInput
-    data: XOR<permisoUpdateWithoutPermiso_rolInput, permisoUncheckedUpdateWithoutPermiso_rolInput>
-  }
-
-  export type permisoUpdateWithoutPermiso_rolInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_servicio?: permiso_servicioUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type permisoUncheckedUpdateWithoutPermiso_rolInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_servicio?: permiso_servicioUncheckedUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type rolUpsertWithoutPermiso_rolInput = {
-    update: XOR<rolUpdateWithoutPermiso_rolInput, rolUncheckedUpdateWithoutPermiso_rolInput>
-    create: XOR<rolCreateWithoutPermiso_rolInput, rolUncheckedCreateWithoutPermiso_rolInput>
-    where?: rolWhereInput
-  }
-
-  export type rolUpdateToOneWithWhereWithoutPermiso_rolInput = {
-    where?: rolWhereInput
-    data: XOR<rolUpdateWithoutPermiso_rolInput, rolUncheckedUpdateWithoutPermiso_rolInput>
-  }
-
-  export type rolUpdateWithoutPermiso_rolInput = {
-    rol?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    usuario_rol?: usuario_rolUpdateManyWithoutRolNestedInput
-  }
-
-  export type rolUncheckedUpdateWithoutPermiso_rolInput = {
-    id_rol?: IntFieldUpdateOperationsInput | number
-    rol?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    usuario_rol?: usuario_rolUncheckedUpdateManyWithoutRolNestedInput
-  }
-
-  export type permisoCreateWithoutPermiso_servicioInput = {
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoUncheckedCreateWithoutPermiso_servicioInput = {
-    id_permiso?: number
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolUncheckedCreateNestedManyWithoutPermisoInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoCreateOrConnectWithoutPermiso_servicioInput = {
-    where: permisoWhereUniqueInput
-    create: XOR<permisoCreateWithoutPermiso_servicioInput, permisoUncheckedCreateWithoutPermiso_servicioInput>
-  }
-
-  export type servicioCreateWithoutPermiso_servicioInput = {
-    nombre: string
-    descripcion: string
-    url: string
-    metodo: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type servicioUncheckedCreateWithoutPermiso_servicioInput = {
-    id_servicio?: number
-    nombre: string
-    descripcion: string
-    url: string
-    metodo: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type servicioCreateOrConnectWithoutPermiso_servicioInput = {
-    where: servicioWhereUniqueInput
-    create: XOR<servicioCreateWithoutPermiso_servicioInput, servicioUncheckedCreateWithoutPermiso_servicioInput>
-  }
-
-  export type permisoUpsertWithoutPermiso_servicioInput = {
-    update: XOR<permisoUpdateWithoutPermiso_servicioInput, permisoUncheckedUpdateWithoutPermiso_servicioInput>
-    create: XOR<permisoCreateWithoutPermiso_servicioInput, permisoUncheckedCreateWithoutPermiso_servicioInput>
-    where?: permisoWhereInput
-  }
-
-  export type permisoUpdateToOneWithWhereWithoutPermiso_servicioInput = {
-    where?: permisoWhereInput
-    data: XOR<permisoUpdateWithoutPermiso_servicioInput, permisoUncheckedUpdateWithoutPermiso_servicioInput>
-  }
-
-  export type permisoUpdateWithoutPermiso_servicioInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type permisoUncheckedUpdateWithoutPermiso_servicioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUncheckedUpdateManyWithoutPermisoNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type servicioUpsertWithoutPermiso_servicioInput = {
-    update: XOR<servicioUpdateWithoutPermiso_servicioInput, servicioUncheckedUpdateWithoutPermiso_servicioInput>
-    create: XOR<servicioCreateWithoutPermiso_servicioInput, servicioUncheckedCreateWithoutPermiso_servicioInput>
-    where?: servicioWhereInput
-  }
-
-  export type servicioUpdateToOneWithWhereWithoutPermiso_servicioInput = {
-    where?: servicioWhereInput
-    data: XOR<servicioUpdateWithoutPermiso_servicioInput, servicioUncheckedUpdateWithoutPermiso_servicioInput>
-  }
-
-  export type servicioUpdateWithoutPermiso_servicioInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    metodo?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type servicioUncheckedUpdateWithoutPermiso_servicioInput = {
-    id_servicio?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    metodo?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permisoCreateWithoutPermiso_usuarioInput = {
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolCreateNestedManyWithoutPermisoInput
-    permiso_servicio?: permiso_servicioCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoUncheckedCreateWithoutPermiso_usuarioInput = {
-    id_permiso?: number
-    nombre: string
-    descripcion: string
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso_rol?: permiso_rolUncheckedCreateNestedManyWithoutPermisoInput
-    permiso_servicio?: permiso_servicioUncheckedCreateNestedManyWithoutPermisoInput
-  }
-
-  export type permisoCreateOrConnectWithoutPermiso_usuarioInput = {
-    where: permisoWhereUniqueInput
-    create: XOR<permisoCreateWithoutPermiso_usuarioInput, permisoUncheckedCreateWithoutPermiso_usuarioInput>
-  }
-
-  export type usuarioCreateWithoutPermiso_usuarioInput = {
-    primer_nombre: string
-    segundo_nombre?: string | null
-    primer_apellido: string
-    segundo_apellido: string
-    correo: string
-    confirmado: boolean
-    token_confirmacion: string
-    ultima_conexion: Date | string
-    password?: string | null
-    fecha_actualizacion?: Date | string
-    fecha_creacion?: Date | string | null
-    estado: boolean
-    evaluacion?: evaluacionCreateNestedManyWithoutUsuarioInput
-    nrc?: nrcCreateNestedManyWithoutUsuarioInput
-    usuario_rol?: usuario_rolCreateNestedManyWithoutUsuarioInput
-  }
-
-  export type usuarioUncheckedCreateWithoutPermiso_usuarioInput = {
-    id_usuario?: number
-    primer_nombre: string
-    segundo_nombre?: string | null
-    primer_apellido: string
-    segundo_apellido: string
-    correo: string
-    confirmado: boolean
-    token_confirmacion: string
-    ultima_conexion: Date | string
-    password?: string | null
-    fecha_actualizacion?: Date | string
-    fecha_creacion?: Date | string | null
-    estado: boolean
-    evaluacion?: evaluacionUncheckedCreateNestedManyWithoutUsuarioInput
-    nrc?: nrcUncheckedCreateNestedManyWithoutUsuarioInput
-    usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutUsuarioInput
-  }
-
-  export type usuarioCreateOrConnectWithoutPermiso_usuarioInput = {
-    where: usuarioWhereUniqueInput
-    create: XOR<usuarioCreateWithoutPermiso_usuarioInput, usuarioUncheckedCreateWithoutPermiso_usuarioInput>
-  }
-
-  export type permisoUpsertWithoutPermiso_usuarioInput = {
-    update: XOR<permisoUpdateWithoutPermiso_usuarioInput, permisoUncheckedUpdateWithoutPermiso_usuarioInput>
-    create: XOR<permisoCreateWithoutPermiso_usuarioInput, permisoUncheckedCreateWithoutPermiso_usuarioInput>
-    where?: permisoWhereInput
-  }
-
-  export type permisoUpdateToOneWithWhereWithoutPermiso_usuarioInput = {
-    where?: permisoWhereInput
-    data: XOR<permisoUpdateWithoutPermiso_usuarioInput, permisoUncheckedUpdateWithoutPermiso_usuarioInput>
-  }
-
-  export type permisoUpdateWithoutPermiso_usuarioInput = {
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUpdateManyWithoutPermisoNestedInput
-    permiso_servicio?: permiso_servicioUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type permisoUncheckedUpdateWithoutPermiso_usuarioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    nombre?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUncheckedUpdateManyWithoutPermisoNestedInput
-    permiso_servicio?: permiso_servicioUncheckedUpdateManyWithoutPermisoNestedInput
-  }
-
-  export type usuarioUpsertWithoutPermiso_usuarioInput = {
-    update: XOR<usuarioUpdateWithoutPermiso_usuarioInput, usuarioUncheckedUpdateWithoutPermiso_usuarioInput>
-    create: XOR<usuarioCreateWithoutPermiso_usuarioInput, usuarioUncheckedCreateWithoutPermiso_usuarioInput>
-    where?: usuarioWhereInput
-  }
-
-  export type usuarioUpdateToOneWithWhereWithoutPermiso_usuarioInput = {
-    where?: usuarioWhereInput
-    data: XOR<usuarioUpdateWithoutPermiso_usuarioInput, usuarioUncheckedUpdateWithoutPermiso_usuarioInput>
-  }
-
-  export type usuarioUpdateWithoutPermiso_usuarioInput = {
-    primer_nombre?: StringFieldUpdateOperationsInput | string
-    segundo_nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    primer_apellido?: StringFieldUpdateOperationsInput | string
-    segundo_apellido?: StringFieldUpdateOperationsInput | string
-    correo?: StringFieldUpdateOperationsInput | string
-    confirmado?: BoolFieldUpdateOperationsInput | boolean
-    token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    evaluacion?: evaluacionUpdateManyWithoutUsuarioNestedInput
-    nrc?: nrcUpdateManyWithoutUsuarioNestedInput
-    usuario_rol?: usuario_rolUpdateManyWithoutUsuarioNestedInput
-  }
-
-  export type usuarioUncheckedUpdateWithoutPermiso_usuarioInput = {
-    id_usuario?: IntFieldUpdateOperationsInput | number
-    primer_nombre?: StringFieldUpdateOperationsInput | string
-    segundo_nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    primer_apellido?: StringFieldUpdateOperationsInput | string
-    segundo_apellido?: StringFieldUpdateOperationsInput | string
-    correo?: StringFieldUpdateOperationsInput | string
-    confirmado?: BoolFieldUpdateOperationsInput | boolean
-    token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    evaluacion?: evaluacionUncheckedUpdateManyWithoutUsuarioNestedInput
-    nrc?: nrcUncheckedUpdateManyWithoutUsuarioNestedInput
-    usuario_rol?: usuario_rolUncheckedUpdateManyWithoutUsuarioNestedInput
-  }
-
-  export type permiso_rolCreateWithoutRolInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_rolInput
-  }
-
-  export type permiso_rolUncheckedCreateWithoutRolInput = {
-    id_permiso: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_rolCreateOrConnectWithoutRolInput = {
-    where: permiso_rolWhereUniqueInput
-    create: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput>
-  }
-
-  export type permiso_rolCreateManyRolInputEnvelope = {
-    data: permiso_rolCreateManyRolInput | permiso_rolCreateManyRolInput[]
+  export type rol_servicioCreateManyRolInputEnvelope = {
+    data: rol_servicioCreateManyRolInput | rol_servicioCreateManyRolInput[]
     skipDuplicates?: boolean
   }
 
@@ -30073,20 +25078,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type permiso_rolUpsertWithWhereUniqueWithoutRolInput = {
-    where: permiso_rolWhereUniqueInput
-    update: XOR<permiso_rolUpdateWithoutRolInput, permiso_rolUncheckedUpdateWithoutRolInput>
-    create: XOR<permiso_rolCreateWithoutRolInput, permiso_rolUncheckedCreateWithoutRolInput>
+  export type rol_servicioUpsertWithWhereUniqueWithoutRolInput = {
+    where: rol_servicioWhereUniqueInput
+    update: XOR<rol_servicioUpdateWithoutRolInput, rol_servicioUncheckedUpdateWithoutRolInput>
+    create: XOR<rol_servicioCreateWithoutRolInput, rol_servicioUncheckedCreateWithoutRolInput>
   }
 
-  export type permiso_rolUpdateWithWhereUniqueWithoutRolInput = {
-    where: permiso_rolWhereUniqueInput
-    data: XOR<permiso_rolUpdateWithoutRolInput, permiso_rolUncheckedUpdateWithoutRolInput>
+  export type rol_servicioUpdateWithWhereUniqueWithoutRolInput = {
+    where: rol_servicioWhereUniqueInput
+    data: XOR<rol_servicioUpdateWithoutRolInput, rol_servicioUncheckedUpdateWithoutRolInput>
   }
 
-  export type permiso_rolUpdateManyWithWhereWithoutRolInput = {
-    where: permiso_rolScalarWhereInput
-    data: XOR<permiso_rolUpdateManyMutationInput, permiso_rolUncheckedUpdateManyWithoutRolInput>
+  export type rol_servicioUpdateManyWithWhereWithoutRolInput = {
+    where: rol_servicioScalarWhereInput
+    data: XOR<rol_servicioUpdateManyMutationInput, rol_servicioUncheckedUpdateManyWithoutRolInput>
+  }
+
+  export type rol_servicioScalarWhereInput = {
+    AND?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
+    OR?: rol_servicioScalarWhereInput[]
+    NOT?: rol_servicioScalarWhereInput | rol_servicioScalarWhereInput[]
+    id_rol?: IntFilter<"rol_servicio"> | number
+    id_servicio?: IntFilter<"rol_servicio"> | number
+    fecha_creacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    fecha_actualizacion?: DateTimeNullableFilter<"rol_servicio"> | Date | string | null
+    estado?: BoolFilter<"rol_servicio"> | boolean
   }
 
   export type usuario_rolUpsertWithWhereUniqueWithoutRolInput = {
@@ -30116,44 +25132,152 @@ export namespace Prisma {
     estado?: BoolFilter<"usuario_rol"> | boolean
   }
 
-  export type permiso_servicioCreateWithoutServicioInput = {
+  export type rol_servicioCreateWithoutServicioInput = {
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_servicioInput
+    rol: rolCreateNestedOneWithoutRol_servicioInput
   }
 
-  export type permiso_servicioUncheckedCreateWithoutServicioInput = {
-    id_permiso: number
+  export type rol_servicioUncheckedCreateWithoutServicioInput = {
+    id_rol: number
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
   }
 
-  export type permiso_servicioCreateOrConnectWithoutServicioInput = {
-    where: permiso_servicioWhereUniqueInput
-    create: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput>
+  export type rol_servicioCreateOrConnectWithoutServicioInput = {
+    where: rol_servicioWhereUniqueInput
+    create: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput>
   }
 
-  export type permiso_servicioCreateManyServicioInputEnvelope = {
-    data: permiso_servicioCreateManyServicioInput | permiso_servicioCreateManyServicioInput[]
+  export type rol_servicioCreateManyServicioInputEnvelope = {
+    data: rol_servicioCreateManyServicioInput | rol_servicioCreateManyServicioInput[]
     skipDuplicates?: boolean
   }
 
-  export type permiso_servicioUpsertWithWhereUniqueWithoutServicioInput = {
-    where: permiso_servicioWhereUniqueInput
-    update: XOR<permiso_servicioUpdateWithoutServicioInput, permiso_servicioUncheckedUpdateWithoutServicioInput>
-    create: XOR<permiso_servicioCreateWithoutServicioInput, permiso_servicioUncheckedCreateWithoutServicioInput>
+  export type rol_servicioUpsertWithWhereUniqueWithoutServicioInput = {
+    where: rol_servicioWhereUniqueInput
+    update: XOR<rol_servicioUpdateWithoutServicioInput, rol_servicioUncheckedUpdateWithoutServicioInput>
+    create: XOR<rol_servicioCreateWithoutServicioInput, rol_servicioUncheckedCreateWithoutServicioInput>
   }
 
-  export type permiso_servicioUpdateWithWhereUniqueWithoutServicioInput = {
-    where: permiso_servicioWhereUniqueInput
-    data: XOR<permiso_servicioUpdateWithoutServicioInput, permiso_servicioUncheckedUpdateWithoutServicioInput>
+  export type rol_servicioUpdateWithWhereUniqueWithoutServicioInput = {
+    where: rol_servicioWhereUniqueInput
+    data: XOR<rol_servicioUpdateWithoutServicioInput, rol_servicioUncheckedUpdateWithoutServicioInput>
   }
 
-  export type permiso_servicioUpdateManyWithWhereWithoutServicioInput = {
-    where: permiso_servicioScalarWhereInput
-    data: XOR<permiso_servicioUpdateManyMutationInput, permiso_servicioUncheckedUpdateManyWithoutServicioInput>
+  export type rol_servicioUpdateManyWithWhereWithoutServicioInput = {
+    where: rol_servicioScalarWhereInput
+    data: XOR<rol_servicioUpdateManyMutationInput, rol_servicioUncheckedUpdateManyWithoutServicioInput>
+  }
+
+  export type rolCreateWithoutRol_servicioInput = {
+    rol: string
+    fecha_creacion?: Date | string
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+    usuario_rol?: usuario_rolCreateNestedManyWithoutRolInput
+  }
+
+  export type rolUncheckedCreateWithoutRol_servicioInput = {
+    id_rol?: number
+    rol: string
+    fecha_creacion?: Date | string
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+    usuario_rol?: usuario_rolUncheckedCreateNestedManyWithoutRolInput
+  }
+
+  export type rolCreateOrConnectWithoutRol_servicioInput = {
+    where: rolWhereUniqueInput
+    create: XOR<rolCreateWithoutRol_servicioInput, rolUncheckedCreateWithoutRol_servicioInput>
+  }
+
+  export type servicioCreateWithoutRol_servicioInput = {
+    nombre: string
+    descripcion: string
+    url: string
+    metodo: string
+    fecha_creacion?: Date | string | null
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+  }
+
+  export type servicioUncheckedCreateWithoutRol_servicioInput = {
+    id_servicio?: number
+    nombre: string
+    descripcion: string
+    url: string
+    metodo: string
+    fecha_creacion?: Date | string | null
+    fecha_actualizacion?: Date | string | null
+    estado: boolean
+  }
+
+  export type servicioCreateOrConnectWithoutRol_servicioInput = {
+    where: servicioWhereUniqueInput
+    create: XOR<servicioCreateWithoutRol_servicioInput, servicioUncheckedCreateWithoutRol_servicioInput>
+  }
+
+  export type rolUpsertWithoutRol_servicioInput = {
+    update: XOR<rolUpdateWithoutRol_servicioInput, rolUncheckedUpdateWithoutRol_servicioInput>
+    create: XOR<rolCreateWithoutRol_servicioInput, rolUncheckedCreateWithoutRol_servicioInput>
+    where?: rolWhereInput
+  }
+
+  export type rolUpdateToOneWithWhereWithoutRol_servicioInput = {
+    where?: rolWhereInput
+    data: XOR<rolUpdateWithoutRol_servicioInput, rolUncheckedUpdateWithoutRol_servicioInput>
+  }
+
+  export type rolUpdateWithoutRol_servicioInput = {
+    rol?: StringFieldUpdateOperationsInput | string
+    fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+    usuario_rol?: usuario_rolUpdateManyWithoutRolNestedInput
+  }
+
+  export type rolUncheckedUpdateWithoutRol_servicioInput = {
+    id_rol?: IntFieldUpdateOperationsInput | number
+    rol?: StringFieldUpdateOperationsInput | string
+    fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+    usuario_rol?: usuario_rolUncheckedUpdateManyWithoutRolNestedInput
+  }
+
+  export type servicioUpsertWithoutRol_servicioInput = {
+    update: XOR<servicioUpdateWithoutRol_servicioInput, servicioUncheckedUpdateWithoutRol_servicioInput>
+    create: XOR<servicioCreateWithoutRol_servicioInput, servicioUncheckedCreateWithoutRol_servicioInput>
+    where?: servicioWhereInput
+  }
+
+  export type servicioUpdateToOneWithWhereWithoutRol_servicioInput = {
+    where?: servicioWhereInput
+    data: XOR<servicioUpdateWithoutRol_servicioInput, servicioUncheckedUpdateWithoutRol_servicioInput>
+  }
+
+  export type servicioUpdateWithoutRol_servicioInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    metodo?: StringFieldUpdateOperationsInput | string
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type servicioUncheckedUpdateWithoutRol_servicioInput = {
+    id_servicio?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    metodo?: StringFieldUpdateOperationsInput | string
+    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type evaluacionCreateWithoutUsuarioInput = {
@@ -30213,30 +25337,6 @@ export namespace Prisma {
 
   export type nrcCreateManyUsuarioInputEnvelope = {
     data: nrcCreateManyUsuarioInput | nrcCreateManyUsuarioInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type permiso_usuarioCreateWithoutUsuarioInput = {
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-    permiso: permisoCreateNestedOneWithoutPermiso_usuarioInput
-  }
-
-  export type permiso_usuarioUncheckedCreateWithoutUsuarioInput = {
-    id_permiso: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioCreateOrConnectWithoutUsuarioInput = {
-    where: permiso_usuarioWhereUniqueInput
-    create: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput>
-  }
-
-  export type permiso_usuarioCreateManyUsuarioInputEnvelope = {
-    data: permiso_usuarioCreateManyUsuarioInput | permiso_usuarioCreateManyUsuarioInput[]
     skipDuplicates?: boolean
   }
 
@@ -30309,22 +25409,6 @@ export namespace Prisma {
     data: XOR<nrcUpdateManyMutationInput, nrcUncheckedUpdateManyWithoutUsuarioInput>
   }
 
-  export type permiso_usuarioUpsertWithWhereUniqueWithoutUsuarioInput = {
-    where: permiso_usuarioWhereUniqueInput
-    update: XOR<permiso_usuarioUpdateWithoutUsuarioInput, permiso_usuarioUncheckedUpdateWithoutUsuarioInput>
-    create: XOR<permiso_usuarioCreateWithoutUsuarioInput, permiso_usuarioUncheckedCreateWithoutUsuarioInput>
-  }
-
-  export type permiso_usuarioUpdateWithWhereUniqueWithoutUsuarioInput = {
-    where: permiso_usuarioWhereUniqueInput
-    data: XOR<permiso_usuarioUpdateWithoutUsuarioInput, permiso_usuarioUncheckedUpdateWithoutUsuarioInput>
-  }
-
-  export type permiso_usuarioUpdateManyWithWhereWithoutUsuarioInput = {
-    where: permiso_usuarioScalarWhereInput
-    data: XOR<permiso_usuarioUpdateManyMutationInput, permiso_usuarioUncheckedUpdateManyWithoutUsuarioInput>
-  }
-
   export type usuario_rolUpsertWithWhereUniqueWithoutUsuarioInput = {
     where: usuario_rolWhereUniqueInput
     update: XOR<usuario_rolUpdateWithoutUsuarioInput, usuario_rolUncheckedUpdateWithoutUsuarioInput>
@@ -30346,7 +25430,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_rol?: permiso_rolCreateNestedManyWithoutRolInput
+    rol_servicio?: rol_servicioCreateNestedManyWithoutRolInput
   }
 
   export type rolUncheckedCreateWithoutUsuario_rolInput = {
@@ -30355,7 +25439,7 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    permiso_rol?: permiso_rolUncheckedCreateNestedManyWithoutRolInput
+    rol_servicio?: rol_servicioUncheckedCreateNestedManyWithoutRolInput
   }
 
   export type rolCreateOrConnectWithoutUsuario_rolInput = {
@@ -30369,16 +25453,15 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionCreateNestedManyWithoutUsuarioInput
     nrc?: nrcCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioCreateNestedManyWithoutUsuarioInput
   }
 
   export type usuarioUncheckedCreateWithoutUsuario_rolInput = {
@@ -30388,16 +25471,15 @@ export namespace Prisma {
     primer_apellido: string
     segundo_apellido: string
     correo: string
-    confirmado: boolean
+    confirmado?: boolean
     token_confirmacion: string
-    ultima_conexion: Date | string
+    ultima_conexion?: Date | string | null
     password?: string | null
     fecha_actualizacion?: Date | string
     fecha_creacion?: Date | string | null
     estado: boolean
     evaluacion?: evaluacionUncheckedCreateNestedManyWithoutUsuarioInput
     nrc?: nrcUncheckedCreateNestedManyWithoutUsuarioInput
-    permiso_usuario?: permiso_usuarioUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type usuarioCreateOrConnectWithoutUsuario_rolInput = {
@@ -30421,7 +25503,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUpdateManyWithoutRolNestedInput
+    rol_servicio?: rol_servicioUpdateManyWithoutRolNestedInput
   }
 
   export type rolUncheckedUpdateWithoutUsuario_rolInput = {
@@ -30430,7 +25512,7 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso_rol?: permiso_rolUncheckedUpdateManyWithoutRolNestedInput
+    rol_servicio?: rol_servicioUncheckedUpdateManyWithoutRolNestedInput
   }
 
   export type usuarioUpsertWithoutUsuario_rolInput = {
@@ -30452,14 +25534,13 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUpdateManyWithoutUsuarioNestedInput
     nrc?: nrcUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUpdateManyWithoutUsuarioNestedInput
   }
 
   export type usuarioUncheckedUpdateWithoutUsuario_rolInput = {
@@ -30471,14 +25552,13 @@ export namespace Prisma {
     correo?: StringFieldUpdateOperationsInput | string
     confirmado?: BoolFieldUpdateOperationsInput | boolean
     token_confirmacion?: StringFieldUpdateOperationsInput | string
-    ultima_conexion?: DateTimeFieldUpdateOperationsInput | Date | string
+    ultima_conexion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_actualizacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
     evaluacion?: evaluacionUncheckedUpdateManyWithoutUsuarioNestedInput
     nrc?: nrcUncheckedUpdateManyWithoutUsuarioNestedInput
-    permiso_usuario?: permiso_usuarioUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type evaluacionCreateWithoutVideojuegoInput = {
@@ -30515,8 +25595,8 @@ export namespace Prisma {
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
-    integrante?: integranteCreateNestedManyWithoutEquipoInput
     estado_equipo: estadoCreateNestedOneWithoutEquiposInput
+    integrante?: integranteCreateNestedManyWithoutEquipoInput
   }
 
   export type equipoUncheckedCreateWithoutVideojuegoInput = {
@@ -30566,8 +25646,8 @@ export namespace Prisma {
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    integrante?: integranteUpdateManyWithoutEquipoNestedInput
     estado_equipo?: estadoUpdateOneRequiredWithoutEquiposNestedInput
+    integrante?: integranteUpdateManyWithoutEquipoNestedInput
   }
 
   export type equipoUncheckedUpdateWithoutVideojuegoInput = {
@@ -30624,12 +25704,12 @@ export namespace Prisma {
 
   export type videojuegoCreateManyEquipoInput = {
     id_videojuego?: number
-    token_captcha: string
     nombre: string
     descripcion?: string | null
     fecha_creacion?: Date | string
     fecha_actualizacion?: Date | string | null
     estado: boolean
+    token_captcha?: string | null
   }
 
   export type integranteUpdateWithoutEquipoInput = {
@@ -30664,34 +25744,34 @@ export namespace Prisma {
   }
 
   export type videojuegoUpdateWithoutEquipoInput = {
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
     evaluacion?: evaluacionUpdateManyWithoutVideojuegoNestedInput
   }
 
   export type videojuegoUncheckedUpdateWithoutEquipoInput = {
     id_videojuego?: IntFieldUpdateOperationsInput | number
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
     evaluacion?: evaluacionUncheckedUpdateManyWithoutVideojuegoNestedInput
   }
 
   export type videojuegoUncheckedUpdateManyWithoutEquipoInput = {
     id_videojuego?: IntFieldUpdateOperationsInput | number
-    token_captcha?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
+    token_captcha?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type equipoCreateManyEstado_equipoInput = {
@@ -30858,92 +25938,8 @@ export namespace Prisma {
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type permiso_rolCreateManyPermisoInput = {
-    id_rol: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_servicioCreateManyPermisoInput = {
+  export type rol_servicioCreateManyRolInput = {
     id_servicio: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioCreateManyPermisoInput = {
-    id_usuario: number
-    fecha_creacion?: Date | string | null
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_rolUpdateWithoutPermisoInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    rol?: rolUpdateOneRequiredWithoutPermiso_rolNestedInput
-  }
-
-  export type permiso_rolUncheckedUpdateWithoutPermisoInput = {
-    id_rol?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_rolUncheckedUpdateManyWithoutPermisoInput = {
-    id_rol?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_servicioUpdateWithoutPermisoInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    servicio?: servicioUpdateOneRequiredWithoutPermiso_servicioNestedInput
-  }
-
-  export type permiso_servicioUncheckedUpdateWithoutPermisoInput = {
-    id_servicio?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_servicioUncheckedUpdateManyWithoutPermisoInput = {
-    id_servicio?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioUpdateWithoutPermisoInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    usuario?: usuarioUpdateOneRequiredWithoutPermiso_usuarioNestedInput
-  }
-
-  export type permiso_usuarioUncheckedUpdateWithoutPermisoInput = {
-    id_usuario?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioUncheckedUpdateManyWithoutPermisoInput = {
-    id_usuario?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_rolCreateManyRolInput = {
-    id_permiso: number
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
@@ -30956,22 +25952,22 @@ export namespace Prisma {
     estado: boolean
   }
 
-  export type permiso_rolUpdateWithoutRolInput = {
+  export type rol_servicioUpdateWithoutRolInput = {
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_rolNestedInput
+    servicio?: servicioUpdateOneRequiredWithoutRol_servicioNestedInput
   }
 
-  export type permiso_rolUncheckedUpdateWithoutRolInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
+  export type rol_servicioUncheckedUpdateWithoutRolInput = {
+    id_servicio?: IntFieldUpdateOperationsInput | number
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type permiso_rolUncheckedUpdateManyWithoutRolInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
+  export type rol_servicioUncheckedUpdateManyWithoutRolInput = {
+    id_servicio?: IntFieldUpdateOperationsInput | number
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
@@ -30998,29 +25994,29 @@ export namespace Prisma {
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type permiso_servicioCreateManyServicioInput = {
-    id_permiso: number
+  export type rol_servicioCreateManyServicioInput = {
+    id_rol: number
     fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
   }
 
-  export type permiso_servicioUpdateWithoutServicioInput = {
+  export type rol_servicioUpdateWithoutServicioInput = {
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_servicioNestedInput
+    rol?: rolUpdateOneRequiredWithoutRol_servicioNestedInput
   }
 
-  export type permiso_servicioUncheckedUpdateWithoutServicioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
+  export type rol_servicioUncheckedUpdateWithoutServicioInput = {
+    id_rol?: IntFieldUpdateOperationsInput | number
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type permiso_servicioUncheckedUpdateManyWithoutServicioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
+  export type rol_servicioUncheckedUpdateManyWithoutServicioInput = {
+    id_rol?: IntFieldUpdateOperationsInput | number
     fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
@@ -31041,13 +26037,6 @@ export namespace Prisma {
     codigo: string
     activo: boolean
     fecha_creacion?: Date | string
-    fecha_actualizacion?: Date | string | null
-    estado: boolean
-  }
-
-  export type permiso_usuarioCreateManyUsuarioInput = {
-    id_permiso: number
-    fecha_creacion?: Date | string | null
     fecha_actualizacion?: Date | string | null
     estado: boolean
   }
@@ -31114,27 +26103,6 @@ export namespace Prisma {
     codigo?: StringFieldUpdateOperationsInput | string
     activo?: BoolFieldUpdateOperationsInput | boolean
     fecha_creacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioUpdateWithoutUsuarioInput = {
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-    permiso?: permisoUpdateOneRequiredWithoutPermiso_usuarioNestedInput
-  }
-
-  export type permiso_usuarioUncheckedUpdateWithoutUsuarioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type permiso_usuarioUncheckedUpdateManyWithoutUsuarioInput = {
-    id_permiso?: IntFieldUpdateOperationsInput | number
-    fecha_creacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fecha_actualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: BoolFieldUpdateOperationsInput | boolean
   }

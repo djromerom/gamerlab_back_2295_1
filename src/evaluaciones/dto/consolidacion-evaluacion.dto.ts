@@ -13,4 +13,5 @@ export class ConsolidacionEvaluacionDto {
   criterios: CriterioEvaluadoDto[];
   promedio_total: number;
   total_evaluaciones: number;
+  nrc: string[];
 } 

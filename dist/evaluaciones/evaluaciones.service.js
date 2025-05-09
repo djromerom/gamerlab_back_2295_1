@@ -21,12 +21,27 @@ let EvaluacionesService = class EvaluacionesService {
         const videojuego = await this.prisma.videojuego.findUnique({
             where: { id_videojuego },
             include: {
-                equipo: true,
+                equipo: {
+                    include: {
+                        integrante: {
+                            include: {
+                                integrante_nrc: {
+                                    include: {
+                                        nrc: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             },
         });
         if (!videojuego) {
             throw new Error(`Videojuego con id ${id_videojuego} no encontrado`);
         }
+        const nrcs = videojuego.equipo.integrante
+            .flatMap(integrante => integrante.integrante_nrc)
+            .map(integranteNrc => integranteNrc.nrc.codigo);
         const evaluaciones = await this.prisma.evaluacion.findMany({
             where: {
                 id_videojuegos: id_videojuego,
@@ -76,6 +91,7 @@ let EvaluacionesService = class EvaluacionesService {
             criterios,
             promedio_total: promedioTotal,
             total_evaluaciones: evaluaciones.length,
+            nrc: nrcs,
         };
     }
     async listarConsolidacionesVideojuegos() {

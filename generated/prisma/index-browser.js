@@ -203,39 +203,6 @@ exports.Prisma.NrcScalarFieldEnum = {
   estado: 'estado'
 };
 
-exports.Prisma.PermisoScalarFieldEnum = {
-  id_permiso: 'id_permiso',
-  nombre: 'nombre',
-  descripcion: 'descripcion',
-  fecha_creacion: 'fecha_creacion',
-  fecha_actualizacion: 'fecha_actualizacion',
-  estado: 'estado'
-};
-
-exports.Prisma.Permiso_rolScalarFieldEnum = {
-  id_permiso: 'id_permiso',
-  id_rol: 'id_rol',
-  fecha_creacion: 'fecha_creacion',
-  fecha_actualizacion: 'fecha_actualizacion',
-  estado: 'estado'
-};
-
-exports.Prisma.Permiso_servicioScalarFieldEnum = {
-  id_permiso: 'id_permiso',
-  id_servicio: 'id_servicio',
-  fecha_creacion: 'fecha_creacion',
-  fecha_actualizacion: 'fecha_actualizacion',
-  estado: 'estado'
-};
-
-exports.Prisma.Permiso_usuarioScalarFieldEnum = {
-  id_permiso: 'id_permiso',
-  id_usuario: 'id_usuario',
-  fecha_creacion: 'fecha_creacion',
-  fecha_actualizacion: 'fecha_actualizacion',
-  estado: 'estado'
-};
-
 exports.Prisma.RolScalarFieldEnum = {
   id_rol: 'id_rol',
   rol: 'rol',
@@ -250,6 +217,14 @@ exports.Prisma.ServicioScalarFieldEnum = {
   descripcion: 'descripcion',
   url: 'url',
   metodo: 'metodo',
+  fecha_creacion: 'fecha_creacion',
+  fecha_actualizacion: 'fecha_actualizacion',
+  estado: 'estado'
+};
+
+exports.Prisma.Rol_servicioScalarFieldEnum = {
+  id_rol: 'id_rol',
+  id_servicio: 'id_servicio',
   fecha_creacion: 'fecha_creacion',
   fecha_actualizacion: 'fecha_actualizacion',
   estado: 'estado'
@@ -282,12 +257,12 @@ exports.Prisma.Usuario_rolScalarFieldEnum = {
 exports.Prisma.VideojuegoScalarFieldEnum = {
   id_videojuego: 'id_videojuego',
   id_equipo: 'id_equipo',
-  token_captcha: 'token_captcha',
   nombre: 'nombre',
   descripcion: 'descripcion',
   fecha_creacion: 'fecha_creacion',
   fecha_actualizacion: 'fecha_actualizacion',
-  estado: 'estado'
+  estado: 'estado',
+  token_captcha: 'token_captcha'
 };
 
 exports.Prisma.SortOrder = {
@@ -316,12 +291,9 @@ exports.Prisma.ModelName = {
   integrante_nrc: 'integrante_nrc',
   materia: 'materia',
   nrc: 'nrc',
-  permiso: 'permiso',
-  permiso_rol: 'permiso_rol',
-  permiso_servicio: 'permiso_servicio',
-  permiso_usuario: 'permiso_usuario',
   rol: 'rol',
   servicio: 'servicio',
+  rol_servicio: 'rol_servicio',
   usuario: 'usuario',
   usuario_rol: 'usuario_rol',
   videojuego: 'videojuego'

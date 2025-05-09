@@ -16,6 +16,7 @@ class ConsolidacionEvaluacionDto {
     criterios;
     promedio_total;
     total_evaluaciones;
+    nrc;
 }
 exports.ConsolidacionEvaluacionDto = ConsolidacionEvaluacionDto;
 //# sourceMappingURL=consolidacion-evaluacion.dto.js.map

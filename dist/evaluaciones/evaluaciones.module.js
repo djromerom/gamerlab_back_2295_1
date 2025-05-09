@@ -10,20 +10,15 @@ exports.EvaluacionesModule = void 0;
 const common_1 = require("@nestjs/common");
 const evaluaciones_controller_1 = require("./evaluaciones.controller");
 const evaluaciones_service_1 = require("./evaluaciones.service");
-const evaluaciones_mock_service_1 = require("./evaluaciones.mock.service");
+const prisma_module_1 = require("../prisma/prisma.module");
 let EvaluacionesModule = class EvaluacionesModule {
 };
 exports.EvaluacionesModule = EvaluacionesModule;
 exports.EvaluacionesModule = EvaluacionesModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [prisma_module_1.PrismaModule],
         controllers: [evaluaciones_controller_1.EvaluacionesController],
-        providers: [
-            {
-                provide: evaluaciones_service_1.EvaluacionesService,
-                useClass: evaluaciones_mock_service_1.EvaluacionesMockService,
-            }
-        ],
+        providers: [evaluaciones_service_1.EvaluacionesService],
     })
 ], EvaluacionesModule);
 //# sourceMappingURL=evaluaciones.module.js.map
