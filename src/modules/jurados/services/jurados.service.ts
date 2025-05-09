@@ -84,18 +84,25 @@ export class JuradosService {
   }
 
   async findAll() {
+    // Obtener todos los usuarios activos que son jurados
     return this.prisma.usuario.findMany({
       where: {
+        estado: true,
         usuario_rol: {
           some: {
             rol: {
-              rol: 'Jurado',
+              rol: 'Jurado'
             },
           },
         },
       },
       include: {
         usuario_rol: {
+          where: {
+            rol: {
+              rol: 'Jurado'
+            }
+          },
           include: {
             rol: true,
           },
@@ -105,8 +112,18 @@ export class JuradosService {
   }
 
   async findOne(id: number) {
-    const user = await this.prisma.usuario.findUnique({
-      where: { id_usuario: id },
+    const user = await this.prisma.usuario.findFirst({
+      where: { 
+        id_usuario: id,
+        estado: true,
+        usuario_rol: {
+          some: {
+            rol: {
+              rol: 'Jurado'
+            }
+          }
+        }
+      },
       include: {
         usuario_rol: {
           include: {
@@ -175,5 +192,152 @@ export class JuradosService {
       },
     });
     return { message: 'Contraseña creada exitosamente' };
+  }
+
+  async deleteJurado(idUsuario: number) {
+    // Verificar si el usuario existe y es jurado
+    const usuario = await this.prisma.usuario.findFirst({
+      where: {
+        id_usuario: idUsuario,
+        estado: true,
+        usuario_rol: {
+          some: {
+            rol: {
+              rol: 'Jurado'
+            }
+          }
+        }
+      }
+    });
+
+    if (!usuario) {
+      throw new NotFoundException('Jurado no encontrado o ya fue eliminado');
+    }
+
+    // Realizar eliminación lógica en una transacción
+    const result = await this.prisma.$transaction(async (prisma) => {
+      // Desactivar el rol de jurado
+      await prisma.usuario_rol.updateMany({
+        where: {
+          id_usuario: idUsuario,
+          rol: {
+            rol: 'Jurado'
+          }
+        },
+        data: {
+          estado: false
+        }
+      });
+
+      // Desactivar el usuario
+      const usuarioDesactivado = await prisma.usuario.update({
+        where: {
+          id_usuario: idUsuario
+        },
+        data: {
+          estado: false
+        }
+      });
+
+      return usuarioDesactivado;
+    });
+
+    return {
+      message: 'Jurado eliminado exitosamente',
+      id: result.id_usuario
+    };
+  }
+
+  async eliminarJurado(idJurado: number) {
+    // Verificar si el jurado existe y está activo
+    const jurado = await this.prisma.usuario.findFirst({
+      where: {
+        id_usuario: idJurado,
+        estado: true,
+        usuario_rol: {
+          some: {
+            rol: {
+              rol: 'Jurado'
+            }
+          }
+        }
+      }
+    });
+
+    if (!jurado) {
+      throw new NotFoundException('Jurado no encontrado o ya ha sido eliminado');
+    }
+
+    // Eliminación lógica: actualizar estado a false
+    await this.prisma.$transaction([
+      // Marcar el rol de jurado como inactivo
+      this.prisma.usuario_rol.updateMany({
+        where: {
+          id_usuario: idJurado,
+          rol: {
+            rol: 'Jurado'
+          }
+        },
+        data: {
+          estado: false
+        }
+      }),
+      // Marcar el usuario como inactivo
+      this.prisma.usuario.update({
+        where: {
+          id_usuario: idJurado
+        },
+        data: {
+          estado: false
+        }
+      })
+    ]);
+
+    return {
+      message: 'Jurado desactivado exitosamente',
+      id: idJurado
+    };
+  }
+
+  async reenviarInvitacion(idUsuario: number) {
+    // Verificamos si el usuario existe y no está confirmado
+    const usuario = await this.prisma.usuario.findFirst({
+      where: {
+        id_usuario: idUsuario,
+        confirmado: false,
+        usuario_rol: {
+          some: {
+            rol: {
+              rol: 'Jurado'
+            }
+          }
+        }
+      }
+    });
+
+    if (!usuario) {
+      throw new NotFoundException('Usuario no encontrado o ya confirmado');
+    }
+
+    // Generamos un nuevo token de confirmación
+    const token = Math.random().toString(36).substring(2, 15);
+
+    // Actualizamos el token en la base de datos
+    await this.prisma.usuario.update({
+      where: { id_usuario: idUsuario },
+      data: { token_confirmacion: token }
+    });
+
+    // Reenviamos el correo de bienvenida con el nuevo token
+    await this.mailService.sendWelcomeEmail(usuario.correo, token);
+
+    return {
+      message: 'Correo de invitación reenviado exitosamente',
+      usuario: {
+        id: usuario.id_usuario,
+        nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
+        correo: usuario.correo
+      }
+    };
   }
 }

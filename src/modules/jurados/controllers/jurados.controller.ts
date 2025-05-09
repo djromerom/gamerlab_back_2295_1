@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Post, Body, Param, Res, Delete, HttpCode, Req, BadRequestException } from '@nestjs/common';
+import { Response, Request } from 'express';
 import { JuradosService } from '../services/jurados.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
 
@@ -23,28 +23,41 @@ export class JuradosController {
   }
 
   @Get('confirm/:token')
-  async confirmEmail(@Param('token') token: string, @Res() res: Response) {
+  async confirmEmail(
+    @Param('token') token: string,
+    @Req() req: Request,
+    @Res() res: Response
+  ) {
     // Confirma el correo (puedes dejarlo vacío si solo quieres la pantalla)
     // await this.juradosService.confirmEmail(token);
 
-    // Devuelve un HTML simple para crear la contraseña
-    return res.send(`
-      <html>
-        <body>
-          <h2>Crear contraseña</h2>
-          <form method="POST" action="/jurados/set-password">
-            <input type="hidden" name="token" value="${token}" />
-            <label>Nueva contraseña:</label>
-            <input type="password" name="password" required />
-            <button type="submit">Guardar contraseña</button>
-          </form>
-        </body>
-      </html>
-    `);
+    const templatePath = require('path').join(__dirname, '../views/set-password.html');
+    let template = await require('fs').promises.readFile(templatePath, 'utf8');
+    
+    // Reemplazar las variables en la plantilla
+    const isResend = req.query.resend === 'true';
+    template = template.replace('{{isResend}}', isResend);
+    template = template.replace('{{token}}', token);
+    
+    return res.send(template);
   }
 
   @Post('set-password')
-  async setPassword(@Body() body: { token: string; password: string }) {
+  async setPassword(@Body() body: { token: string; password: string; confirmPassword: string }) {
+    if (body.password !== body.confirmPassword) {
+      throw new BadRequestException('Las contraseñas no coinciden');
+    }
     return this.juradosService.setPassword(body.token, body.password);
+  }
+
+  @Post(':id/reenviar-invitacion')
+  @HttpCode(200)
+  async reenviarInvitacion(@Param('id') id: string) {
+    return this.juradosService.reenviarInvitacion(Number(id));
+  }
+
+  @Delete(':id')
+  async eliminarJurado(@Param('id') id: string) {
+    return this.juradosService.eliminarJurado(Number(id));
   }
 }

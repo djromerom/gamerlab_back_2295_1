@@ -8,22 +8,24 @@ import { PrismaService } from '../prisma/prisma.service';
 @Injectable()
 export class EvaluacionService {
   constructor(private readonly prisma: PrismaService) {}
-
   async getEvaluacionesByUsuario(idUsuario: number) {
-    // 1. Verificar si el usuario tiene el rol de jurado
-    const usuarioEsJurado = await this.prisma.usuario_rol.findFirst({
+    // Verificar si es jurado y está activo
+    const usuario = await this.prisma.usuario.findFirst({
       where: {
         id_usuario: idUsuario,
-        id_rol: 2, // Rol de jurado
         estado: true,
-      },
-    });
-
-    if (!usuarioEsJurado) {
-      throw new ForbiddenException('Este usuario no tiene permisos de jurado.');
+        usuario_rol: {
+          some: {
+            rol: {
+              rol: 'Jurado'
+            }
+          }
+        }
+      }
+    });    if (!usuario) {
+      throw new ForbiddenException('Este usuario no tiene permisos de jurado o está desactivado.');
     }
 
-    // 2. Obtener evaluaciones con criterios evaluados y nombre del criterio
     const evaluaciones = await this.prisma.evaluacion.findMany({
       where: {
         id_usuario: idUsuario,
@@ -55,7 +57,6 @@ export class EvaluacionService {
       throw new NotFoundException('Este jurado no ha realizado evaluaciones.');
     }
 
-    // 3. Formatear respuesta
     return evaluaciones.map((ev) => ({
       id_evaluacion: ev.id_evaluacion,
       id_videojuegos: ev.id_videojuegos,
@@ -66,6 +67,6 @@ export class EvaluacionService {
         nombre: ce.criterio.nombre,
         valoracion: ce.valoracion,
       })),
-    }));
-  }
+    }));  }
 }
+
