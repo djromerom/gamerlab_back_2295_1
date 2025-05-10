@@ -1,23 +1,51 @@
 import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { integrante } from '@prisma/client'; 
+import { integrante_nrc } from '@prisma/client'; 
 import { CreateIntegranteDto } from './dto/create-integrante.dto';
+import { CreateIntegranteNrcDto } from './dto/create-integrante-nrc.dto';
 
 @Injectable()
 export class EstudiantesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
+async create(createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
+    const { nrcIds, ...integranteData } = createIntegranteDto;
     try {
-      // validacion de usuario git y correo uninorte ----
       const nuevoIntegrante = await this.prisma.integrante.create({
-        data: createIntegranteDto, 
+        data: {
+          ...integranteData,
+          integrante_nrc: nrcIds?.length
+            ? {
+                create: nrcIds.map(id_nrc => ({
+                  nrc: { connect: { id_nrc } },
+                  estado: true,    
+                })),
+              }
+            : undefined,
+        },
       });
-
-      return nuevoIntegrante; 
-
+      return nuevoIntegrante;
     } catch (error) {
-      throw new InternalServerErrorException('No se pudo crear el integrante.', error.message);
+      throw new InternalServerErrorException(
+        'No se pudo crear el integrante.',
+        error.message,
+      );
+    }
+  }
+
+  async createIntegranteNrc(
+    dto: CreateIntegranteNrcDto,
+  ): Promise<integrante_nrc> {
+    try {
+      return await this.prisma.integrante_nrc.create({
+        data: dto,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'No se pudo crear el registro integrante_nrc.',
+        error.message,
+      );
     }
   }
 
