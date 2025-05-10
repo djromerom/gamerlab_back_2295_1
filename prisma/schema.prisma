@@ -15,7 +15,7 @@ model criterio {
   fecha_creacion      DateTime              @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?             @updatedAt @db.Timestamp(6)
   estado              Boolean
-  porcentaje          Int
+  porcentaje          Float
   criterio_evaluacion criterio_evaluacion[]
 }
 

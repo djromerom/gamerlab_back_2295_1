@@ -1,11 +1,12 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { Public } from '../guards/auth.guard';
 
 interface UserDTO{
     email: string,
     password: string,
 }
-
+@Public()
 @Controller('auth')
 export class AuthController {
 
