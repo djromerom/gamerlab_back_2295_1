@@ -125,15 +125,13 @@ let EvaluacionesService = class EvaluacionesService {
                 comentario: evaluacion.comentario || '',
                 jurado: {
                     nombre: `${evaluacion.usuario.primer_nombre} ${evaluacion.usuario.primer_apellido}`,
-                    rol: 'Jurado'
+                    rol: 'Jurado',
                 },
-                criterios: evaluacion.criterio_evaluacion.map(ce => {
-                    return {
-                        id_criterio: ce.id_criterio,
-                        nombre: ce.criterio.nombre,
-                        valoracion: parseFloat(ce.valoracion)
-                    };
-                })
+                criterios: evaluacion.criterio_evaluacion.map(ce => ({
+                    id_criterio: ce.id_criterio,
+                    nombre: ce.criterio.nombre,
+                    valoracion: parseFloat(ce.valoracion),
+                })),
             };
         });
     }
@@ -145,18 +143,80 @@ let EvaluacionesService = class EvaluacionesService {
             include: {
                 usuario_rol: {
                     include: {
-                        rol: true
-                    }
-                }
-            }
+                        rol: true,
+                    },
+                },
+            },
         });
-        return usuarios.map(usuario => {
+        return usuarios.map(usuario => ({
+            id_usuario: usuario.id_usuario,
+            nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
+            rol: usuario.usuario_rol.length > 0 ? usuario.usuario_rol[0].rol.rol : 'Usuario',
+        }));
+    }
+    async obtenerEvaluacionesConDetalle() {
+        const evaluaciones = await this.prisma.evaluacion.findMany({
+            where: {
+                estado: true,
+            },
+            include: {
+                videojuego: {
+                    select: { nombre: true },
+                },
+                usuario: {
+                    select: { primer_nombre: true, primer_apellido: true },
+                },
+                criterio_evaluacion: {
+                    include: {
+                        criterio: {
+                            select: { nombre: true },
+                        },
+                    },
+                },
+            },
+        });
+        return evaluaciones.map(ev => {
+            const criterios = ev.criterio_evaluacion.map(ce => ({
+                nombre: ce.criterio.nombre,
+                valoracion: ce.valoracion,
+            }));
+            const promedio = criterios.length > 0
+                ? criterios.reduce((sum, c) => sum + parseFloat(c.valoracion), 0) / criterios.length
+                : 0;
             return {
-                id_usuario: usuario.id_usuario,
-                nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
-                rol: usuario.usuario_rol.length > 0 ? usuario.usuario_rol[0].rol.rol : 'Usuario'
+                videojuegoNombre: ev.videojuego.nombre,
+                juradoNombre: `${ev.usuario.primer_nombre} ${ev.usuario.primer_apellido}`,
+                criterios,
+                promedio: promedio.toFixed(2),
+                comentario: ev.comentario || '',
+                fecha: ev.fecha_creacion,
             };
         });
+    }
+    async obtenerDistribucionPorMateria() {
+        const consolidaciones = await this.listarConsolidacionesVideojuegos();
+        const materiasAgrupadas = consolidaciones.reduce((acc, curr) => {
+            const nrcs = curr.nrc;
+            if (!nrcs || nrcs.length === 0)
+                return acc;
+            nrcs.forEach(nrc => {
+                if (!acc[nrc]) {
+                    acc[nrc] = {
+                        nrc: `NRC ${nrc}`,
+                        promedioSum: 0,
+                        cantidad: 0,
+                    };
+                }
+                acc[nrc].promedioSum += curr.promedio_total;
+                acc[nrc].cantidad += 1;
+            });
+            return acc;
+        }, {});
+        return Object.values(materiasAgrupadas).map(grupo => ({
+            nrc: grupo.nrc,
+            promedio: +(grupo.promedioSum / grupo.cantidad).toFixed(2),
+            cantidad: grupo.cantidad,
+        }));
     }
 };
 exports.EvaluacionesService = EvaluacionesService;

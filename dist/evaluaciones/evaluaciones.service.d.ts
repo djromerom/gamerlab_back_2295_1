@@ -25,4 +25,20 @@ export declare class EvaluacionesService {
         nombre: string;
         rol: string;
     }[]>;
+    obtenerEvaluacionesConDetalle(): Promise<{
+        videojuegoNombre: string;
+        juradoNombre: string;
+        criterios: {
+            nombre: string;
+            valoracion: string;
+        }[];
+        promedio: string;
+        comentario: string;
+        fecha: Date;
+    }[]>;
+    obtenerDistribucionPorMateria(): Promise<{
+        nrc: string;
+        promedio: number;
+        cantidad: number;
+    }[]>;
 }

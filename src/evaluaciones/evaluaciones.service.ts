@@ -7,8 +7,6 @@ export class EvaluacionesService {
   constructor(private prisma: PrismaService) {}
 
   async consolidarEvaluaciones(id_videojuego: number): Promise<ConsolidacionEvaluacionDto> {
-
-    // 1. Obtener el videojuego con su equipo
     const videojuego = await this.prisma.videojuego.findUnique({
       where: { id_videojuego },
       include: {
@@ -36,8 +34,6 @@ export class EvaluacionesService {
       .flatMap(integrante => integrante.integrante_nrc)
       .map(integranteNrc => integranteNrc.nrc.codigo);
 
-
-    // 2. Obtener todas las evaluaciones para el videojuego
     const evaluaciones = await this.prisma.evaluacion.findMany({
       where: {
         id_videojuegos: id_videojuego,
@@ -53,14 +49,12 @@ export class EvaluacionesService {
       },
     });
 
-    // 3. Agrupar criterios y calcular promedios
     const criteriosMap = new Map<number, CriterioEvaluadoDto>();
-    
-    // Procesar todas las evaluaciones y sus criterios
+
     evaluaciones.forEach(evaluacion => {
       evaluacion.criterio_evaluacion.forEach(criterioEval => {
         const idCriterio = criterioEval.id_criterio;
-        
+
         if (!criteriosMap.has(idCriterio)) {
           criteriosMap.set(idCriterio, {
             id_criterio: idCriterio,
@@ -70,30 +64,26 @@ export class EvaluacionesService {
             valoraciones: [],
           });
         }
-        
-        // Añadir valoración a la lista de valoraciones del criterio
+
         criteriosMap.get(idCriterio)!.valoraciones.push(criterioEval.valoracion);
       });
     });
 
-    // Calcular promedio para cada criterio
     const criterios: CriterioEvaluadoDto[] = [];
     let sumaPromedios = 0;
-    
+
     criteriosMap.forEach(criterio => {
-      // Convertir valoraciones a números y calcular promedio
       const valoracionesNumericas = criterio.valoraciones.map(val => parseFloat(val));
       const promedio = valoracionesNumericas.reduce((a, b) => a + b, 0) / valoracionesNumericas.length;
-      
+
       criterio.promedio = Number(promedio.toFixed(2));
       sumaPromedios += criterio.promedio;
-      
+
       criterios.push(criterio);
     });
 
-    // Calcular promedio total
-    const promedioTotal = criterios.length > 0 
-      ? Number((sumaPromedios / criterios.length).toFixed(2)) 
+    const promedioTotal = criterios.length > 0
+      ? Number((sumaPromedios / criterios.length).toFixed(2))
       : 0;
 
     return {
@@ -108,13 +98,11 @@ export class EvaluacionesService {
   }
 
   async listarConsolidacionesVideojuegos(): Promise<ConsolidacionEvaluacionDto[]> {
-    // Obtener todos los videojuegos activos
     const videojuegos = await this.prisma.videojuego.findMany({
       where: { estado: true },
       select: { id_videojuego: true }
     });
 
-    // Consolidar evaluaciones para cada videojuego
     const consolidaciones = await Promise.all(
       videojuegos.map(vj => this.consolidarEvaluaciones(vj.id_videojuego))
     );
@@ -122,10 +110,7 @@ export class EvaluacionesService {
     return consolidaciones;
   }
 
-  // Métodos adicionales para obtener evaluaciones individuales
-
   async obtenerEvaluacionesVideojuego(id_videojuego: number) {
-    // Obtener evaluaciones para un videojuego específico
     const evaluaciones = await this.prisma.evaluacion.findMany({
       where: {
         id_videojuegos: id_videojuego,
@@ -141,7 +126,6 @@ export class EvaluacionesService {
       },
     });
 
-    // Transformar los datos para que sean más fáciles de usar en el cliente
     return evaluaciones.map(evaluacion => {
       return {
         id_evaluacion: evaluacion.id_evaluacion,
@@ -150,41 +134,108 @@ export class EvaluacionesService {
         comentario: evaluacion.comentario || '',
         jurado: {
           nombre: `${evaluacion.usuario.primer_nombre} ${evaluacion.usuario.primer_apellido}`,
-          rol: 'Jurado' // En un caso real, esto vendría de la base de datos
+          rol: 'Jurado',
         },
-        criterios: evaluacion.criterio_evaluacion.map(ce => {
-          return {
-            id_criterio: ce.id_criterio,
-            nombre: ce.criterio.nombre,
-            valoracion: parseFloat(ce.valoracion)
-          };
-        })
+        criterios: evaluacion.criterio_evaluacion.map(ce => ({
+          id_criterio: ce.id_criterio,
+          nombre: ce.criterio.nombre,
+          valoracion: parseFloat(ce.valoracion),
+        })),
       };
     });
   }
 
   async obtenerJurados() {
-    // Obtener usuarios con rol de jurado
     const usuarios = await this.prisma.usuario.findMany({
       where: {
         estado: true,
-        // En un caso real, aquí filtrarías por rol de jurado
       },
       include: {
         usuario_rol: {
           include: {
-            rol: true
-          }
-        }
-      }
+            rol: true,
+          },
+        },
+      },
     });
 
-    return usuarios.map(usuario => {
+    return usuarios.map(usuario => ({
+      id_usuario: usuario.id_usuario,
+      nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
+      rol: usuario.usuario_rol.length > 0 ? usuario.usuario_rol[0].rol.rol : 'Usuario',
+    }));
+  }
+
+  async obtenerEvaluacionesConDetalle() {
+    const evaluaciones = await this.prisma.evaluacion.findMany({
+      where: {
+        estado: true,
+      },
+      include: {
+        videojuego: {
+          select: { nombre: true },
+        },
+        usuario: {
+          select: { primer_nombre: true, primer_apellido: true },
+        },
+        criterio_evaluacion: {
+          include: {
+            criterio: {
+              select: { nombre: true },
+            },
+          },
+        },
+      },
+    });
+
+    return evaluaciones.map(ev => {
+      const criterios = ev.criterio_evaluacion.map(ce => ({
+        nombre: ce.criterio.nombre,
+        valoracion: ce.valoracion,
+      }));
+
+      const promedio = criterios.length > 0
+        ? criterios.reduce((sum, c) => sum + parseFloat(c.valoracion), 0) / criterios.length
+        : 0;
+
       return {
-        id_usuario: usuario.id_usuario,
-        nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
-        rol: usuario.usuario_rol.length > 0 ? usuario.usuario_rol[0].rol.rol : 'Usuario'
+        videojuegoNombre: ev.videojuego.nombre,
+        juradoNombre: `${ev.usuario.primer_nombre} ${ev.usuario.primer_apellido}`,
+        criterios,
+        promedio: promedio.toFixed(2),
+        comentario: ev.comentario || '',
+        fecha: ev.fecha_creacion,
       };
     });
   }
-} 
+  async obtenerDistribucionPorMateria() {
+  const consolidaciones = await this.listarConsolidacionesVideojuegos();
+
+  const materiasAgrupadas = consolidaciones.reduce((acc, curr) => {
+    const nrcs = curr.nrc;
+    if (!nrcs || nrcs.length === 0) return acc;
+
+    nrcs.forEach(nrc => {
+      if (!acc[nrc]) {
+        acc[nrc] = {
+          nrc: `NRC ${nrc}`,
+          promedioSum: 0,
+          cantidad: 0,
+        };
+      }
+
+      acc[nrc].promedioSum += curr.promedio_total;
+      acc[nrc].cantidad += 1;
+    });
+
+    return acc;
+  }, {} as Record<string, { nrc: string; promedioSum: number; cantidad: number }>);
+
+  return Object.values(materiasAgrupadas).map(grupo => ({
+    nrc: grupo.nrc,
+    promedio: +(grupo.promedioSum / grupo.cantidad).toFixed(2),
+    cantidad: grupo.cantidad,
+  }));
+}
+
+}

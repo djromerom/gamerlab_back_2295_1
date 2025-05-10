@@ -1,5 +1,6 @@
 import { EvaluacionesService } from './evaluaciones.service';
 import { ConsolidacionEvaluacionDto } from './dto/consolidacion-evaluacion.dto';
+import { Response } from 'express';
 export declare class EvaluacionesController {
     private readonly evaluacionesService;
     constructor(evaluacionesService: EvaluacionesService);
@@ -54,4 +55,6 @@ export declare class EvaluacionesController {
             cantidad: number;
         }[];
     }>;
+    exportarExcel(res: Response): Promise<void>;
+    exportarPDF(res: Response): Promise<void>;
 }
