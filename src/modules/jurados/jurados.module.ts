@@ -11,3 +11,4 @@ import { MailModule } from '../../shared/mail/mail.module';
   exports: [JuradosService],
 })
 export class JuradosModule {} 
+// comentario
