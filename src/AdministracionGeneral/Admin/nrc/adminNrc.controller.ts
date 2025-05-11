@@ -21,6 +21,7 @@ interface NrcDTO {
 export class AdminNrcController {
   constructor(private adminService: AdminNrcService) {}
   //CRUD de materias
+  @Public()
   @Post('createNrc')
   createNrc(@Body() data: NrcDTO) {
     return this.adminService.createNrc(data);

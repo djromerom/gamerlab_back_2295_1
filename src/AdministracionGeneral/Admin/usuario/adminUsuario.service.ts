@@ -37,6 +37,8 @@ export class AdminUsuarioService {
         `El correo ${data.correo} ya está registrado`,
       );
     }
+    // Verificar si el rol existe
+    this.validarRolActivo(data.id_rol);
     const token = randomUUID();
     const usuario = await this.PrismaService.usuario.create({
       data: {
@@ -59,8 +61,16 @@ export class AdminUsuarioService {
         estado: true,
       },
     });
+    const rol = await this.PrismaService.rol.findUnique({
+      where: {
+        id_rol: data.id_rol,
+      },
+    })
+    if (!rol) {
+      throw new NotFoundException(`Rol con id ${data.id_rol} no encontrado`);
+    }
     // Enviar correo de confirmación
-    await this.mailService.sendWelcomeEmail(usuario.correo, token);
+    await this.mailService.sendWelcomeEmail(usuario.correo, token, rol.rol);
     return {
       ...usuario,
       usuario_rol: usuario_rol,
@@ -163,12 +173,36 @@ export class AdminUsuarioService {
     return updatedUsuario;
   }
 
-  async deleteUsuario(id_usuario: number) {
+  async deleteUsuario(id_usuario: number, id_rol: number){
     await this.validarUsuarioActivo(id_usuario);
-    return this.PrismaService.usuario.update({
-      where: { id_usuario },
-      data: { estado: false },
+    await this.validarRolActivo(id_rol);    
+    if(id_rol === 3){
+    const NrcsUsuario = await this.PrismaService.nrc.findMany({
+      where: {
+        id_usuario: id_usuario,
+        estado: true,
+      }
     });
+    if(NrcsUsuario.length > 0){
+      throw new BadRequestException(`El usuario con id ${id_usuario} tiene nrcs asignados`);
+    }
+  }
+    this.removeRolFromUsuario(id_usuario, id_rol);
+    const usuario_rol = await this.PrismaService.usuario_rol.findFirst({
+      where: {
+        id_usuario: id_usuario,
+        estado: true,
+      }
+    });
+    if(!usuario_rol){
+      this.PrismaService.usuario.update({
+        where: { id_usuario },
+        data: { estado: false },
+      });
+    }
+    return {
+      message: `Usuario con id ${id_usuario} eliminado`,
+    }
   }
 
   async addRolToUsuario(id_usuaio: number, id_rol: number) {
@@ -200,7 +234,37 @@ export class AdminUsuarioService {
     return usuario_rol;
   }
 
-  private async validarUsuarioActivo(id_usuario: number) {
+  async removeRolFromUsuario(id_usuario: number, id_rol: number){
+    await this.validarUsuarioActivo(id_usuario);
+    await this.validarRolActivo(id_rol);
+
+    const usuario_rol = await this.PrismaService.usuario_rol.findFirst({
+      where: {
+        id_usuario: id_usuario,
+        id_rol: id_rol,
+        estado: true,
+      }
+    });
+    if(!usuario_rol){
+      throw new NotFoundException(`El rol con id ${id_rol} no existe para el usuario con id ${id_usuario}`);
+    }
+    const usuario_rolEliminado = await this.PrismaService.usuario_rol.updateMany({
+      where: {
+        id_rol: usuario_rol.id_rol,
+        id_usuario: usuario_rol.id_usuario,
+        estado: true,
+      },
+      data: {
+        estado: false,
+      }
+    });
+    return {
+      message: `Rol con id ${id_rol} eliminado del usuario con id ${id_usuario}`,
+      usuario_rolEliminado,
+    };
+  }
+
+  private async validarUsuarioActivo(id_usuario: number){
     const usuario = await this.PrismaService.usuario.findUnique({
       where: {
         id_usuario: id_usuario,
@@ -243,9 +307,7 @@ export class AdminUsuarioService {
       }
 
       const updatedUser = await this.updateUsuario(user.id_usuario, {
-        token_confirmacion: '',
-        confirmado: true,
-      });
+        confirmado: true, token_confirmacion: ''})
 
       return {
         message: 'Correo confirmado exitosamente',
@@ -265,34 +327,10 @@ export class AdminUsuarioService {
     const user = await this.PrismaService.usuario.findFirst({
       where: { token_confirmacion: token },
     });
-
-    if (!user) {
-      throw new NotFoundException('Token inválido o expirado');
-    }
-
-    if (user.confirmado) {
-      throw new BadRequestException('La cuenta ya fue confirmada');
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await this.PrismaService.usuario.update({
-      where: { id_usuario: user.id_usuario },
-      data: {
-        password: hashedPassword,
-        confirmado: true,
-        token_confirmacion: '',
-      },
-    });
-    /*
-  async setPassword(token: string, password: string) {
-    const user = await this.prisma.usuario.findFirst({
-      where: { token_confirmacion: token },
-    });
     if (!user) throw new NotFoundException('Token inválido');
 
     const hashed = await bcrypt.hash(password, 10);
-    await this.prisma.usuario.update({
+    await this.PrismaService.usuario.update({
       where: { id_usuario: user.id_usuario },
       data: {
         password: hashed,
@@ -303,7 +341,59 @@ export class AdminUsuarioService {
     return { message: 'Contraseña creada exitosamente' };
   }
 
-  return { message: 'Contraseña asignada correctamente. Ya puedes iniciar sesión.' };
-}*/
+  async reenviarInvitacion(idUsuario: number, idRol: number) {
+    // Verificamos si el usuario existe y no está confirmado
+    const usuario = await this.PrismaService.usuario.findFirst({
+      where: {
+        id_usuario: idUsuario,
+        confirmado: false,
+        estado: true,
+      }
+    });
+
+    if (!usuario) {
+      throw new NotFoundException('Usuario no encontrado o ya confirmado');
+    }
+    // Verificamos si el usuario tiene el rol
+    const usuarioRol = await this.PrismaService.usuario_rol.findFirst({
+      where: {
+        id_usuario: idUsuario,
+        id_rol: idRol,
+        estado: true,
+      }
+    });
+    if (!usuarioRol) {
+      throw new NotFoundException('El usuario no tiene el rol especificado');
+    }
+    // Verificamos si el rol existe
+    const rol = await this.PrismaService.rol.findUnique({
+      where: {
+        id_rol: idRol,
+      }
+    });
+    if (!rol) {
+      throw new NotFoundException('Rol no encontrado');
+    }
+    // Generamos un nuevo token de confirmación
+    const token = randomUUID();
+
+    // Actualizamos el token en la base de datos
+    await this.PrismaService.usuario.update({
+      where: { id_usuario: idUsuario },
+      data: { token_confirmacion: token }
+    });
+
+    // Reenviamos el correo de bienvenida con el nuevo token
+    await this.mailService.sendWelcomeEmail(usuario.correo, token, rol.rol);
+
+    return {
+      message: 'Correo de invitación reenviado exitosamente',
+      usuario: {
+        id: usuario.id_usuario,
+        nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
+        correo: usuario.correo
+      }
+    };
   }
+
 }

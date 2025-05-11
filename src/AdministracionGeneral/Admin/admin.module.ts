@@ -7,8 +7,8 @@ import { AdminNrcController } from './nrc/adminNrc.controller';
 import { AdminNrcService } from './nrc/adminNrc.service';
 import { AdminUsuarioController } from './usuario/adminUsuario.controller';
 import { AdminUsuarioService } from './usuario/adminUsuario.service';
+import { ConfirmacionController } from './usuario/confirmacion/comfirmacion.controller';
 import { MailService } from './usuario/email/email.service';
-import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [],
@@ -17,6 +17,7 @@ import { ConfigService } from '@nestjs/config';
     AdminCriterioController,
     AdminNrcController,
     AdminUsuarioController,
+    ConfirmacionController,
   ],
   providers: [
     AdminMateriaService,
@@ -24,7 +25,13 @@ import { ConfigService } from '@nestjs/config';
     AdminNrcService,
     AdminUsuarioService,
     MailService,
-    ConfigService,
   ],
+  exports: [
+    AdminMateriaService,
+    AdminCriterioService,
+    AdminNrcService,
+    AdminUsuarioService,
+    MailService,
+  ]
 })
 export class AdminModule {}
