@@ -1,0 +1,79 @@
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import * as nodemailer from 'nodemailer';
+
+@Injectable()
+export class MailService {
+  private transporter: nodemailer.Transporter;
+
+  constructor(private configService: ConfigService) {
+    this.createTransporter();
+  }
+
+  private async createTransporter() {
+    const testAccount = await nodemailer.createTestAccount();
+    
+    this.transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass,
+      },
+    });
+
+    console.log('=== Configuración de Ethereal ===');
+    console.log('Usuario:', testAccount.user);
+    console.log('Contraseña:', testAccount.pass);
+    console.log('URL de Ethereal:', 'https://ethereal.email');
+    console.log('===============================');
+  }
+
+  async sendWelcomeEmail(email: string, token: string) {
+    try {
+      const confirmUrl = `http://localhost:3000/jurados/confirm/${token}`;
+
+      const info = await this.transporter.sendMail({
+        from: '"Sistema de Jurados" <noreply@jurados.com>',
+        to: email,
+        subject: 'Confirmación de Cuenta - Sistema de Jurados',
+        html: `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+            <div style="background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              <h2 style="color: #333; margin-top: 0; margin-bottom: 24px; text-align: center;">Bienvenido al Sistema de Jurados</h2>
+              <div style="background-color: #f8f9fa; border-left: 4px solid #4a90e2; padding: 16px; margin-bottom: 24px;">
+                <p style="color: #666; margin: 0;">Gracias por aceptar ser parte de nuestro panel de jurados. Tu experiencia y criterio son fundamentales para nuestro sistema de evaluación.</p>
+              </div>
+              <p style="color: #555; margin-bottom: 16px; text-align: center;">Para confirmar tu cuenta y establecer tu contraseña, por favor haz clic en el siguiente botón:</p>
+              <div style="text-align: center; margin: 32px 0;">
+                <a href="${confirmUrl}" 
+                   style="background-color: #4a90e2; color: white; padding: 14px 28px; 
+                          text-decoration: none; border-radius: 6px; display: inline-block;
+                          font-weight: 600; transition: background-color 0.2s ease;">
+                  Confirmar Cuenta
+                </a>
+              </div>
+              <div style="border-top: 1px solid #eee; margin-top: 32px; padding-top: 20px;">
+                <p style="color: #666; font-size: 14px; margin: 0 0 8px 0;">¿No funciona el botón? Copia y pega esta URL en tu navegador:</p>
+                <p style="word-break: break-all; color: #4a90e2; font-size: 14px; margin: 0; background-color: #f8f9fa; padding: 8px; border-radius: 4px;">${confirmUrl}</p>
+              </div>
+              <p style="color: #999; font-size: 13px; text-align: center; margin-top: 24px;">Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
+            </div>
+          </div>
+        `,
+      });
+
+      console.log('=== Información del Correo Enviado ===');
+      console.log('ID del mensaje:', info.messageId);
+      console.log('URL de vista previa:', nodemailer.getTestMessageUrl(info));
+      console.log('URL de confirmación:', confirmUrl);
+      console.log('====================================');
+
+      return info;
+    } catch (error) {
+      console.error('Error al enviar el correo:', error);
+      throw error;
+    }
+  }
+} 
