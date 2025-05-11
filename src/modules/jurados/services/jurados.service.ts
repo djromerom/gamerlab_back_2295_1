@@ -1,4 +1,9 @@
-import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { MailService } from '../../../shared/mail/mail.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
@@ -70,7 +75,8 @@ export class JuradosService {
       await this.mailService.sendWelcomeEmail(user.correo, token);
 
       return {
-        message: 'Jurado creado exitosamente. Por favor, revisa tu correo para confirmar tu cuenta.',
+        message:
+          'Jurado creado exitosamente. Por favor, revisa tu correo para confirmar tu cuenta.',
         user: {
           id: user.id_usuario,
           nombre: `${user.primer_nombre} ${user.primer_apellido}`,
@@ -151,7 +157,9 @@ export class JuradosService {
       }
 
       if (user.confirmado) {
-        throw new BadRequestException('El correo ya ha sido confirmado anteriormente');
+        throw new BadRequestException(
+          'El correo ya ha sido confirmado anteriormente',
+        );
       }
 
       const updatedUser = await this.prisma.usuario.update({
