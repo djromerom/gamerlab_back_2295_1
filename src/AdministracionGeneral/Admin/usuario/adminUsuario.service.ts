@@ -33,6 +33,7 @@ export class AdminUsuarioService {
       },
     });
     if (usuarioExistente) {
+      this.addRolToUsuario(usuarioExistente.id_usuario, data.id_rol);
       throw new BadRequestException(
         `El correo ${data.correo} ya está registrado`,
       );
