@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Param, Res, Delete, HttpCode, Req, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Res, Delete, HttpCode, Req, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { JuradosService } from '../services/jurados.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
+import * as path from 'path';
+import { promises as fs } from 'fs';
 
 @Controller('jurados')
 export class JuradosController {
@@ -28,26 +30,44 @@ export class JuradosController {
     @Req() req: Request,
     @Res() res: Response
   ) {
-    // Confirma el correo (puedes dejarlo vacío si solo quieres la pantalla)
-    // await this.juradosService.confirmEmail(token);
+    try {
+      const templatePath = path.join(__dirname, '..', 'views', 'set-password.html');
+      let template = await fs.readFile(templatePath, 'utf8');
+      
+      // Replace all token placeholders
+      template = template.replaceAll('{{token}}', token);
+      
+       template = template
+        .replace('{{#if isResend}}', '')
+        .replace('{{/if}}', '')
+        .replace('{{#if}}', '')
+        .replace('{{/if}}', '');
 
-    const templatePath = require('path').join(__dirname, '../views/set-password.html');
-    let template = await require('fs').promises.readFile(templatePath, 'utf8');
-    
-    // Reemplazar las variables en la plantilla
-    const isResend = req.query.resend === 'true';
-    template = template.replace('{{isResend}}', isResend);
-    template = template.replace('{{token}}', token);
-    
-    return res.send(template);
+      
+      return res.send(template);
+    } catch (error) {
+      console.error('Error loading template:', error);
+      throw new InternalServerErrorException('Error loading template');
+    }
   }
 
   @Post('set-password')
-  async setPassword(@Body() body: { token: string; password: string; confirmPassword: string }) {
-    if (body.password !== body.confirmPassword) {
-      throw new BadRequestException('Las contraseñas no coinciden');
+  async setPassword(
+    @Body() body: { token: string; password: string; confirmPassword: string },
+    @Res() res: Response
+  ) {
+    try {
+      if (body.password !== body.confirmPassword) {
+        throw new BadRequestException('Las contraseñas no coinciden');
+      }
+
+      await this.juradosService.setPassword(body.token, body.password);
+      
+      // Redirect to frontend login page
+      return res.redirect('http://localhost:5173/login');
+    } catch (error) {
+      throw error;
     }
-    return this.juradosService.setPassword(body.token, body.password);
   }
 
   @Post(':id/reenviar-invitacion')

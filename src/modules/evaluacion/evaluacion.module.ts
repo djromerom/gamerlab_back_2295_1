@@ -2,10 +2,10 @@
 import { Module } from '@nestjs/common';
 import { EvaluacionController } from './controllers/evaluacion.controller';
 import { EvaluacionService } from './services/evaluacion.service';
-import { PrismaModule } from '../../prisma/prisma.module'; // << IMPORTANTE
+import { PrismaModule } from '../../prisma/prisma.module'; 
 
 @Module({
-  imports: [PrismaModule], // << Asegúrate de tener esto
+  imports: [PrismaModule], 
   controllers: [EvaluacionController],
   providers: [EvaluacionService],
 })

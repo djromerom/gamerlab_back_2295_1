@@ -3,6 +3,7 @@ import {
   ConflictException,
   NotFoundException,
   BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { MailService } from '../../../shared/mail/mail.service';
@@ -90,17 +91,17 @@ export class JuradosService {
   }
 
   async findAll() {
-    // Obtener todos los usuarios activos que son jurados
     return this.prisma.usuario.findMany({
       where: {
-        estado: true,
+        estado: true,  // Usuario activo
         usuario_rol: {
           some: {
             rol: {
-              rol: 'Jurado'
-            },
-          },
-        },
+              rol: 'Jurado',
+              estado: true  // Rol activo
+            }
+          }
+        }
       },
       include: {
         usuario_rol: {
@@ -110,10 +111,10 @@ export class JuradosService {
             }
           },
           include: {
-            rol: true,
-          },
-        },
-      },
+            rol: true
+          }
+        }
+      }
     });
   }
 
@@ -185,21 +186,42 @@ export class JuradosService {
   }
 
   async setPassword(token: string, password: string) {
-    const user = await this.prisma.usuario.findFirst({
-      where: { token_confirmacion: token },
-    });
-    if (!user) throw new NotFoundException('Token inválido');
+    try {
+      const user = await this.prisma.usuario.findFirst({
+        where: { 
+          token_confirmacion: token,
+          estado: true
+        },
+        include: {
+          usuario_rol: true
+        }
+      });
 
-    const hashed = await bcrypt.hash(password, 10);
-    await this.prisma.usuario.update({
-      where: { id_usuario: user.id_usuario },
-      data: {
-        password: hashed,
-        token_confirmacion: '', // Limpia el token
-        confirmado: true,
-      },
-    });
-    return { message: 'Contraseña creada exitosamente' };
+      if (!user) {
+        throw new NotFoundException('Token inválido o expirado');
+      }
+
+      const salt = await bcrypt.genSalt();
+      const hashed = await bcrypt.hash(password, salt);
+
+      await this.prisma.usuario.update({
+        where: { id_usuario: user.id_usuario },
+        data: {
+          password: hashed,
+          token_confirmacion: '',
+          confirmado: true,
+          fecha_actualizacion: new Date()
+        }
+      });
+
+      return {
+        success: true,
+        message: 'Contraseña establecida exitosamente',
+        redirectUrl: 'http://localhost:5173/login'
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
   async deleteJurado(idUsuario: number) {
