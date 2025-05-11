@@ -5,7 +5,7 @@ import {
   BadRequestException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 import { MailService } from '../../../shared/mail/mail.service';
 import { CreateJuradoDto } from '../dto/create-jurado.dto';
 import * as bcrypt from 'bcrypt';
