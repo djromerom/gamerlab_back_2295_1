@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { AdminUsuarioService } from './adminUsuario.service';
 import { Response } from 'express';
+import { Public } from 'src/AdministracionGeneral/guards/auth.guard';
 
 // esquema de usuario
 interface UsuarioDTO {
@@ -25,7 +26,7 @@ interface UsuarioDTO {
   password?: string;
   id_rol: number;
 }
-
+@Public()
 @Controller('admin')
 export class AdminUsuarioController {
   constructor(private adminService: AdminUsuarioService) {}
@@ -34,7 +35,7 @@ export class AdminUsuarioController {
   createUsuario(@Body() data: UsuarioDTO) {
     return this.adminService.createUsuario(data);
   }
-  
+
   @Get('getUsuarios')
   getUsuarios() {
     return this.adminService.getUsuarios();
@@ -49,7 +50,7 @@ export class AdminUsuarioController {
   getUsuariosByRol(@Param('id') id: string) {
     return this.adminService.getUsuariosByRol(Number(id));
   }
-/*
+  /*
   @Get('getUsuariosByMateria/:id')
   getUsuarioByMateria(@Param('id') id: string) {
     return this.adminService.getUsuarioByMateria(Number(id));
@@ -84,7 +85,7 @@ export class AdminUsuarioController {
   @Get('confirm/:token')
   async confirmEmail(@Param('token') token: string, @Res() res: Response) {
     // Confirma el correo (puedes dejarlo vacío si solo quieres la pantalla)
-     //await this.adminService.confirmEmail(token);
+    //await this.adminService.confirmEmail(token);
 
     // Devuelve un HTML simple para crear la contraseña
     return res.send(`
@@ -103,20 +104,21 @@ export class AdminUsuarioController {
   }
 
   @Post('set-password')
-  async setPassword(@Body() body: { token: string; password: string; confirmPassword: string }) {
-  if (body.password !== body.confirmPassword) {
-    throw new BadRequestException('Las contraseñas no coinciden');
-  }
-  
-  // Validación de requisitos de contraseña
-  const passwordRegex = /^(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])(?=.{8,})/;
-  if (!passwordRegex.test(body.password)) {
-    throw new BadRequestException(
-      'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial'
-    );
-  }
-  
-  return this.adminService.setPassword(body.token, body.password);
-}
-}
+  async setPassword(
+    @Body() body: { token: string; password: string; confirmPassword: string },
+  ) {
+    if (body.password !== body.confirmPassword) {
+      throw new BadRequestException('Las contraseñas no coinciden');
+    }
 
+    // Validación de requisitos de contraseña
+    const passwordRegex = /^(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])(?=.{8,})/;
+    if (!passwordRegex.test(body.password)) {
+      throw new BadRequestException(
+        'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial',
+      );
+    }
+
+    return this.adminService.setPassword(body.token, body.password);
+  }
+}

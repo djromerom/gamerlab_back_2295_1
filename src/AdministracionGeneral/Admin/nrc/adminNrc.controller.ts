@@ -8,6 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { AdminNrcService } from './adminNrc.service';
+import { Public } from 'src/AdministracionGeneral/guards/auth.guard';
 
 // esquema de nrc
 interface NrcDTO {
@@ -15,7 +16,7 @@ interface NrcDTO {
   codigo: string;
   id_usuario: number;
 }
-
+@Public()
 @Controller('admin')
 export class AdminNrcController {
   constructor(private adminService: AdminNrcService) {}

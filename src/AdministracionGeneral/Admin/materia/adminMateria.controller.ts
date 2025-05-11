@@ -1,39 +1,47 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { AdminMateriaService } from "./adminMateria.service";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { AdminMateriaService } from './adminMateria.service';
+import { Public } from 'src/AdministracionGeneral/guards/auth.guard';
 
 //esquema de la materia
 interface MateriaDTO {
-    nombre: string;
-    codigo: string;
+  nombre: string;
+  codigo: string;
 }
-
+@Public()
 @Controller('admin')
 export class AdminMateriaController {
-    constructor(private adminService: AdminMateriaService) { }
-    //CRUD de materias
-    @Post('createMateria')
-    createMateria(@Body() data: MateriaDTO) {
-        return this.adminService.createMateria(data);
-    }
+  constructor(private adminService: AdminMateriaService) {}
+  //CRUD de materias
+  @Post('createMateria')
+  createMateria(@Body() data: MateriaDTO) {
+    return this.adminService.createMateria(data);
+  }
 
-    @Get("getMaterias")
-    getMateria() {
-        return this.adminService.getMaterias();
-    }
+  @Get('getMaterias')
+  getMateria() {
+    return this.adminService.getMaterias();
+  }
 
-    @Get("getMateriaById/:id")
-    getMateriaById(@Param('id') id: string) {
-        return this.adminService.getMateriaById(Number(id));
-    }
+  @Get('getMateriaById/:id')
+  getMateriaById(@Param('id') id: string) {
+    return this.adminService.getMateriaById(Number(id));
+  }
 
-    @Put("updateMateria/:id")
-    updateMateria(@Param('id') id: string, @Body() data: MateriaDTO) {
-        return this.adminService.updateMateria(Number(id), data);
-    }
+  @Put('updateMateria/:id')
+  updateMateria(@Param('id') id: string, @Body() data: MateriaDTO) {
+    return this.adminService.updateMateria(Number(id), data);
+  }
 
-
-    @Delete("deleteMateria/:id")
-    deleteMateria(@Param('id') id: string) {
-        return this.adminService.deleteMateria(Number(id));
-    }
+  @Delete('deleteMateria/:id')
+  deleteMateria(@Param('id') id: string) {
+    return this.adminService.deleteMateria(Number(id));
+  }
 }

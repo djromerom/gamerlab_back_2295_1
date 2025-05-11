@@ -1,41 +1,48 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { AdminCriterioService } from "./adminCriterio.service";
-
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { AdminCriterioService } from './adminCriterio.service';
+import { Public } from 'src/AdministracionGeneral/guards/auth.guard';
 
 //esquema del rol
 interface CriterioDTO {
-    nombre: string,
-    descripcion: string,
-    porcentaje: number,
+  nombre: string;
+  descripcion: string;
+  porcentaje: number;
 }
-
+@Public()
 @Controller('admin')
 export class AdminCriterioController {
-    constructor(private adminService: AdminCriterioService) { }
-    //CRUD de materias
-    @Post('createCriterio')
-    createCriterio(@Body() data: CriterioDTO) {
-        return this.adminService.createCriterio(data);
-    }
+  constructor(private adminService: AdminCriterioService) {}
+  //CRUD de materias
+  @Post('createCriterio')
+  createCriterio(@Body() data: CriterioDTO) {
+    return this.adminService.createCriterio(data);
+  }
 
-    @Get("getCriterios")
-    getCriterios() {
-        return this.adminService.getCriterios();
-    }
+  @Get('getCriterios')
+  getCriterios() {
+    return this.adminService.getCriterios();
+  }
 
-    @Get("getCriterioById/:id")
-    getCriterioById(@Param('id') id: string) {
-        return this.adminService.getCriterioById(Number(id));
-    }
+  @Get('getCriterioById/:id')
+  getCriterioById(@Param('id') id: string) {
+    return this.adminService.getCriterioById(Number(id));
+  }
 
-    @Put("updateCriterio/:id")
-    updateCriterio(@Param('id') id: string, @Body() data: CriterioDTO) {
-        return this.adminService.updateCriterio(Number(id), data);
-    }
+  @Put('updateCriterio/:id')
+  updateCriterio(@Param('id') id: string, @Body() data: CriterioDTO) {
+    return this.adminService.updateCriterio(Number(id), data);
+  }
 
-
-    @Delete("deleteCriterio/:id")
-    deleteCriterio(@Param('id') id: string) {
-        return this.adminService.deleteCriterio(Number(id));
-    }
+  @Delete('deleteCriterio/:id')
+  deleteCriterio(@Param('id') id: string) {
+    return this.adminService.deleteCriterio(Number(id));
+  }
 }
