@@ -66,7 +66,7 @@ export class AdminUsuarioService {
       where: {
         id_rol: data.id_rol,
       },
-    })
+    });
     if (!rol) {
       throw new NotFoundException(`Rol con id ${data.id_rol} no encontrado`);
     }
@@ -175,36 +175,38 @@ export class AdminUsuarioService {
     return updatedUsuario;
   }
 
-  async deleteUsuario(id_usuario: number, id_rol: number){
+  async deleteUsuario(id_usuario: number, id_rol: number) {
     await this.validarUsuarioActivo(id_usuario);
-    await this.validarRolActivo(id_rol);    
-    if(id_rol === 3){
-    const NrcsUsuario = await this.PrismaService.nrc.findMany({
-      where: {
-        id_usuario: id_usuario,
-        estado: true,
+    await this.validarRolActivo(id_rol);
+    if (id_rol === 3) {
+      const NrcsUsuario = await this.PrismaService.nrc.findMany({
+        where: {
+          id_usuario: id_usuario,
+          estado: true,
+        },
+      });
+      if (NrcsUsuario.length > 0) {
+        throw new BadRequestException(
+          `El usuario con id ${id_usuario} tiene nrcs asignados`,
+        );
       }
-    });
-    if(NrcsUsuario.length > 0){
-      throw new BadRequestException(`El usuario con id ${id_usuario} tiene nrcs asignados`);
     }
-  }
     await this.removeRolFromUsuario(id_usuario, id_rol);
     const usuario_rol = await this.PrismaService.usuario_rol.findFirst({
       where: {
         id_usuario: id_usuario,
         estado: true,
-      }
+      },
     });
-    if(!usuario_rol){
+    if (!usuario_rol) {
       await this.PrismaService.usuario.update({
-        where: { id_usuario },
+        where: { id_usuario: id_usuario },
         data: { estado: false },
       });
     }
     return {
       message: `Usuario con id ${id_usuario} eliminado`,
-    }
+    };
   }
 
   async addRolToUsuario(id_usuaio: number, id_rol: number) {
@@ -236,7 +238,7 @@ export class AdminUsuarioService {
     return usuario_rol;
   }
 
-  async removeRolFromUsuario(id_usuario: number, id_rol: number){
+  async removeRolFromUsuario(id_usuario: number, id_rol: number) {
     await this.validarUsuarioActivo(id_usuario);
     await this.validarRolActivo(id_rol);
 
@@ -245,28 +247,31 @@ export class AdminUsuarioService {
         id_usuario: id_usuario,
         id_rol: id_rol,
         estado: true,
-      }
-    });
-    if(!usuario_rol){
-      throw new NotFoundException(`El rol con id ${id_rol} no existe para el usuario con id ${id_usuario}`);
-    }
-    const usuario_rolEliminado = await this.PrismaService.usuario_rol.updateMany({
-      where: {
-        id_rol: usuario_rol.id_rol,
-        id_usuario: usuario_rol.id_usuario,
-        estado: true,
       },
-      data: {
-        estado: false,
-      }
     });
+    if (!usuario_rol) {
+      throw new NotFoundException(
+        `El rol con id ${id_rol} no existe para el usuario con id ${id_usuario}`,
+      );
+    }
+    const usuario_rolEliminado =
+      await this.PrismaService.usuario_rol.updateMany({
+        where: {
+          id_rol: usuario_rol.id_rol,
+          id_usuario: usuario_rol.id_usuario,
+          estado: true,
+        },
+        data: {
+          estado: false,
+        },
+      });
     return {
       message: `Rol con id ${id_rol} eliminado del usuario con id ${id_usuario}`,
       usuario_rolEliminado,
     };
   }
 
-  private async validarUsuarioActivo(id_usuario: number){
+  private async validarUsuarioActivo(id_usuario: number) {
     const usuario = await this.PrismaService.usuario.findUnique({
       where: {
         id_usuario: id_usuario,
@@ -309,7 +314,9 @@ export class AdminUsuarioService {
       }
 
       const updatedUser = await this.updateUsuario(user.id_usuario, {
-        confirmado: true, token_confirmacion: ''})
+        confirmado: true,
+        token_confirmacion: '',
+      });
 
       return {
         message: 'Correo confirmado exitosamente',
@@ -350,7 +357,7 @@ export class AdminUsuarioService {
         id_usuario: idUsuario,
         confirmado: false,
         estado: true,
-      }
+      },
     });
 
     if (!usuario) {
@@ -362,7 +369,7 @@ export class AdminUsuarioService {
         id_usuario: idUsuario,
         id_rol: idRol,
         estado: true,
-      }
+      },
     });
     if (!usuarioRol) {
       throw new NotFoundException('El usuario no tiene el rol especificado');
@@ -371,7 +378,7 @@ export class AdminUsuarioService {
     const rol = await this.PrismaService.rol.findUnique({
       where: {
         id_rol: idRol,
-      }
+      },
     });
     if (!rol) {
       throw new NotFoundException('Rol no encontrado');
@@ -382,7 +389,7 @@ export class AdminUsuarioService {
     // Actualizamos el token en la base de datos
     await this.PrismaService.usuario.update({
       where: { id_usuario: idUsuario },
-      data: { token_confirmacion: token }
+      data: { token_confirmacion: token },
     });
 
     // Reenviamos el correo de bienvenida con el nuevo token
@@ -393,9 +400,8 @@ export class AdminUsuarioService {
       usuario: {
         id: usuario.id_usuario,
         nombre: `${usuario.primer_nombre} ${usuario.primer_apellido}`,
-        correo: usuario.correo
-      }
+        correo: usuario.correo,
+      },
     };
   }
-
 }
