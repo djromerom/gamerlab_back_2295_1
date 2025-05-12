@@ -32,26 +32,4 @@ export class EvaluacionController {
 
 
 
-/*@Delete('DeleteEvaluacionById/:id') // Maneja solicitudes DELETE a /evaluacion/:id
-  async deleteEvaluacionById(@Param('id') idEvaluacion: number) {
-    return this.evaluacionService.deleteEvaluacionById(Number(idEvaluacion));
-}
-
-@Put('putEvaluacionById') // Maneja solicitudes PUT a /evaluacion/:id
-  async updateEvaluacion(
-    @Body()
-    body: {
-      idEvaluacion: number;
-      comentario: string;
-      criterios: { id_criterio: number; valoracion: string }[];
-    },
-  ) {
-    const {idEvaluacion, comentario, criterios } = body;
-    return this.evaluacionService.updateEvaluacion(
-      Number(idEvaluacion),
-      comentario,
-      criterios,
-    );
-  }
-  */
 }
