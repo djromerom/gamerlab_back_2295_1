@@ -10,4 +10,5 @@ export class CreateEquipoDto {
   @IsBoolean()
   estado: boolean;
 
+  imagen_url: string;
 }
