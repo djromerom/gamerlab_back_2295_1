@@ -142,6 +142,7 @@ export class AdminUsuarioService {
     if (!usuario) {
       throw new NotFoundException(`usuario con id ${id_usuario} no encontrado`);
     }
+    return usuario;
   }
 
   async updateUsuario(
@@ -188,7 +189,7 @@ export class AdminUsuarioService {
       throw new BadRequestException(`El usuario con id ${id_usuario} tiene nrcs asignados`);
     }
   }
-    this.removeRolFromUsuario(id_usuario, id_rol);
+    await this.removeRolFromUsuario(id_usuario, id_rol);
     const usuario_rol = await this.PrismaService.usuario_rol.findFirst({
       where: {
         id_usuario: id_usuario,
@@ -196,7 +197,7 @@ export class AdminUsuarioService {
       }
     });
     if(!usuario_rol){
-      this.PrismaService.usuario.update({
+      await this.PrismaService.usuario.update({
         where: { id_usuario },
         data: { estado: false },
       });
