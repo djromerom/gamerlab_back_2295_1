@@ -2,11 +2,11 @@ import { Controller, Post, Param, Body, Get, Delete, Put } from '@nestjs/common'
 import { EvaluacionService } from '../services/evaluacion.services';
 
 
-@Controller('evaluacion') // Ruta base: /evaluacion
+@Controller('evaluacion')
 export class EvaluacionController {
   constructor(private readonly evaluacionService: EvaluacionService) {}
 
-@Post('createEvaluacion') // Maneja solicitudes POST a /evaluacion/createEvaluacion
+@Post('createEvaluacion') 
   async createEvaluacion(
     @Body()
     body: {
@@ -25,11 +25,43 @@ export class EvaluacionController {
     );
 }
 
-@Get('getEvaluacionesByUsuario/:idUsuario') // Maneja solicitudes GET a /evaluacion/usuario/:idUsuario
+@Get('getEvaluacionesByUsuario/:idUsuario')
   async getEvaluacionesByUsuario(@Param('idUsuario') idUsuario: number) {
     return this.evaluacionService.getEvaluacionesByUsuario(Number(idUsuario));
 }
 
+@Get('getEvaluacionByVideojuegoAndUsuario/:id_videojuego/:id_usuario')
+  async getEvaluacionByVideojuegoAndUsuario(
+    @Param('id_videojuego') id_videojuego: number,
+    @Param('id_usuario') id_usuario: number,
+  ) {
+    return this.evaluacionService.getEvaluacionByVideojuegoAndUsuario(
+      Number(id_videojuego),
+      Number(id_usuario),
+    );
+  }
 
 
+/*@Delete('DeleteEvaluacionById/:id') // Maneja solicitudes DELETE a /evaluacion/:id
+  async deleteEvaluacionById(@Param('id') idEvaluacion: number) {
+    return this.evaluacionService.deleteEvaluacionById(Number(idEvaluacion));
+}
+
+@Put('putEvaluacionById') // Maneja solicitudes PUT a /evaluacion/:id
+  async updateEvaluacion(
+    @Body()
+    body: {
+      idEvaluacion: number;
+      comentario: string;
+      criterios: { id_criterio: number; valoracion: string }[];
+    },
+  ) {
+    const {idEvaluacion, comentario, criterios } = body;
+    return this.evaluacionService.updateEvaluacion(
+      Number(idEvaluacion),
+      comentario,
+      criterios,
+    );
+  }
+  */
 }
