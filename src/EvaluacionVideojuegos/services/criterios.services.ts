@@ -4,9 +4,9 @@ import { NotFoundError } from "rxjs";
 
 @Injectable()
 export class CriteriosService {
-constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
-async getAllCriterios() {
+  async getAllCriterios() {
     const criterios = await this.prisma.criterio.findMany({
       select: {
         id_criterio: true,
@@ -14,12 +14,13 @@ async getAllCriterios() {
         descripcion: true,
       },
     });
-  
+
     if (criterios.length === 0) {
-      throw new NotFoundException("No se encontraron criterios en la base de datos.");
+      throw new NotFoundException(
+        'No se encontraron criterios en la base de datos.',
+      );
     }
-  
+
     return criterios;
   }
-  
 }
