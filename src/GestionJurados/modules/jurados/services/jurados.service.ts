@@ -120,7 +120,7 @@ export class JuradosService {
 
   async findOne(id: number) {
     const user = await this.prisma.usuario.findFirst({
-      where: {
+      where: { 
         id_usuario: id,
         estado: true,
         usuario_rol: {
@@ -134,10 +134,10 @@ export class JuradosService {
       include: {
         usuario_rol: {
           include: {
-            rol: true
-          }
-        }
-      }
+            rol: true,
+          },
+        },
+      },
     });
 
     if (!user) {

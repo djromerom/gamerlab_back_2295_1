@@ -25,14 +25,29 @@ export class JuradosController {
   }
 
   @Get('confirm/:token')
-  async confirmEmail(@Param('token') token: string, @Res() res: Response) {
+  async confirmEmail(
+    @Param('token') token: string,
+    @Req() req: Request,
+    @Res() res: Response
+  ) {
     try {
       const templatePath = path.join(__dirname, '..', 'views', 'set-password.html');
       let template = await fs.readFile(templatePath, 'utf8');
+      
+      // Replace all token placeholders
       template = template.replaceAll('{{token}}', token);
+      
+       template = template
+        .replace('{{#if isResend}}', '')
+        .replace('{{/if}}', '')
+        .replace('{{#if}}', '')
+        .replace('{{/if}}', '');
+
+      
       return res.send(template);
     } catch (error) {
-      throw new BadRequestException('Error al cargar la página de confirmación');
+      console.error('Error loading template:', error);
+      throw new InternalServerErrorException('Error loading template');
     }
   }
 
@@ -42,20 +57,13 @@ export class JuradosController {
     @Res() res: Response
   ) {
     try {
-      if (!body.token) {
-        throw new BadRequestException('Token requerido');
-      }
-
       if (body.password !== body.confirmPassword) {
         throw new BadRequestException('Las contraseñas no coinciden');
       }
 
-      const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
-      if (!passwordRegex.test(body.password)) {
-        throw new BadRequestException('La contraseña no cumple con los requisitos mínimos');
-      }
-
       await this.juradosService.setPassword(body.token, body.password);
+      
+      // Redirect to frontend login page
       return res.redirect('http://localhost:5173/login');
     } catch (error) {
       throw error;
