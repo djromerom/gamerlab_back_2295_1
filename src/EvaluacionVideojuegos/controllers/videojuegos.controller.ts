@@ -1,6 +1,8 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { VideojuegosService } from '../services/videojuegos.services';
+import { Public } from '../guards/auth.guard';
 
+@Public()
 @Controller('videojuegos')
 export class VideojuegosController {
 constructor(private readonly videojuegosService: VideojuegosService) {}
