@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { CriteriosService } from '../services/criterios.services';
+import { Public } from '../guards/auth.guard';
 
+@Public()
 @Controller('criterios')
 export class CriteriosController {
 constructor(private readonly criteriosService: CriteriosService) {}
