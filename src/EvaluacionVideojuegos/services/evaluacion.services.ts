@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException,ConflictException} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -101,6 +97,55 @@ export class EvaluacionService {
         valoracion: criterio.valoracion,
       })),
     }));
+  }
+
+  async getEvaluacionByVideojuegoAndUsuario(
+    id_videojuego: number,
+    id_usuario: number,
+  ) {
+    const evaluacion = await this.prisma.evaluacion.findFirst({
+      where: {
+        id_videojuegos: id_videojuego,
+        id_usuario: id_usuario,
+      },
+      select: {
+        id_evaluacion: true,
+        id_usuario: true,
+        id_videojuegos: true,
+        comentario: true,
+        fecha_creacion: true,
+        criterio_evaluacion: {
+          select: {
+            id_criterio: true,
+            valoracion: true,
+            criterio: {
+              select: {
+                nombre: true,
+                porcentaje: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!evaluacion) {
+      throw new NotFoundException(
+        `No se encontró una evaluación para el videojuego con ID ${id_videojuego} realizada por el usuario con ID ${id_usuario}.`,
+      );
+    }
+
+    const contribuciones = evaluacion.criterio_evaluacion.map(
+      (criterioEval) => {
+        const peso = criterioEval.criterio.porcentaje || 0;
+        const nota = parseFloat(criterioEval.valoracion) || 0;
+        return peso * nota;
+      },
+    );
+
+    const notaFinal = contribuciones.reduce((sum, val) => sum + val, 0);
+
+    return { ...evaluacion, notaFinal };
   }
 
   /*async deleteEvaluacionById(idEvaluacion: number) {
