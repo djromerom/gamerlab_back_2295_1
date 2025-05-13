@@ -1,10 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService
+  ) {}
 
   async validateUser(correo: string, password: string) {
     const user = await this.prisma.usuario.findFirst({
@@ -49,17 +53,26 @@ export class AuthService {
         data: { ultima_conexion: new Date() }
       });
 
-      return {
-        id_usuario: user.id_usuario,
-        nombre: `${user.primer_nombre} ${user.primer_apellido}`,
+      const payload = {
+        sub: user.id_usuario,
         correo: user.correo,
-        rol: 'Jurado',
-        evaluaciones: await this.prisma.evaluacion.count({
-          where: {
-            id_usuario: user.id_usuario,
-            estado: true
-          }
-        })
+        rol: 'Jurado'
+      };
+
+      return {
+        access_token: this.jwtService.sign(payload),
+        user: {
+          id_usuario: user.id_usuario,
+          nombre: `${user.primer_nombre} ${user.primer_apellido}`,
+          correo: user.correo,
+          rol: 'Jurado',
+          evaluaciones: await this.prisma.evaluacion.count({
+            where: {
+              id_usuario: user.id_usuario,
+              estado: true
+            }
+          })
+        }
       };
     } catch (error) {
       throw new UnauthorizedException('Error al validar credenciales');
