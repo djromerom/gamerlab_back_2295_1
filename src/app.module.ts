@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import { JuradosModule } from './modules/jurados/jurados.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { EvaluacionModule } from './modules/evaluacion/evaluacion.module';
@@ -7,16 +8,12 @@ import { MailModule } from './shared/mail/mail.module';
 
 @Module({
   imports: [
-    // Configuración global
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-
-    // Módulos de infraestructura
     PrismaModule,
     MailModule,
-
-    // Módulos de funcionalidad
+    AuthModule,
     JuradosModule,
     EvaluacionModule,
   ],
