@@ -9,6 +9,8 @@ import { AdminUsuarioController } from './usuario/adminUsuario.controller';
 import { AdminUsuarioService } from './usuario/adminUsuario.service';
 import { ConfirmacionController } from './usuario/confirmacion/comfirmacion.controller';
 import { MailService } from './usuario/email/email.service';
+import { MonitoreoController } from './monitoreo/monitoreo.controller';
+import { MonitoreoService } from './monitoreo/monitoreo.service';
 
 @Module({
   imports: [],
@@ -18,6 +20,7 @@ import { MailService } from './usuario/email/email.service';
     AdminNrcController,
     AdminUsuarioController,
     ConfirmacionController,
+    MonitoreoController,
   ],
   providers: [
     AdminMateriaService,
@@ -25,6 +28,7 @@ import { MailService } from './usuario/email/email.service';
     AdminNrcService,
     AdminUsuarioService,
     MailService,
+    MonitoreoService,
   ],
   exports: [
     AdminMateriaService,
@@ -32,6 +36,7 @@ import { MailService } from './usuario/email/email.service';
     AdminNrcService,
     AdminUsuarioService,
     MailService,
+    MonitoreoService,
   ]
 })
 export class AdminModule {}
