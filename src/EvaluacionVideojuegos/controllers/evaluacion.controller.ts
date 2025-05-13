@@ -1,6 +1,8 @@
 import { Controller, Post, Param, Body, Get, Delete, Put } from '@nestjs/common';
 import { EvaluacionService } from '../services/evaluacion.services';
+import { Public } from '../guards/auth.guard';
 
+@Public()
 
 @Controller('evaluacion')
 export class EvaluacionController {
