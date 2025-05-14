@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { AdminMateriaService } from "./adminMateria.service";
 
-//esquema de la materia
 interface MateriaDTO {
     nombre: string;
     codigo: string;
@@ -10,7 +9,6 @@ interface MateriaDTO {
 @Controller('admin')
 export class AdminMateriaController {
     constructor(private adminService: AdminMateriaService) { }
-    //CRUD de materias
     @Post('createMateria')
     createMateria(@Body() data: MateriaDTO) {
         return this.adminService.createMateria(data);
@@ -36,4 +34,5 @@ export class AdminMateriaController {
     deleteMateria(@Param('id') id: string) {
         return this.adminService.deleteMateria(Number(id));
     }
+
 }

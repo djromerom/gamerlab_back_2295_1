@@ -1,13 +1,15 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from "src/prisma/prisma.service";
+import { materia as FrontendMateriaInterface, nrc as FrontendNrcInterface } from '@prisma/client'; 
+
 
 @Injectable()
 export class AdminMateriaService {
-  constructor(private PrismaService: PrismaService) {}
-// CRUD de Materias
+  constructor(private prismaService: PrismaService) {}
+
   async createMateria(data: { nombre: string; codigo: string }) {
     console.log('DATA RECIBIDA:', data);
-    return this.PrismaService.materia.create({
+    return this.prismaService.materia.create({ // Usa prismaService, no PrismaService
       data: {
         nombre: data.nombre,
         codigo: data.codigo,
@@ -16,16 +18,26 @@ export class AdminMateriaService {
     });
   }
 
-  async getMaterias() {
-    return this.PrismaService.materia.findMany({
-      where: {
-        estado: true,
-      },
-    });
-  }
+   async getMaterias() {
+     try {
+        const materias = await this.prismaService.materia.findMany({ 
+          where: {
+            estado: true,
+          },
+        });
+        return materias; 
+     } catch (error) {
+         console.error('Error getting materias:', error);
+         throw new InternalServerErrorException('Failed to fetch materias.');
+     }
+   }
+
 
   async getMateriaById(id_materia: number) {
-    const materia = await this.PrismaService.materia.findFirst({
+     if (isNaN(id_materia) || id_materia <= 0) {
+          throw new BadRequestException('ID de materia inválido.');
+      }
+    const materia = await this.prismaService.materia.findFirst({ 
       where: {
         id_materia,
         estado: true,
@@ -36,34 +48,39 @@ export class AdminMateriaService {
       throw new NotFoundException(`Materia con id ${id_materia} no encontrada o inactiva`);
     }
 
-    return materia;
+    return materia; 
   }
 
   async updateMateria(id_materia: number, data: { nombre?: string; codigo?: string }) {
     await this.validarMateriaActiva(id_materia);
-  
-    return this.PrismaService.materia.update({
+
+    return this.prismaService.materia.update({ 
       where: { id_materia },
       data,
     });
   }
-  
+
   async deleteMateria(id_materia: number) {
     await this.validarMateriaActiva(id_materia);
-  
-    return this.PrismaService.materia.update({
+
+    return this.prismaService.materia.update({
       where: { id_materia },
       data: { estado: false },
     });
   }
 
   private async validarMateriaActiva(id_materia: number) {
-    const materia = await this.PrismaService.materia.findUnique({ where: { id_materia } });
-  
+     if (isNaN(id_materia) || id_materia <= 0) {
+          throw new BadRequestException('ID de materia inválido para validación.');
+     }
+    const materia = await this.prismaService.materia.findUnique({ where: { id_materia } }); 
     if (!materia || !materia.estado) {
       throw new NotFoundException(`Materia con id ${id_materia} no encontrada o inactiva`);
     }
-  
-    return materia;
+
+    return materia; 
   }
+
+
+  
 }

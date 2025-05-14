@@ -4,11 +4,11 @@ import { CreateIntegranteDto } from './dto/create-integrante.dto';
 import { CreateIntegranteNrcDto } from './dto/create-integrante-nrc.dto';
 import { integrante } from '@prisma/client'
 
-@Controller('estudiantes') // http://localhost:3000/estudiantes
+@Controller('estudiantes') 
 export class EstudiantesController {
   constructor(private readonly estudiantesService: EstudiantesService) {}
 
-  @Post() // crear estudiantes
+  @Post() 
   async create(@Body() createIntegranteDto: CreateIntegranteDto): Promise<integrante> {
     return this.estudiantesService.create(createIntegranteDto);
   }
@@ -18,12 +18,12 @@ export class EstudiantesController {
     return this.estudiantesService.createIntegranteNrc(dto);
   }
 
-  @Get() // obtener estudiantes
+  @Get() 
   async findAll(): Promise<integrante[]> {
     return this.estudiantesService.findAll();
   }
 
-  @Get(':id') // obtener estudiante por ID: http://localhost:3000/estudiantes/id
+  @Get(':id') 
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<integrante | null> {
     return this.estudiantesService.findOne(id);
   }

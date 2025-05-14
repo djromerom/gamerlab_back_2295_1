@@ -147,7 +147,6 @@ export class VideojuegosService {
   }
 
   async remove(id: number) {
-    // Verificar si existe el videojuego
     await this.findOne(id);
 
     return this.prisma.videojuego.delete({

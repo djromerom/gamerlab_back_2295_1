@@ -53,7 +53,7 @@ export class EquiposService {
   async findByName(name: string): Promise<equipo | null> {
     
       const equipoEncontrado = await this.prisma.equipo.findFirst({
-        where: { nombre: name }, // Asegúrate de que 'nombre' sea el campo correcto en tu modelo de Prisma
+        where: { nombre: name }, 
       });
       
       return equipoEncontrado;

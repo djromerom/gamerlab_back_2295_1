@@ -6,7 +6,7 @@ export class UpdateVideojuegoDto {
   nombre?: string;
 
   @IsString()
-  token_captcha: string; // Token de reCAPTCHA para validación
+  token_captcha: string; 
 
   @IsOptional()
   @IsString()

@@ -15,10 +15,6 @@ export class EquiposController {
       if (existingTeam) {
         throw new HttpException('Team with this name already exists', HttpStatus.CONFLICT);
       }
-  
-  
-  
-      // Crear el equipo después de todas las validaciones
       return this.equiposService.create(createEquipoDto);
     }
   
