@@ -61,7 +61,7 @@ export class EvaluacionService {
 
   async getEvaluacionesByUsuario(idUsuario: number) {
     const evaluaciones = await this.prisma.evaluacion.findMany({
-      where: { id_usuario: idUsuario },
+      where: { id_usuario: idUsuario, estado: true },
       select: {
         id_evaluacion: true,
         id_usuario: true,
@@ -107,6 +107,7 @@ export class EvaluacionService {
       where: {
         id_videojuegos: id_videojuego,
         id_usuario: id_usuario,
+        estado: true
       },
       select: {
         id_evaluacion: true,

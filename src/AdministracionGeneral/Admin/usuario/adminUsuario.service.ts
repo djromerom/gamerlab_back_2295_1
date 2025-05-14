@@ -121,6 +121,7 @@ export class AdminUsuarioService {
     const usuarios = await this.PrismaService.usuario.findMany({
       where: {
         estado: true,
+        confirmado: true,
         usuario_rol: {
           some: {
             id_rol: id_rol,

@@ -8,6 +8,9 @@ export class VideojuegosService {
 
   async getAllVideojuegos() {
     const videojuegos = await this.prisma.videojuego.findMany({
+      where: {
+        estado: true,
+      },
       select: {
         id_videojuego: true,
         id_equipo: true,
@@ -58,7 +61,7 @@ export class VideojuegosService {
 
   async getVideojuegoById(id_videojuego: number, id_usuario: number) {
     const videojuego = await this.prisma.videojuego.findUnique({
-      where: { id_videojuego },
+      where: { id_videojuego, estado: true },
       select: {
         id_videojuego: true,
         id_equipo: true,
@@ -118,7 +121,7 @@ export class VideojuegosService {
 
   async getVideojuegosNoEvaluadosPorUsuario(id_usuario: number) {
     const evaluaciones = await this.prisma.evaluacion.findMany({
-      where: { id_usuario },
+      where: { id_usuario, estado: true },
       select: { id_videojuegos: true },
     });
 
@@ -149,6 +152,7 @@ export class VideojuegosService {
 
   async getAllVideojuegosByUsuario(id_usuario: number) {
     const videojuegos = await this.prisma.videojuego.findMany({
+      where:{estado:true},
       select: {
         id_videojuego: true,
         id_equipo: true,
