@@ -1,6 +1,8 @@
 import { Controller, Get } from "@nestjs/common";
 import { MonitoreoService } from "./monitoreo.service";
+import { Public } from "src/AdministracionGeneral/guards/auth.guard";
 
+@Public()
 @Controller('monitoreo')
 export class MonitoreoController {
 
@@ -28,7 +30,7 @@ export class MonitoreoController {
 
     @Get('ranking')
     getRanking(){
-
+        return this.monitoreoService.getRanking();
     }
 
     @Get('sinCalificar')

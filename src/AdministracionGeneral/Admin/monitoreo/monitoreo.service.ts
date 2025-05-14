@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 
 @Injectable()
@@ -33,6 +33,66 @@ export class MonitoreoService {
     async getCountEvaluacionesEsperadas() {
 
     }
+
+    async getRanking() {
+  const videojuegos = await this.PrismaService.videojuego.findMany({
+    where: {
+      estado: true,
+    },
+    select: {
+      id_videojuego: true,
+      id_equipo: true,
+      nombre: true,
+      descripcion: true,
+      evaluacion: {
+        select: {
+          id_evaluacion: true,
+          criterio_evaluacion: {
+            select: {
+              criterio: {
+                select: {
+                  nombre: true,
+                  porcentaje: true,
+                },
+              },
+              valoracion: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (videojuegos.length === 0) {
+    throw new NotFoundException(
+      'No se encontraron videojuegos en la base de datos.',
+    );
+  }
+
+  const videojuegosConNotas = videojuegos.map((videojuego) => {
+    if (videojuego.evaluacion.length > 0) {
+      const notas = videojuego.evaluacion.flatMap((evaluacion) =>
+        evaluacion.criterio_evaluacion.map((criterioEval) => {
+          const peso = criterioEval.criterio.porcentaje;
+          const nota = parseFloat(criterioEval.valoracion);
+          return peso * nota;
+        }),
+      );
+      const notaFinal = notas.reduce((sum, nota) => sum + nota, 0);
+      return { ...videojuego, notaFinal };
+    }
+    return { ...videojuego, notaFinal: null };
+  });
+
+  // Ordenar por notaFinal de mayor a menor (nulls al final)
+  const videojuegosOrdenados = videojuegosConNotas.sort((a, b) => {
+    if (a.notaFinal === null) return 1;
+    if (b.notaFinal === null) return -1;
+    return b.notaFinal - a.notaFinal;
+  });
+
+  return videojuegosOrdenados;
+}
 
     async getPromedioGlobal() {
   const videojuegos = await this.PrismaService.videojuego.findMany({
