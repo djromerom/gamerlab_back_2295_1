@@ -38,7 +38,7 @@ model equipo {
   fecha_creacion      DateTime     @default(now()) @db.Timestamp(6)
   fecha_actualizacion DateTime?    @updatedAt @db.Timestamp(6)
   estado              Boolean
-  imagen_url          String
+  imagen_url          String?
   integrante          integrante[]
   videojuego          videojuego[]
   estado_equipo       estado       @relation(fields: [id_estado], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
