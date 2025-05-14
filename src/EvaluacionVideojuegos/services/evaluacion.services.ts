@@ -22,7 +22,7 @@ export class EvaluacionService {
     }
 
     const evaluacionExistente = await this.prisma.evaluacion.findFirst({
-      where: { id_usuario: idUsuario, id_videojuegos: idVideojuego },
+      where: { id_usuario: idUsuario, id_videojuegos: idVideojuego, estado: true },
     });
 
     if (evaluacionExistente) {
@@ -61,7 +61,7 @@ export class EvaluacionService {
 
   async getEvaluacionesByUsuario(idUsuario: number) {
     const evaluaciones = await this.prisma.evaluacion.findMany({
-      where: { id_usuario: idUsuario },
+      where: { id_usuario: idUsuario, estado: true },
       select: {
         id_evaluacion: true,
         id_usuario: true,
@@ -107,6 +107,7 @@ export class EvaluacionService {
       where: {
         id_videojuegos: id_videojuego,
         id_usuario: id_usuario,
+        estado: true,
       },
       select: {
         id_evaluacion: true,
@@ -148,39 +149,4 @@ export class EvaluacionService {
     return { ...evaluacion, notaFinal };
   }
 
-  /*async deleteEvaluacionById(idEvaluacion: number) {
-    await this.prisma.criterio_evaluacion.deleteMany({
-      where: { id_evaluacion: idEvaluacion },
-    });
-
-    return this.prisma.evaluacion.delete({
-      where: { id_evaluacion: idEvaluacion },
-    });
-}
-
-async updateEvaluacion( /// Solucionar esta vaina
-    idEvaluacion: number,
-    comentario: string,
-    criterios: { id_criterio: number; valoracion: string }[],
-  ) {
-    // Actualizar el comentario de la evaluación
-    const evaluacion = await this.prisma.evaluacion.update({
-      where: { id_evaluacion: idEvaluacion },
-      data: { comentario },
-    });
-
-    // Actualizar las valoraciones de los criterios
-    for (const criterio of criterios) {
-      await this.prisma.criterio_evaluacion.updateMany({
-        where: {
-          id_evaluacion: idEvaluacion,
-          id_criterio: criterio.id_criterio,
-        },
-        data: { valoracion: criterio.valoracion },
-      });
-    }
-
-    return { message: 'Evaluación actualizada exitosamente', evaluacion };
-}
-*/
 }

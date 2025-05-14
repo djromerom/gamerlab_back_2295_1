@@ -8,6 +8,7 @@ export class CriteriosService {
 
   async getAllCriterios() {
     const criterios = await this.prisma.criterio.findMany({
+      where: {estado: true},
       select: {
         id_criterio: true,
         nombre: true,
